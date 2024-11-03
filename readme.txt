@@ -1,12 +1,13 @@
 /mvc-php/
-    /app/
+    /PHP_PROJECT/
         /controllers/
-            TaskController.php
+            ComponentController.php
         /models/
-            Task.php
+            Component.php
         /views/
-            taskList.php
-    /public/
-        index.php
+            componentView.php
+        /public/
+            indexComponent.php
     /config/
         database.php
+    index.php     
