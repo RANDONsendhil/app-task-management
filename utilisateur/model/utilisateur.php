@@ -1,24 +1,18 @@
 <?php
 class Utilisateur
 {
-
-  private $user_name;
   private $user_id;
+  private $user_name;
   private $user_address;
   private $db;
 
-
-  public function __construct(DatabaseConnection $db_conn, $user_name, $user_id, $user_address)
+  public function __construct(DatabaseConnection $db_conn)
   {
     $this->db = $db_conn;
-    $this->user_name = $user_name;
-    $this->user_id = $user_id;
-    $this->user_address = $user_address;
   }
 
-  public function add_user(): bool
+  public function add_user($data_userid,  $data_username, $data_useraddress): bool
   {
-
     //establish database connection
     $connect_db = $this->db->connect();
 
@@ -26,11 +20,6 @@ class Utilisateur
 
     //prepare stateement
     $stmt =  $connect_db->prepare($sql);
-
-    $data_userid = $this->getUserId();
-    $data_username = $this->getUserName();
-    $data_useraddress = $this->getUserAddress();
-
     $stmt->bind_param("sss", $data_userid,  $data_username, $data_useraddress);
 
     if ($stmt->execute()) {

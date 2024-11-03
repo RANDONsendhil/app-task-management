@@ -1,0 +1,12 @@
+/mvc-php/
+    /app/
+        /controllers/
+            TaskController.php
+        /models/
+            Task.php
+        /views/
+            taskList.php
+    /public/
+        index.php
+    /config/
+        database.php

@@ -1,43 +1,73 @@
-<!DOCTYPE html>
-<html lang="en">
+<?php
+define('BASE_PATH', __DIR__);
+// echo "here" . "<br>";
 
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Document</title>
-</head>
+// // Parse the URL
+// $requestUri = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
+// $currentDir = dirname($_SERVER['PHP_SELF']);
+// $baseUrl = (isset($_SERVER['HTTPS']) ? "https://" : "http://") . $_SERVER['HTTP_HOST'] . $currentDir;
 
-<body>
+// // Define a simple routing mechanism
+// switch ($baseUrl) {
+//   case $baseUrl . '/':
+//     print_r("here " . $baseUrl);
+//     homePage();
+//     break;
+//   case $baseUrl . '/about':
+//     echo "ABOUT ";
+//     aboutPage();
+//     break;
+//   case '/contact':
+//     contactPage();
+//     break;
+//   default:
 
-  <?php
-  //  require 'utilisateur.php';
-  //  $user1 = new Utilisateur( 'Sendhil', '12345', 'Sendhil Address');
-  //  echo $user1->getUserName() .', '. $user1->getUserId(). ','. $user1->getUserAddress();
-  // echo $user1->getUserName();
+//     print_r("BASE URI " . $baseUrl . '/');
+//     http_response_code(404);
 
-  ?>
-  <p>Paragraphe</p>
+//     echo "404 Not Found";
+//     break;
+// }
 
-  <form action="controllerUtilisateur.php" method="post">
-    <div>
-      <label for="username"> User Name:
-        <input type="text" name="username" placeholder="username" id="username">
-      </label>
-    </div>
-    <div>
-      <label for="userId"> User Id:
-        <input type="text" name="userId" placeholder="userId" id="userId">
-      </label>
-    </div>
-    <div>
-      <label for="userAddress"> User Address:
-        <input type="text" name="userAddress" placeholder="userAddress" id="userAddress">
-      </label>
-    </div>
-    <input type="submit" value="Add" name="save-user">
-  </form>
+// // Function for the home page
+// function homePage()
+// {
+//   print_r(BASE_PATH . '/utilisateur/public/index.php');
+//   require  BASE_PATH . '/utilisateur/public/index.php';
+// }
+
+// // Function for the about page
+// function aboutPage()
+// {
+//   echo "This is the about page.";
+// }
+
+// // Function for the contact page
+// function contactPage()
+// {
+//   echo "Contact us at example@example.com.";
+// }
+$requestUri = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
+
+$routes = [
+  '/' =>  BASE_PATH . '/home/public/index.php',
+  '/user' =>   BASE_PATH . '/utilisateur/public/index.php'
+];
+print_r($requestUri);
+echo '<br>';
+print_r($routes);
+print_r("<br>");
 
 
-</body>
+function route_controller($requestUri, $routes)
+{
+  array_key_exists($requestUri, $routes) ? require  $routes[$requestUri] : abort();
+}
+function abort()
+{
+  http_response_code(404);
+  echo ("Page Not Found !");
+  die();
+}
 
-</html>
+route_controller($requestUri, $routes);
