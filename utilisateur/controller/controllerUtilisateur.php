@@ -1,6 +1,7 @@
 <?php
 require_once(BASE_PATH . '/config/database.php');
 require_once(BASE_PATH . '/utilisateur/model/utilisateur.php');
+require_once(BASE_PATH . '/config/utils.php');
 
 class ControllerUtilisateur
 {
@@ -13,14 +14,33 @@ class ControllerUtilisateur
     $this->utilsateurModel = new Utilisateur($this->db);
   }
 
+
   public function add_user($userId, $uname, $userAddress)
   {
-    echo $this->utilsateurModel->add_user($userId, $uname, $userAddress);
-    header('Location: .');
+    if ($this->utilsateurModel->insert_user($userId, $uname, $userAddress)) {
+      new Log("User created successfully new!");
+      $_SESSION['message'] = 'User created successfully!';
+    } else {
+      $_SESSION['message'] = 'User creation Failed!';
+      new Log("User creation Failed!");
+    }
+
+    header('Location: /user');
+  }
+
+  public function get_list_users()
+  {
+    $users = $this->utilsateurModel->fetch_all_users();
+    require(BASE_PATH . '/utilisateur/view/formUser.php');
   }
 
   public function index()
   {
-    require(BASE_PATH . '/utilisateur/view/listUtilisateur.php');
+    require(BASE_PATH . '/utilisateur/view/formUser.php');
+  }
+  public function __destruct()
+  {
+    return;
+    //$this->utilsateurModel->closeConnection();
   }
 }

@@ -6,11 +6,18 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Document</title>
 </head>
+<?php
+include('confirmation.php');
+include('listUser.php');
+?>
 
 <body>
+  <h1>User List</h1>
+  <form method="get">
+    <input type="submit" value="Fetch users" name="get-users">
+  </form>
 
-  <p>Paragraphe</p>
-  <form action="." method="post">
+  <form method="post">
     <div>
       <div>
         <label for="userId"> User Id:
@@ -27,6 +34,7 @@
       </label>
     </div>
     <input type="submit" value="Add" name="save-user">
+
   </form>
 
 

@@ -1,4 +1,5 @@
 <?php
+session_start();
 class Utilisateur
 {
   private $user_id;
@@ -11,32 +12,43 @@ class Utilisateur
     $this->db = $db_conn;
   }
 
-  public function add_user($data_userid,  $data_username, $data_useraddress): bool
+  public function insert_user($data_userid,  $data_username, $data_useraddress)
   {
     //establish database connection
     $connect_db = $this->db->connect();
-
     $sql = "INSERT INTO users (idusers, username, useraddress) VALUES (?, ?, ?)";
-
     //prepare stateement
     $stmt =  $connect_db->prepare($sql);
     $stmt->bind_param("sss", $data_userid,  $data_username, $data_useraddress);
 
     if ($stmt->execute()) {
-      echo "New article inserted successfully!";
       return true;
     } else {
-      echo "Error: " . $stmt->error;
       return false;
     }
     // prepare and bind
     $stmt->close();
   }
 
-  public function __destruct()
+  public function fetch_all_users()
   {
-    //Du code à exécuter
+    $connect_db = $this->db->connect();
+    if ($connect_db->connect_error) {
+      die("Connection failed: " . $connect_db->connect_error);
+    }
+    $sql = "SELECT idusers, username, useraddress FROM users";
+    $result = $connect_db->query($sql);
+    if ($result->num_rows > 0) {
+      return $result->fetch_all(MYSQLI_ASSOC);
+    } else {
+      return [];
+    }
   }
+  public function closeConnection()
+  {
+    $this->db->close();
+  }
+
   public function getUserName()
   {
     return $this->user_name;
