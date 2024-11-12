@@ -44,6 +44,13 @@ class Utilisateur
       return [];
     }
   }
+
+  public function deleteUserById($id)
+  {
+
+    return;
+  }
+
   public function closeConnection()
   {
     $this->db->close();

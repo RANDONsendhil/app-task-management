@@ -12,6 +12,7 @@ class ControllerUtilisateur
   {
     $this->db = new DatabaseConnection();
     $this->utilsateurModel = new Utilisateur($this->db);
+    // $this->get_list_users();
   }
 
 
@@ -24,14 +25,13 @@ class ControllerUtilisateur
       $_SESSION['message'] = 'User creation Failed!';
       new Log("User creation Failed!");
     }
-
     header('Location: /user');
   }
 
   public function get_list_users()
   {
     $users = $this->utilsateurModel->fetch_all_users();
-    require(BASE_PATH . '/utilisateur/view/formUser.php');
+    require(BASE_PATH . '/utilisateur/view/listUser.php');
   }
 
   public function index()

@@ -9,12 +9,33 @@
 
 <body>
   <?php if (!empty($users)): ?>
-    <ul>
-      <?php foreach ($users as $user): ?>
-        <p>ID: <?= htmlspecialchars($user['username']) ?></p>
 
+    <table border="5px">
+      <tr>
+        <th>Id</th>
+        <th>Name </th>
+        <th>Address</th>
+      </tr>
+      <?php foreach ($users as $user): ?>
+        <tr>
+          <td>
+            <?= htmlspecialchars($user['idusers']) ?></td>
+          <td>
+            <?= htmlspecialchars($user['username']) ?>
+          </td>
+          <td>
+            <?= htmlspecialchars($user['useraddress']) ?>
+          </td>
+          <td>
+            <input type="button" value="Delete" name="delete-user">
+          </td>
+          <td>
+            <input type="button" value="Update" name="update-user">
+          </td>
+        </tr>
       <?php endforeach; ?>
-    </ul>
+    </table>
+
   <?php else: ?>
     <p>No users found.</p>
   <?php endif; ?>

@@ -13,7 +13,7 @@ include('listUser.php');
 
 <body>
   <h1>User List</h1>
-  <form method="get">
+  <form method="POST">
     <input type="submit" value="Fetch users" name="get-users">
   </form>
 
@@ -34,10 +34,7 @@ include('listUser.php');
       </label>
     </div>
     <input type="submit" value="Add" name="save-user">
-
   </form>
-
-
 </body>
 
 </html>
