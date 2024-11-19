@@ -5,11 +5,14 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Document</title>
+
 </head>
 
 <body>
+  <?php
+    include('formUser.php');
+  ?>
   <?php if (!empty($users)): ?>
-
     <table border="5px">
       <tr>
         <th>Id</th>
@@ -27,7 +30,10 @@
             <?= htmlspecialchars($user['useraddress']) ?>
           </td>
           <td>
-            <input type="button" value="Delete" name="delete-user">
+            <form method="post">
+              <input type='hidden' name='idusers' value='<?= $user['idusers'] ?>'>
+              <button type="submit" name="delete-user" value="delete">Delete</button>
+            </form>
           </td>
           <td>
             <input type="button" value="Update" name="update-user">
@@ -39,6 +45,7 @@
   <?php else: ?>
     <p>No users found.</p>
   <?php endif; ?>
+
 </body>
 
 </html>

@@ -62,13 +62,13 @@ print_r("CURRENT DIR" . $currentDir);
 
 function route_controller($requestUri, $routes)
 {
-  array_key_exists($requestUri, $routes) ? require  $routes[$requestUri] : abort();
+    array_key_exists($requestUri, $routes) ? require  $routes[$requestUri] : abort();
 }
 function abort()
 {
-  http_response_code(404);
-  echo ("Page Not Found !");
-  die();
+    http_response_code(404);
+    echo("Page Not Found !");
+    die();
 }
 
 route_controller($requestUri, $routes);
