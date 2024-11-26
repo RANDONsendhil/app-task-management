@@ -16,9 +16,9 @@ class ControllerUtilisateur
     }
 
 
-    public function add_user($userId, $uname, $userAddress)
+    public function add_user($uname, $userAddress)
     {
-        if ($this->utilsateurModel->insert_user($userId, $uname, $userAddress)) {
+        if ($this->utilsateurModel->insert_user($uname, $userAddress)) {
             return true;
         } else {
             return false;
@@ -35,6 +35,13 @@ class ControllerUtilisateur
     {
         return $this->utilsateurModel->deleteUserById($id);
     }
+
+    public function update_user_info($userid, $username, $useraddress)
+    {
+
+        return $this->utilsateurModel->modifyUserInfo($userid, $username, $useraddress);
+    }
+
 
     public function index()
     {

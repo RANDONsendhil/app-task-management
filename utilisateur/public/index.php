@@ -5,47 +5,77 @@ require_once(BASE_PATH . '/utilisateur/controller/controllerUtilisateur.php');
 $currentDir = dirname($_SERVER['PHP_SELF']);
 
 class IndexUtilisateur
-{
+{   
+  private $userId ="";
+  private $uname ="";
+  private $userAddress ="";
+
     public function __construct()
-    {
+    {     
+        $this->userId =  $this->sanitize_input($_POST["userId"]);
+        $this->uname = $this->sanitize_input($_POST["username"]);
+        $this->userAddress =$_POST["userAddress"];
+   
         $controllerUtilisateur = new ControllerUtilisateur();
         if (($_SERVER['REQUEST_METHOD'] === 'POST') && isset($_POST['save-user'])) {
             $this->addUser($controllerUtilisateur);
+      
         } elseif (($_SERVER['REQUEST_METHOD'] === 'POST')  && isset($_POST['get-users'])) {
             $controllerUtilisateur->get_list_users();
         } elseif (($_SERVER['REQUEST_METHOD'] === 'POST')  && isset($_POST['delete-user'])) {
             $this->deleteUser($controllerUtilisateur);
-        }
-        $controllerUtilisateur->index();
+        } 
+          $controllerUtilisateur->index();
+      
     }
-
+    public function sanitize_input($data) {
+        return htmlspecialchars(stripslashes(trim($data)));
+    }
     public function deleteUser($controllerUtilisateur): bool
     {
-        echo"\n deleteUser called ";
         if (isset($_POST['idusers'])) {
             if ($controllerUtilisateur->delete_user_by_id((int)$_POST['idusers'])) {
-                $_SESSION['message-delete-user'] = 'User ' . $_POST['idusers'] . ' deleted successfully!';
+                $_SESSION['message'] = 'User ' . $_POST['idusers'] . ' deleted successfully!';
+                $message = 'User ' . $_POST['idusers'] . ' deleted successfully!';
                 return true;
             } else {
-                $_SESSION['message-delete-user'] = 'User ' . $_POST['idusers'] . ' deleted failed!';
+                $_SESSION['message'] = 'User ' . $_POST['idusers'] . ' deleted failed!';
+                $message = 'User ' . $_POST['idusers'] . ' deleted failed!';
+                exit;
                 return false;
             }
         }
+        return false;
     }
 
     public function addUser($controllerUtilisateur): bool
-    {
-        echo"\n addUser called ";
-        $uname = $_POST["username"];
-        $userId = $_POST["userId"];
-        $userAddress = $_POST["userAddress"];
-        if ($controllerUtilisateur->add_user($userId, $uname, $userAddress)) {
-            $_SESSION['message'] = 'User created successfully!';
-            return true;
-        } else {
-            $_SESSION['message'] = 'User--->  creation failed !';
-            return false;
+    {   
+        if (($this->userId != "") && ($this->uname != "") && ($this-> userAddress != "")) {
+          
+            if ($controllerUtilisateur->update_user_info(intval($this->userId), $this->uname, $this->userAddress)) {
+                return true;
+            } else {
+                return false;
+               
+            }
+
+        } elseif(($this->uname != "") && ($this-> userAddress != "")) {
+            if ($controllerUtilisateur->add_user($this->uname, $this->userAddress)) {
+                $_SESSION['message'] = 'User creation successfully!' . "".$this->uname."". $this->userAddress;
+               $message = 'User creation successfully!';
+                return true;
+            } else {
+                return false;
+            }
+        }else{
+          
+          return false;
         }
+       
+    }
+
+    public function getError() : string {
+      return "";
     }
 }
 

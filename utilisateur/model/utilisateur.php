@@ -13,23 +13,20 @@ class Utilisateur
         $this->db = $db_conn;
     }
 
-    public function insert_user($data_userid, $data_username, $data_useraddress)
+    public function insert_user($data_username, $data_useraddress)
     {
         //establish database connection
         $connect_db = $this->db->connect();
-        $sql = "INSERT INTO users (idusers, username, useraddress) VALUES (?, ?, ?)";
+        $sql = "INSERT INTO users (username, useraddress) VALUES (?, ?)";
         //prepare stateement
         $stmt =  $connect_db->prepare($sql);
-        $stmt->bind_param("sss", $data_userid, $data_username, $data_useraddress);
+        $stmt->bind_param("ss", $data_username, $data_useraddress);
 
         if ($stmt->execute()) {
-
             return true;
         } else {
-
             return false;
         }
-        // prepare and bind
         $stmt->close();
     }
 
@@ -69,6 +66,24 @@ class Utilisateur
         }
 
         // Close the prepared statement
+        $stmt->close();
+    }
+
+    public function modifyUserInfo($userid, $username, $useraddress)
+    {
+        $connect_db = $this->db->connect();
+        $sql = "UPDATE users SET username = ?, useraddress = ? WHERE idusers = ?";
+        //prepare stateement
+        $stmt =  $connect_db->prepare($sql);
+        $stmt->bind_param("ssi", $username, $useraddress, $userid);
+
+        if ($stmt->execute()) {
+            return true;
+        } else {
+
+            return false;
+        }
+        // prepare and bind
         $stmt->close();
     }
 
