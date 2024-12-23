@@ -27,8 +27,8 @@
     <!-- Navbar -->
     <nav>
         <a href="/">Home</a>
-        <a href="user">About</a>
-        <a href="services">Services</a>
+        <a href="user">Clients</a>
+        <a href="services">Agenda</a>
         <a href="contact">Contact</a>
     </nav>
 
@@ -37,14 +37,14 @@
       <div class="container">
       <?php
         define('BASE_PATH', __DIR__);
-        require BASE_PATH . '/router.php';
-      ?>
+require BASE_PATH . '/router.php';
+?>
       </div>
     </main>
 
     <!-- Footer -->
     <footer>
-        <p>&copy; 2024 My Dynamic Website. All rights reserved.</p>
+        <p>&copy;  FOOTER</p>
     </footer>
 
  

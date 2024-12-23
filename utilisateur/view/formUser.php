@@ -8,8 +8,23 @@
 </head>
 
 <body>
-  <?php include("confirmation.php")?>
-  <button id="btn_display_form" onclick="display_userCreation_form()">Create User</button>
+  
+ 
+  <div class="user-table-header">
+    <div id="confirmMessg">
+        <?php include("confirmation.php")?>
+    </div>
+
+    <div class="table-info">
+      <div> 
+        <button class="btn btn-info" id="btn_display_form" onclick="display_userCreation_form()">Create User</button>
+      </div>
+    </div>
+
+  </div>
+
+
+
     <div id="form_user" class="modal" tabindex="-1"> 
       <div class="modal-dialog">
         <div class="modal-content">
@@ -18,7 +33,7 @@
            
           </div>
           <div class="modal-body">
-            <form method="post" action="/user" onsubmit="return validateForm()">
+            <form method="post" action="/user" onsubmit="return validateFormUserCreation()">
              
             <span class="error"> <?php echo "*". $_SESSION['message'] ;?></span>
               <div id="divId">
@@ -51,6 +66,14 @@
     
     <script src="../../utilisateur/view/js/script.js"></script>
 <link rel="stylesheet" href="../../utilisateur/view/css/style.css">
+<script>
+    let messg = document.getElementById("confirmMessg");
+    function messageTimeout(){
+    messg.style.display = "none";
+  }
+    setTimeout(messageTimeout, 2000);
+
+  </script>
 </body>
 
 </html>

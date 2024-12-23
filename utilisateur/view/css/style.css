@@ -53,4 +53,19 @@
 
 #tableUsers tr:hover {background-color: #ddd;}
 
+.user-table-header{
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  gap: 10px;
+}
+
+ /* table-info */
+
+ .user-table-header div {
+  padding: 10px;
+}
+.user-table-header .table-info{
+  margin-left: auto; 
+}
  

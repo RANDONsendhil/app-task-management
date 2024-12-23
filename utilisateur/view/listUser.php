@@ -5,7 +5,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>HERE</title>
-
+  <link rel="stylesheet" href="../../utilisateur/view/css/style.css">
 </head>
 
 <body>
@@ -52,7 +52,6 @@
   <?php else: ?>
     <p>No users found.</p>
   <?php endif; ?>
-  <link rel="stylesheet" href="../../utilisateur/view/css/style.css">
 </body>
 
 </html>
