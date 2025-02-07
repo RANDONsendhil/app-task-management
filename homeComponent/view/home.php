@@ -20,15 +20,14 @@
   <link rel="stylesheet" href="css/other/bootstrap.min.css">
 
   <!-- Header -->
-  <header>
-    <h1>USER REGISTRATION APPLICATION</h1>
-  </header>
+
+  <h2>Home</h2>
+
   <!-- Navbar -->
   <nav>
-    <a href="login">J'ai déja un Compte</a>
-    <a href="create-user">Créer un compte</a>
-    <a href="services">Agenda</a>
-    <a href="contact">Contact</a>
+    <a href="userAccount">Mon Compte</a>
+    <a href="appointment">Mes rendez vous</a>
+    <a href="personalInformation">Mes Coordonnés</a>
   </nav>
 
   <!-- Main Content -->
