@@ -7,11 +7,26 @@ $currentDir = dirname($_SERVER['PHP_SELF']);
 
 class IndexLogin
 {
+    private $controllerLogin;
     public function __construct()
     {
-        $controllerLogin = new ControllerLogin();
-        $controllerLogin -> index();
+        $this->controllerLogin = new ControllerLogin();
+        //  $controllerLogin -> index();
+    }
+
+
+    public function login($uname, $password)
+    {
+
+        $this->controllerLogin->indexLogin();
+
+    }
+
+    public function userCreation()
+    {
+        $this->controllerLogin->indexUserCreation();
     }
 }
 
-new IndexLogin();
+$index = new IndexLogin();
+$index->userCreation();

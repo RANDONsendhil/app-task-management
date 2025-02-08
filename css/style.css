@@ -4,7 +4,46 @@ body {
   padding: 0;
   background-color: #f4f4f4;
 }
+.container {
+  max-width: auto;
+  margin: auto;
+  padding: 20px;
+  background-color: #fff;
+  border-radius: 8px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
 
+h2 {
+  text-align: center;
+}
+
+.form-group {
+  margin-bottom: 20px;
+}
+
+label {
+  font-weight: bold;
+  display: block;
+  margin-bottom: 5px;
+}
+
+input[type="text"],
+input[type="email"],
+input[type="password"] {
+  width: 100%;
+  padding: 10px;
+  margin: 5px 0;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+.container {
+  max-width: auto;
+  margin: 50px auto;
+  padding: 20px;
+  background-color: #fff;
+  border-radius: 8px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
 /* Navbar styles */
 nav {
   background-color: #072249;
@@ -49,11 +88,37 @@ footer {
   bottom: 0;
 }
 
+legend {
+  font-weight: bold;
+  position: relative;
+}
+.container {
+  padding: 0px;
+  /* Add a custom shadow with a light gray color */
+  box-shadow: 0px 4px 10px rgba(75, 135, 226, 0.6); /* Light gray shadow */
+}
+
+legend::after {
+  content: "";
+  position: absolute;
+  margin-top: 5px;
+  bottom: 0;
+  left: 0;
+  width: 100%; /* Ensures the line spans the full width of the legend */
+  height: 1px; /* Height of the underline */
+  background: linear-gradient(
+    to right,
+    rgba(211, 211, 211, 0) 0%,
+    rgb(14, 16, 97) 50%,
+    rgba(211, 211, 211, 0) 100%
+  );
+  /* Light gray color with opacity on both edges */
+}
 /* Responsive design for mobile screens */
 @media screen and (max-width: 600px) {
   nav a {
-      float: none;
-      width: 100%;
-      text-align: left;
+    float: none;
+    width: 100%;
+    text-align: left;
   }
 }

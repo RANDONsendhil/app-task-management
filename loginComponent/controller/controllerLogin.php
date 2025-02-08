@@ -13,9 +13,14 @@ class ControllerLogin
 
     }
 
-    public function index()
+    public function indexLogin()
     {
         require(BASE_PATH . '/loginComponent/view/login.php');
+
+    }
+    public function indexUserCreation()
+    {
+        require(BASE_PATH . '/loginComponent/view/userCreation.php');
 
     }
 }

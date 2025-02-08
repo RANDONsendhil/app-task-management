@@ -1,32 +1,27 @@
-<!DOCTYPE html>
-<html lang="en">
+  <style>
+.container {
+  max-width: 500px;
 
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Login Page</title>
-</head>
-
-<body>
-  <h2>Login Page</h2>
-
-  <?php
-    // Display error message if login failed
-    if (isset($error_message)) {
-        echo "<p style='color:red;'>$error_message</p>";
-    }
-  ?>
-  <main>
-    <div class="container">
-      <form method="POST" action="login.php">
-        <label for="username">Username:</label>
-        <input type="text" name="username" id="username" required><br><br>
-        <label for="password">Password:</label>
-        <input type="password" name="password" id="password" required><br><br>
-        <input type="submit" value="Login">
-      </form>
-    </div>
-  </main>
-</body>
-
-</html>
+  padding: 20px;
+  background-color: #fff;
+  border-radius: 8px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+  </style>
+  <fieldset>
+    <legend>
+      <h3 class="text-center m-2">SE CONNECTER</h3>
+    </legend>
+    <div class="container-mb-5">
+      <div class="container-sm shadow-lg p-3 mb-5 bg-body-tertiary rounded">
+        <form method="POST" action="/">
+          <div class="form-group">
+            <label for="username">Username:</label>
+            <input type="text" name="username" id="username" required><br><br>
+            <label for="password">Password:</label>
+            <input type="password" name="password" id="password" required><br><br>
+            <input class="btn btn-primary align-center" type="submit" value="Login">
+          </div>
+        </form>
+      </div>
+  </fieldset>
