@@ -3,11 +3,9 @@
    <legend class="text-center m-4">
      <h3>CRÉER UN COMPTE</h3>
    </legend>
-
    <div class="container-sm shadow-lg p-3  bg-body-tertiary rounded">
-     <form class="row g-3">
-
-       <div class="form-group" method="POST" action="/">
+     <form class="row g-3" method="POST" action="/">
+       <div class="form-group">
          <div class="form-check form-check-inline">
            <input class="form-check-input" type="radio" id="madame" name="genre" value="madame">
            <label class="form-check-label" for="madame">Madame</label>
@@ -61,10 +59,19 @@
          <input type="text" class="form-control" id="inputZip">
        </div>
 
-       <div class="d-flex justify-content-start mt-3">
-         <button type="submit" class="btn btn-primary btn-lg">Sign in</button>
-       </div>
+       <div class="d-grid gap-2 mt-4 d-flex justify-content-end">
+         <div class="grid text-center d-inline-flex gap-1">
 
+
+           <div class="fg-col-4">
+             <input class="btn btn-danger btn-lg" type="submit" value="Annuler">
+           </div>
+
+           <div class="g-col-4">
+             <input class="btn btn-primary btn-lg" type="submit" value="Créer un Compte">
+           </div>
+         </div>
+       </div>
      </form>
    </div>
 
