@@ -19,7 +19,6 @@ class IndexUtilisateur
         $controllerUtilisateur = new ControllerUtilisateur();
         if (($_SERVER['REQUEST_METHOD'] === 'POST') && isset($_POST['save-user'])) {
             $this->addUser($controllerUtilisateur);
-
         } elseif (($_SERVER['REQUEST_METHOD'] === 'POST')  && isset($_POST['get-users'])) {
             $controllerUtilisateur->get_list_users();
         } elseif (($_SERVER['REQUEST_METHOD'] === 'POST')  && isset($_POST['delete-user'])) {
@@ -31,6 +30,26 @@ class IndexUtilisateur
     {
         return htmlspecialchars(stripslashes(trim($data)));
     }
+
+    function getUserObj()
+    {
+        return new User(
+            $this->sanitize_input($_POST["genreMme"]),
+            $this->sanitize_input($_POST["genreMr"]),
+            $this->sanitize_input($_POST["numSS"]),
+            $this->sanitize_input($_POST["lname"]),
+            $this->sanitize_input($_POST["fname"]),
+            $this->sanitize_input($_POST["inputEmail"]),
+            $this->sanitize_input($_POST["inputPassword"]),
+            $this->sanitize_input($_POST["mobileNum"]),
+            $this->sanitize_input($_POST["phoneNum"]),
+            $this->sanitize_input($_POST["inputAddress"]),
+            $this->sanitize_input($_POST["inputCity"]),
+            $this->sanitize_input($_POST["inputZip"])
+        );
+    }
+
+
     public function deleteUser($controllerUtilisateur): bool
     {
         if (isset($_POST['idusers'])) {
@@ -47,31 +66,29 @@ class IndexUtilisateur
 
     public function addUser($controllerUtilisateur): bool
     {
-        if (($this->userId != "") && ($this->uname != "") && ($this-> userAddress != "")) {
+        if (($this->userId != "") && ($this->uname != "") && ($this->userAddress != "")) {
 
             if ($controllerUtilisateur->update_user_info(intval($this->userId), $this->uname, $this->userAddress)) {
-                $_SESSION['message'] = 'User Updated successfully!' . "".$this->uname."". $this->userAddress;
+                $_SESSION['message'] = 'User Updated successfully!' . "" . $this->uname . "" . $this->userAddress;
                 header("Location: user");
                 die();
             } else {
-                $_SESSION['message'] = 'User Updation failed!' . "".$this->uname."". $this->userAddress;
+                $_SESSION['message'] = 'User Updation failed!' . "" . $this->uname . "" . $this->userAddress;
                 return false;
             }
-
-        } elseif (($this->uname != "") && ($this-> userAddress != "")) {
+        } elseif (($this->uname != "") && ($this->userAddress != "")) {
             if ($controllerUtilisateur->add_user($this->uname, $this->userAddress)) {
-                $_SESSION['message'] = 'User created successfully!' . "".$this->uname."". $this->userAddress;
+                $_SESSION['message'] = 'User created successfully!' . "" . $this->uname . "" . $this->userAddress;
                 header("Location: user");
                 die();
             } else {
-                $_SESSION['message'] = 'User creation Failed !' . "".$this->uname."". $this->userAddress;
+                $_SESSION['message'] = 'User creation Failed !' . "" . $this->uname . "" . $this->userAddress;
                 return false;
             }
         } else {
 
             return false;
         }
-
     }
 
     public function getError(): string

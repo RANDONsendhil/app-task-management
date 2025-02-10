@@ -17,16 +17,9 @@ class IndexLogin
 
     public function login($uname, $password)
     {
-
-        $this->controllerLogin->indexLogin();
-
-    }
-
-    public function userCreation()
-    {
-        $this->controllerLogin->indexUserCreation();
+        $this->controllerLogin->index();
     }
 }
 
 $index = new IndexLogin();
-$index->userCreation();
+$index->login("", "");

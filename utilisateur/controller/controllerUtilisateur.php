@@ -2,7 +2,6 @@
 
 require_once(BASE_PATH . '/config/database.php');
 require_once(BASE_PATH . '/utilisateur/model/utilisateur.php');
-require_once(BASE_PATH . '/config/utils.php');
 
 class ControllerUtilisateur
 {
