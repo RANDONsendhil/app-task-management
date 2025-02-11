@@ -5,7 +5,6 @@ require_once(BASE_PATH . '/userCreationComponent/controller/controllerUserCreati
 require_once(BASE_PATH . '/userCreationComponent/model/user.php');
 $currentDir = dirname($_SERVER['PHP_SELF']);
 
-
 class IndexUserCreation
 {
     private $controllerUserCreation;

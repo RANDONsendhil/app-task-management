@@ -31,23 +31,6 @@ class IndexUtilisateur
         return htmlspecialchars(stripslashes(trim($data)));
     }
 
-    function getUserObj()
-    {
-        return new User(
-            $this->sanitize_input($_POST["genreMme"]),
-            $this->sanitize_input($_POST["genreMr"]),
-            $this->sanitize_input($_POST["numSS"]),
-            $this->sanitize_input($_POST["lname"]),
-            $this->sanitize_input($_POST["fname"]),
-            $this->sanitize_input($_POST["inputEmail"]),
-            $this->sanitize_input($_POST["inputPassword"]),
-            $this->sanitize_input($_POST["mobileNum"]),
-            $this->sanitize_input($_POST["phoneNum"]),
-            $this->sanitize_input($_POST["inputAddress"]),
-            $this->sanitize_input($_POST["inputCity"]),
-            $this->sanitize_input($_POST["inputZip"])
-        );
-    }
 
 
     public function deleteUser($controllerUtilisateur): bool

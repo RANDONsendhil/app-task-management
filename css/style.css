@@ -1,125 +1,157 @@
+/** @format */
+
 body {
-  font-family: Arial, sans-serif;
-  margin: 0;
-  padding: 0;
-  background-color: #f4f4f4;
+	font-family: Arial, sans-serif;
+	margin: 0;
+	padding: 0;
+	background-color: #f4f4f4;
 }
 .container {
-  max-width: auto;
-  margin: auto;
-  padding: 20px;
-  background-color: #fff;
-  border-radius: 8px;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+	max-width: auto;
+	margin: auto;
+	padding: 20px;
+	background-color: #fff;
+	border-radius: 8px;
+	box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
 }
 
-
 h2 {
-  text-align: center;
+	text-align: center;
 }
 
 .form-group {
-  margin-bottom: 20px;
+	margin-bottom: 20px;
 }
 
 label {
-  font-weight: bold;
-  display: block;
-  margin-bottom: 5px;
+	font-weight: bold;
+	display: block;
+	margin-bottom: 5px;
 }
 
 input[type="text"],
 input[type="email"],
 input[type="password"] {
-  width: 100%;
-  padding: 10px;
-  margin: 5px 0;
-  border: 1px solid #ddd;
-  border-radius: 4px;
+	width: 100%;
+	padding: 10px;
+	margin: 5px 0;
+	border: 1px solid #ddd;
+	border-radius: 4px;
 }
 .container {
-  max-width: auto;
-  margin: 50px auto;
-  padding: 20px;
-  background-color: #fff;
-  border-radius: 8px;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+	max-width: auto;
+	margin: 50px auto;
+	padding: 20px;
+	background-color: #fff;
+	border-radius: 8px;
+	box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
 }
 /* Navbar styles */
 nav {
-  background-color: #072249;
-  overflow: hidden;
-}
-
-nav a {
-  float: left;
-  display: block;
-  color: white;
-  text-align: center;
-  padding: 14px 20px;
-  text-decoration: none;
-}
-
-nav a:hover {
-  background-color: #ddd;
-  color: black;
+	background-color: #072249;
+	overflow: hidden;
 }
 
 /* Header styles */
 header {
-  background-color: #0d3f87;
-  color: white;
-  padding: 20px;
-  text-align: center;
+	background-color: #c2d5f0;
+	color: white;
+	/* padding: 10px; */
+	text-align: center;
 }
 
 /* Main content styles */
 main {
-  padding: 20px;
+	padding: 20px;
 }
 
 /* Footer styles */
 footer {
-  background-color: #333;
-  color: white;
-  text-align: center;
-  padding: 10px 0;
-  position: fixed;
-  width: 100%;
-  bottom: 0;
+	background-color: #333;
+	color: white;
+	text-align: center;
+	padding: 10px 0;
+	position: fixed;
+	width: 100%;
+	bottom: 0;
 }
 
 legend {
-  font-weight: bold;
-  position: relative;
+	font-weight: bold;
+	position: relative;
 }
 .container {
-  padding: 0px;
-  /* Add a custom shadow with a light gray color */
-  box-shadow: 0px 4px 10px rgba(75, 135, 226, 0.6); /* Light gray shadow */
+	padding: 0px;
+	/* Add a custom shadow with a light gray color */
+	box-shadow: 0px 4px 10px rgba(75, 135, 226, 0.6); /* Light gray shadow */
 }
 
 legend::after {
-  content: "";
-  position: absolute;
-  margin-top: 5px;
-  bottom: 0;
-  left: 0;
-  width: 100%; /* Ensures the line spans the full width of the legend */
-  height: 1px; /* Height of the underline */
-  background: linear-gradient(
-    to right,
-    rgba(211, 211, 211, 0) 0%,
-    rgb(14, 16, 97) 50%,
-    rgba(211, 211, 211, 0) 100%
-  );
-  /* Light gray color with opacity on both edges */
+	content: "";
+	position: absolute;
+	margin-top: 5px;
+	bottom: 0;
+	left: 0;
+	width: 100%; /* Ensures the line spans the full width of the legend */
+	height: 1px; /* Height of the underline */
+	background: linear-gradient(
+		to right,
+		rgba(211, 211, 211, 0) 0%,
+		rgb(14, 16, 97) 50%,
+		rgba(211, 211, 211, 0) 100%
+	);
+	/* Light gray color with opacity on both edges */
 }
 /* Responsive design for mobile screens */
 @media screen and (max-width: 600px) {
-  nav a {
-    float: none;
-    width: 100%;
-    text-align: left;
-  }
+	nav a {
+		float: none;
+		width: 100%;
+		text-align: left;
+	}
+}
+.navbar {
+	border-radius: 5px;
+	background-color: rgb(255, 255, 255) !important;
+}
+.navbar-contianer {
+	height: 100vh;
+}
+.navbar-nav {
+	flex: 1;
+	text-align: center;
+	color: #000;
+	font-weight: 200;
+}
+.navbar-brand {
+	flex: 0;
+}
+.navbar-nav .nav-item {
+	margin: 0px;
+}
+
+#container-nav-bar {
+	display: flex;
+	flex-direction: row;
+	flex-wrap: wrap;
+	align-content: stretch;
+	justify-content: space-evenly;
+}
+
+.navbar-light .navbar-nav .nav-link {
+	font-size: x-large;
+}
+
+.container-login {
+	position: relative;
+	height: 48px;
+	width: 160px;
+}
+#nav-login {
+	position: absolute;
+	background: #1682a3;
+	color: white;
+	height: 49px;
+	width: 163px;
+	border-radius: 5px;
 }
