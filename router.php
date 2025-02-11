@@ -6,6 +6,7 @@ $currentDir = dirname($_SERVER['PHP_SELF']);
 
 $routes = [
   '/' =>  BASE_PATH . '/userCreationComponent/public/index.php',
+  '/userCreation' =>  BASE_PATH . '/userCreationComponent/public/index.php',
   '/login' =>  BASE_PATH . '/loginComponent/view/login.php',
   '/home' =>  BASE_PATH . '/homeComponent/public/index.php',
   '/user' =>   BASE_PATH . '/utilisateur/public/index.php'

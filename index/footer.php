@@ -1,4 +1,4 @@
 <footer>
-   <p>&copy; FOOTER</p>
- </footer>
- </body>
+  <p>&copy; FOOTER</p>
+</footer>
+</body>

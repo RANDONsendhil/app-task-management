@@ -14,12 +14,15 @@ $page = isset($_GET['page']) ? $_GET['page'] : 'home';
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <title>REGISTRATION APP</title>
 </head>
+
 <link rel="stylesheet" href="/css/other/bootstrap-grid.css">
 <link rel="stylesheet" href="/css/other/bootstrap-grid.min.css">
-<link rel="stylesheet" href="/css/other/bootstrap-doc.css" rel="stylesheet">
+<link rel="stylesheet" href="/css/other/bootstrap-doc.css">
 <link rel="stylesheet" href="/css/other/bootstrap.min.css">
 <link rel="stylesheet" href="/css/other/bootstrap.css">
 <link rel="stylesheet" href="/css/style.css">
+
+
 
 <body>
   <header>
@@ -72,4 +75,7 @@ $page = isset($_GET['page']) ? $_GET['page'] : 'home';
   <footer>
     <p>&copy; FOOTER</p>
   </footer>
+  <script src="js/common/script.js"></script>
+  <script src="js/other/scriptBootstrap.js"></script>
+  <script src="homeComponent/view/js/script.js"></script>
 </body>
