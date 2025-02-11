@@ -6,10 +6,11 @@ body {
 	padding: 0;
 	background-color: #f4f4f4;
 }
+
 .container {
-	max-width: auto;
+	/* max-width: auto; */
 	margin: auto;
-	padding: 20px;
+	/* padding: 20px; */
 	background-color: #fff;
 	border-radius: 8px;
 	box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
@@ -60,11 +61,6 @@ header {
 	text-align: center;
 }
 
-/* Main content styles */
-main {
-	padding: 20px;
-}
-
 /* Footer styles */
 footer {
 	background-color: #333;
@@ -113,6 +109,7 @@ legend::after {
 .navbar {
 	border-radius: 5px;
 	background-color: rgb(255, 255, 255) !important;
+	text-decoration: underline;
 }
 .navbar-contianer {
 	height: 100vh;
@@ -144,14 +141,48 @@ legend::after {
 
 .container-login {
 	position: relative;
-	height: 48px;
-	width: 160px;
+	transition: transform 0.3s ease;
+	background: #1682a3;
+	height: 67px;
+	width: 187px;
+	border-radius: 10px;
 }
+
 #nav-login {
 	position: absolute;
-	background: #1682a3;
+	transition: transform 0.3s ease;
+	transition: transform 0.3s ease;
+	font-size: 20px !important;
+	font-weight: lighter;
 	color: white;
-	height: 49px;
-	width: 163px;
-	border-radius: 5px;
+	top: 10px;
+	left: 10px;
+}
+
+nav::after {
+	content: "";
+	position: absolute;
+	margin-top: 5px;
+	bottom: 0;
+	left: 0;
+	width: 100%; /* Ensures the line spans the full width of the legend */
+	height: 2px; /* Height of the underline */
+	background: linear-gradient(
+		to right,
+		rgba(211, 211, 211, 0) 0%,
+		rgb(14, 84, 95) 50%,
+		rgba(211, 211, 211, 0) 100%
+	);
+	/* Light gray color with opacity on both edges */
+}
+
+#nav-login img {
+	margin-top: 2px;
+	margin-bottom: 5px;
+	height: 29px;
+	transition: transform 0.3s ease; /* Smooth transition for image movement */
+}
+
+#nav-login:hover img {
+	transform: translateX(10px); /* Move image 3px to the right on hover */
 }
