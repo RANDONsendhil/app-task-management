@@ -1,15 +1,15 @@
   <style>
-.container {
-  max-width: 500px;
-  padding: 40px;
-  background-color: #fff;
-  border-radius: 8px;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-}
+    .container {
+      max-width: 500px;
+      padding: 40px;
+      background-color: #fff;
+      border-radius: 8px;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    }
 
-.btn {
-  width: 175px;
-}
+    .btn {
+      width: 175px;
+    }
   </style>
   <main>
     <?php
@@ -48,3 +48,7 @@
 
     </fieldset>
   </main>
+  <?php
+  include(BASE_PATH . "/index/footer.php")
+  ?>
+  </body>
