@@ -8,12 +8,14 @@ $routes = [
   '/' =>  BASE_PATH . '/userCreationComponent/public/index.php',
   '/userCreation' =>  BASE_PATH . '/userCreationComponent/public/index.php',
   '/login' =>  BASE_PATH . '/loginComponent/view/login.php',
-  '/home' =>  BASE_PATH . '/homeComponent/public/index.php',
-  '/user' =>   BASE_PATH . '/utilisateur/public/index.php'
+  '/home' =>  BASE_PATH . '/user/homeComponent/public/index.php',
+  '/user' =>   BASE_PATH . '/utilisateur/public/index.php',
+  '/profil' =>   BASE_PATH . '/user/profilComponent/public/index.php'
 ];
+
 // print_r($requestUri);
 // echo '<br>';
-// print_r($routes);
+// print_r($routes);s
 // print_r("<br>");
 // print_r("CURRENT DIR" . $currentDir);
 function route_controller($requestUri, $routes)

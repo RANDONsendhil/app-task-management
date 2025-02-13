@@ -1,6 +1,6 @@
 <?php define('BASE_PATH', __DIR__);
 ?>
-<!DOCTYPE html>
+
 <?php
 // Get the 'page' parameter from the URL (default to 'home' if not set)
 $page = isset($_GET['page']) ? $_GET['page'] : 'home';
@@ -21,7 +21,8 @@ $page = isset($_GET['page']) ? $_GET['page'] : 'home';
 <link rel="stylesheet" href="/css/other/bootstrap.min.css">
 <link rel="stylesheet" href="/css/other/bootstrap.css">
 <link rel="stylesheet" href="/css/style.css">
-
+<script src="js/other/jquery-3.6.0.min.js"></script>
+<script src="js/other/scriptBootstrap.js"></script>
 
 
 <body>
@@ -31,7 +32,7 @@ $page = isset($_GET['page']) ? $_GET['page'] : 'home';
   <?php
   require BASE_PATH . '/router.php'; ?>
 
+
+  <script src="user/homeComponent/view/js/script.js"></script>
   <script src="js/common/script.js"></script>
-  <script src="js/other/scriptBootstrap.js"></script>
-  <script src="homeComponent/view/js/script.js"></script>
 </body>

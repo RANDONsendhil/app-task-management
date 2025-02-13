@@ -41,8 +41,9 @@ input[type="password"] {
 }
 .container {
 	max-width: auto;
-	margin: 50px auto;
-	padding: 20px;
+	font-size: 12px;
+	/* margin: 50px auto; */
+	/* padding: 20px; */
 	background-color: #fff;
 	border-radius: 8px;
 	box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
@@ -136,15 +137,15 @@ legend::after {
 }
 
 .navbar-light .navbar-nav .nav-link {
-	font-size: x-large;
+	font-size: large;
 }
 
 .container-login {
 	position: relative;
 	transition: transform 0.3s ease;
 	background: #0a485a;
-	height: 67px;
-	width: 187px;
+	height: 35px;
+	width: 123px;
 	border-radius: 10px;
 }
 
@@ -152,11 +153,11 @@ legend::after {
 	position: absolute;
 	transition: transform 0.3s ease;
 	transition: transform 0.3s ease;
-	font-size: 20px !important;
+	font-size: 10px !important;
 	font-weight: lighter;
 	color: white;
-	top: 10px;
-	left: 10px;
+	bottom: -7px;
+	left: 9px;
 }
 
 nav::after {
@@ -185,4 +186,28 @@ nav::after {
 
 #nav-login:hover img {
 	transform: translateX(10px); /* Move image 3px to the right on hover */
+}
+
+.card {
+	display: flex;
+	flex-wrap: wrap;
+	flex-direction: row;
+	gap: 15px;
+	top: 16px;
+	max-width: 1300px;
+	margin: auto;
+	padding: 20px 14px 19px 19px;
+	background-color: #dddddd;
+}
+
+.card-body {
+	flex: 1 1 calc(33.33% - 16px);
+	max-width: calc(33.33% - 16px);
+	/* height: 300px;
+	width: 200px; */
+	background-color: white;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-around;
+	border-radius: 8px;
 }

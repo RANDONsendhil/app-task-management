@@ -1,7 +1,7 @@
  <nav class="navbar navbar-expand-lg navbar-light bg-light" id="#navbar-home">
    <div class="container-fluid" id="container-nav-bar">
      <a id="logoPng" class="nav-item" href="/">
-       <img style="height: 150px;" src="/images/logo.png" alt="" srcset="">
+       <img style="height: 100px;" src="/images/logo.png" alt="" srcset="">
      </a>
      <!------ NAV BAR ITEM ------>
      <div class="d-flex justify-content-center align-items-center navbar-container">

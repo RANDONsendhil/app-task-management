@@ -33,10 +33,10 @@
                   <div class="grid text-center d-inline-flex gap-1">
 
                     <div class="fg-col-4">
-                      <input class="btn btn-info btn-lg" type="submit" value="Créer un Compte">
+                      <input class="btn btn-info" type="submit" value="Créer un Compte">
                     </div>
                     <div class="g-col-4">
-                      <input class="btn btn-primary btn-lg" type="submit" value="Se Connecter">
+                      <input class="btn btn-primary" type="submit" value="Se Connecter">
                     </div>
 
                   </div>

@@ -1,40 +1,40 @@
 <style>
-/* Custom styles for sidebar */
-.sidebar {
-  height: 100vh;
-  width: 250px;
-  position: fixed;
-  top: 0;
-  left: 0;
-  background-color: #000000;
-  padding-top: 20px;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
-}
+  /* Custom styles for sidebar */
+  .sidebar {
+    height: 100vh;
+    width: 250px;
+    position: fixed;
+    top: 0;
+    left: 0;
+    background-color: #000000;
+    padding-top: 20px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
 
 
-.sidebar a {
-  color: white !important;
-  padding: 10px 0px;
-  display: block;
-  text-decoration: none;
-  color: #333;
-}
+  .sidebar a {
+    color: white !important;
+    padding: 10px 0px;
+    display: block;
+    text-decoration: none;
+    color: #333;
+  }
 
 
-.submenu {
-  padding-left: 30px;
-}
+  .submenu {
+    padding-left: 30px;
+  }
 
-.nav-link {
-  color: rgb(172, 169, 169) !important;
-}
+  .nav-link {
+    color: rgb(172, 169, 169) !important;
+  }
 
-.nav-item a span {
-  margin: 0px 5px;
+  .nav-item a span {
+    margin: 0px 5px;
 
-}
+  }
 </style>
 <fieldset>
   <!-- Sidebar -->
@@ -54,12 +54,11 @@
         <div class="nav-link" href="#submenu1" aria-expanded="false" aria-controls="submenu1">
           Activité
         </div>
-        <div class="nav-custom-sidebar" id="nav-tableau">
+        <div class="nav-custom-sidebar" id="navTableaubord">
           <ul class="nav flex-column submenu">
             <li><a class="nav-link" href="#"><span> <img style="height: 39px;" src="/images/graph.png" alt=""
                     srcset=""></span>
-                <span>Tableau
-                  de bord</span></a></li>
+                <span>Tableau de bord</span></a></li>
 
           </ul>
         </div>
@@ -67,7 +66,7 @@
 
       <!-- Menu 2 -->
       <li class="nav-item">
-        <div class="nav-link" href="#submenu2" aria-expanded="false" aria-controls="submenu2">
+        <div class="nav-link" href="#" aria-expanded="false">
           Paramètres
         </div>
         <div class="nav-custom-sidebar" id="nav-profil">
@@ -85,7 +84,6 @@
         </div>
         <div class="nav-custom-sidebar" id="nav-find">
           <ul class="nav flex-column submenu">
-
             <li><a class="nav-link" href="#"><span> <img style="height: 30px;" src="/images/location.png" alt=""
                     srcset=""></span><span>Trouver un medecin</span></a></li>
           </ul>

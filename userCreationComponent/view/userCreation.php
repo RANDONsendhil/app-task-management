@@ -7,7 +7,7 @@
 
 
       <legend class="text-center m-4">
-        <h3>CRÉER UN COMPTE</h3>
+        <h4>CRÉER UN COMPTE</h4>
       </legend>
       <div class="container-sm shadow-lg p-3  bg-body-tertiary rounded">
         <form class="row g-3" method="POST" action="/">
