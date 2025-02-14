@@ -19,7 +19,7 @@
       <div class="container">
 
         <legend>
-          <h3 class="text-center m-0">SE CONNECTER</h3>
+          <h5 class="text-center m-0">SE CONNECTER</h5>
         </legend>
         <div class="container-mb-10">
           <div class="container-sm shadow-lg p-3 mb-5 bg-body-tertiary rounded">
@@ -33,7 +33,8 @@
                   <div class="grid text-center d-inline-flex gap-1">
 
                     <div class="fg-col-4">
-                      <input class="btn btn-info" type="submit" value="Créer un Compte">
+
+                      <input class="btn btn-info" id="compteCreation" type="submit" onclick="window.location.href='/'" value="Je crée un Compte">
                     </div>
                     <div class="g-col-4">
                       <input class="btn btn-primary" type="submit" value="Se Connecter">

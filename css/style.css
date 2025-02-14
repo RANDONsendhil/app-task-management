@@ -2,18 +2,21 @@
 
 body {
 	font-family: Arial, sans-serif;
-	margin: 0;
-	padding: 0;
 	background-color: #f4f4f4;
+}
+#containerCreationCompte {
+	position: relative;
+	width: 1000px;
+	font-size: 12px;
+	height: 800px;
 }
 
 .container {
-	/* max-width: auto; */
-	margin: auto;
-	/* padding: 20px; */
+	padding: 20px;
 	background-color: #fff;
-	border-radius: 8px;
+	border-radius: 3px;
 	box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+	margin-top: 25px;
 }
 
 h2 {
@@ -34,20 +37,12 @@ input[type="text"],
 input[type="email"],
 input[type="password"] {
 	width: 100%;
-	padding: 10px;
-	margin: 5px 0;
+	padding: 3px;
+	margin: 1px 0px;
 	border: 1px solid #ddd;
 	border-radius: 4px;
 }
-.container {
-	max-width: auto;
-	font-size: 12px;
-	/* margin: 50px auto; */
-	/* padding: 20px; */
-	background-color: #fff;
-	border-radius: 8px;
-	box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-}
+
 /* Navbar styles */
 nav {
 	background-color: #072249;
@@ -64,29 +59,24 @@ header {
 
 /* Footer styles */
 footer {
+	position: fixed;
 	background-color: #0a485a;
+	padding: 3px 0;
 	color: white;
 	text-align: center;
-	padding: 10px 0;
-	position: fixed;
 	width: 100%;
 	bottom: 0;
+	text-align: center;
 }
 
 legend {
 	font-weight: bold;
 	position: relative;
 }
-.container {
-	padding: 0px;
-	/* Add a custom shadow with a light gray color */
-	box-shadow: 0px 4px 10px rgba(75, 135, 226, 0.6); /* Light gray shadow */
-}
 
 legend::after {
 	content: "";
 	position: absolute;
-	margin-top: 5px;
 	bottom: 0;
 	left: 0;
 	width: 100%; /* Ensures the line spans the full width of the legend */
@@ -144,7 +134,7 @@ legend::after {
 	position: relative;
 	transition: transform 0.3s ease;
 	background: #0a485a;
-	height: 35px;
+	height: 41px;
 	width: 123px;
 	border-radius: 10px;
 }
@@ -153,11 +143,10 @@ legend::after {
 	position: absolute;
 	transition: transform 0.3s ease;
 	transition: transform 0.3s ease;
-	font-size: 10px !important;
+	font-size: 12px !important;
 	font-weight: lighter;
 	color: white;
-	bottom: -7px;
-	left: 9px;
+	top: -3px;
 }
 
 nav::after {

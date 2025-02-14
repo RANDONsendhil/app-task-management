@@ -32,7 +32,9 @@ $page = isset($_GET['page']) ? $_GET['page'] : 'home';
   <?php
   require BASE_PATH . '/router.php'; ?>
 
-
+  <div id="contentArea"> </div>
   <script src="user/homeComponent/view/js/script.js"></script>
   <script src="js/common/script.js"></script>
+  <script src="/js/common/script.js"></script>
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 </body>

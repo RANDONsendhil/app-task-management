@@ -31,8 +31,6 @@ class IndexUtilisateur
         return htmlspecialchars(stripslashes(trim($data)));
     }
 
-
-
     public function deleteUser($controllerUtilisateur): bool
     {
         if (isset($_POST['idusers'])) {
