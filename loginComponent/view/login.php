@@ -1,22 +1,25 @@
   <style>
-    .container {
-      max-width: 500px;
-      padding: 40px;
-      background-color: #fff;
-      border-radius: 8px;
-      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-    }
+.containerLogin {
+  margin: auto;
+  /* max-width: 500px; */
+  padding: 40px;
+  width: 400px;
+  background-color: #fff;
+  border-radius: 8px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
 
-    .btn {
-      width: 175px;
-    }
+}
+
+.btn {
+  width: 175px;
+}
   </style>
   <main>
     <?php
     include(BASE_PATH . "/index/nav.php")
     ?>
     <fieldset>
-      <div class="container">
+      <div class="containerLogin">
 
         <legend>
           <h5 class="text-center m-0">SE CONNECTER</h5>
@@ -34,7 +37,8 @@
 
                     <div class="fg-col-4">
 
-                      <input class="btn btn-info" id="compteCreation" type="submit" onclick="window.location.href='/'" value="Je crée un Compte">
+                      <input class="btn btn-info" id="compteCreation" type="submit" onclick="window.location.href='/'"
+                        value="Je crée un Compte">
                     </div>
                     <div class="g-col-4">
                       <input class="btn btn-primary" type="submit" value="Se Connecter">

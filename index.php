@@ -9,8 +9,10 @@ $page = isset($_GET['page']) ? $_GET['page'] : 'home';
 <html lang="en">
 
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.5, user-scalable=yes">
+
+
+
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <title>REGISTRATION APP</title>
 </head>
@@ -21,20 +23,22 @@ $page = isset($_GET['page']) ? $_GET['page'] : 'home';
 <link rel="stylesheet" href="/css/other/bootstrap.min.css">
 <link rel="stylesheet" href="/css/other/bootstrap.css">
 <link rel="stylesheet" href="/css/style.css">
+<link rel="stylesheet" href="/user/homeComponent/view/css/style.css">
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script src="js/other/jquery-3.6.0.min.js"></script>
 <script src="js/other/scriptBootstrap.js"></script>
+
 
 
 <body>
   <header>
   </header>
-
   <?php
   require BASE_PATH . '/router.php'; ?>
+  </div>
 
-  <div id="contentArea"> </div>
   <script src="user/homeComponent/view/js/script.js"></script>
   <script src="js/common/script.js"></script>
   <script src="/js/common/script.js"></script>
-  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
 </body>

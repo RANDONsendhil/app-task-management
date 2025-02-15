@@ -1,6 +1,7 @@
 /** @format */
-
+var login = false;
 $(document).ready(function () {
+	loadContent("home");
 	// When 'Load Page 1' button is clicked
 	$(".loadPage").click(function () {
 		loadContent("home");
@@ -10,12 +11,12 @@ $(document).ready(function () {
 // Function to load content dynamically using AJAX
 function loadContent(page) {
 	$.ajax({
-		url: "js/common/loadContent.php", // This is the PHP file where you handle the dynamic content
+		url: "loadContent.php", // This is the PHP file where you handle the dynamic content
 		type: "GET",
 		data: { page: page },
 		success: function (response) {
 			// Insert the returned content into the content div
-			initHome();
+			hideDisplay();
 			$("#contentArea").html(response);
 		},
 		error: function () {
@@ -24,7 +25,15 @@ function loadContent(page) {
 	});
 }
 
-function initHome() {
+function init() {
+	//displayHome on init
+	if (login === true) {
+		loadContent("home");
+		return "logged in";
+	}
+}
+
+function hideDisplay() {
 	pages = [
 		"#contentHome",
 		"#contentProfil",

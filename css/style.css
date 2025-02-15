@@ -1,22 +1,83 @@
 /** @format */
+* {
+	box-sizing: border-box;
+}
+body,
+html {
+	margin: 0;
+	padding: 0;
 
-body {
 	font-family: Arial, sans-serif;
 	background-color: #f4f4f4;
 }
-#containerCreationCompte {
-	position: relative;
-	width: 1000px;
+.container {
+	display: flex;
+	/* min-height: 100vh; */
+	transition: margin-left 0.3s; /* Smooth transition when the sidebar toggles */
+}
+#navbar-home {
+	color: black;
+}
+/* Sidebar styling */
+.sidebar {
+	width: 250px;
+	position: fixed;
+	top: 0;
+	left: 0;
+	bottom: 0;
+	background-color: #000000;
+	color: white;
+	padding-top: 10px;
 	font-size: 12px;
-	height: 800px;
+	overflow-y: auto;
+	height: 100%; /* Ensures sidebar fills the height */
+}
+#avbar-home {
+	color: black;
 }
 
-.container {
+.sidebar a {
+	display: block;
+	padding: 10px;
+	text-decoration: none;
+	color: white;
+}
+
+.nav-item .nav-link {
+	color: white;
+}
+
+.sidebar a:hover {
+	background-color: #444;
+}
+
+/* Content area */
+#contentArea {
+	margin: auto;
+	margin-left: 250px;
 	padding: 20px;
-	background-color: #fff;
-	border-radius: 3px;
-	box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-	margin-top: 25px;
+	flex-grow: 1;
+	transition: margin-left 0.3s;
+}
+
+/* Media Query for smaller screens */
+@media (max-width: 768px) {
+	.sidebar {
+		position: relative;
+		width: 10%;
+		height: auto;
+		padding-top: 20px;
+	}
+
+	#contentArea {
+		margin-left: 0; /* Full width on smaller screens */
+	}
+}
+
+#containerCreationCompte {
+	position: relative;
+	font-size: 12px;
+	/* height: 800px; */
 }
 
 h2 {
@@ -46,7 +107,7 @@ input[type="password"] {
 /* Navbar styles */
 nav {
 	background-color: #072249;
-	overflow: hidden;
+	/* overflow: hidden; */
 }
 
 /* Header styles */
@@ -124,10 +185,14 @@ legend::after {
 	flex-wrap: wrap;
 	align-content: stretch;
 	justify-content: space-evenly;
+	color: white;
 }
-
+#nar-home {
+	color: white;
+}
 .navbar-light .navbar-nav .nav-link {
 	font-size: large;
+	color: #000;
 }
 
 .container-login {
@@ -183,20 +248,21 @@ nav::after {
 	flex-direction: row;
 	gap: 15px;
 	top: 16px;
-	max-width: 1300px;
+	max-width: 905px;
 	margin: auto;
 	padding: 20px 14px 19px 19px;
 	background-color: #dddddd;
 }
 
 .card-body {
+	flex-direction: column;
 	flex: 1 1 calc(33.33% - 16px);
 	max-width: calc(33.33% - 16px);
 	/* height: 300px;
 	width: 200px; */
 	background-color: white;
 	display: flex;
-	flex-direction: column;
+
 	justify-content: space-around;
 	border-radius: 8px;
 }
