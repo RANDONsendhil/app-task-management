@@ -24,21 +24,16 @@
       <div id="username-sidebar" class="nav-link" href="#submenu1" aria-expanded="false" aria-controls="submenu1">
         <a class="nav-link" href="#"> User name</a>
       </div>
-
-
-
       <!-- Menu 1 -->
     <li class="nav-item">
       <div class="nav-link" href="#submenu1" aria-expanded="false" aria-controls="submenu1">
         Activité
       </div>
-      <div class="nav-custom-sidebar" id="nav-tableau">
+      <div class="nav-custom-sidebar">
         <ul class="nav flex-column submenu">
-          <li><a class="nav-link" href="#" class="loadPage" data-page="home"><span> <img style="height: 39px;"
-                  src="/images/graph.png" alt="" srcset=""></span>
-              <span>Tableau
-                de bord</span></a></li>
-
+          <li><a class="nav-link" href="/home" id="home"><span> <img style="height: 39px;" src="/images/graph.png"
+                  alt="" srcset=""></span>
+              <span>Tableau de bord</span></a></li>
         </ul>
       </div>
     </li>
@@ -48,21 +43,23 @@
       <div class="nav-link" href="#submenu2" aria-expanded="false" aria-controls="submenu2">
         Paramètres
       </div>
-      <div class="nav-custom-sidebar" id="nav-profil">
+      <!-- <div class="nav-custom-sidebar" onclick="loadContent('profil')"> -->
+      <div class="nav-custom-sidebar">
         <ul class="nav flex-column submenu">
-          <li><a class="nav-link" href="#" class="loadPage" data-page="profil"><span> <img style="height: 39px;"
-                  src="/images/person_1.svg" alt="" srcset=""></span><span>Profil</span></a></li>
+          <li><a class=" nav-link" href="/profil"><span> <img style="height: 39px;" src="/images/person_1.svg" alt=""
+                  srcset=""></span><span>Profil</span></a>
+          </li>
         </ul>
       </div>
     </li>
 
     <!-- Menu 3 -->
-    <li class="nav-item">
+    <li class=" nav-item">
       <div class="nav-link" href="#submenu3" aria-expanded="false" aria-controls="submenu3">
         Information
       </div>
-      <div class="nav-custom-sidebar" id="nav-find">
-        <ul class="nav flex-column submenu">
+      <div class="nav-custom-sidebar">
+        <ul class="nav flex-column submenu" onclick="loadContent('findSpecialist')">
 
           <li><a class="nav-link" href="#"><span> <img style="height: 30px;" src="/images/location.png" alt=""
                   srcset=""></span><span>Trouver un medecin</span></a></li>
@@ -83,8 +80,4 @@
       </div>
     </li>
   </ul>
-</div>
-
-<div id="container">
-  <div id="contentArea"></div>
 </div>

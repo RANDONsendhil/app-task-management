@@ -9,8 +9,8 @@ $routes = [
   '/userCreation' =>  BASE_PATH . '/userCreationComponent/public/index.php',
   '/login' =>  BASE_PATH . '/loginComponent/view/login.php',
   '/home' =>  BASE_PATH . '/user/homeComponent/public/index.php',
-  '/user' =>   BASE_PATH . '/utilisateur/public/index.php',
-  '/profil' =>   BASE_PATH . '/user/profilComponent/public/index.php'
+  '/profil' =>   BASE_PATH . '/user/profilComponent/public/index.php',
+  '/name' =>   BASE_PATH . '/utilisateur/public/index.php'
 ];
 
 // print_r($requestUri);

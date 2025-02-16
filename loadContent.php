@@ -10,7 +10,7 @@ switch ($page) {
     header("Location: /user/homeComponent/view/displayHome.php");
     break;
   case 'profil':
-    header("Location: /user/profilComponent/view/profil.php");
+    header("Location: /userCreationComponent/view/displayUser.php");
     break;
   case 'page3':
     echo "<h1>Welcome to Page 3</h1><p>This is the content of Page 3.</p>";

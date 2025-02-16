@@ -1,6 +1,3 @@
-<?php define('BASE_PATH', __DIR__);
-?>
-
 <?php
 // Get the 'page' parameter from the URL (default to 'home' if not set)
 $page = isset($_GET['page']) ? $_GET['page'] : 'home';
@@ -26,17 +23,23 @@ $page = isset($_GET['page']) ? $_GET['page'] : 'home';
 <link rel="stylesheet" href="/user/homeComponent/view/css/style.css">
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script src="js/other/jquery-3.6.0.min.js"></script>
-<script src="js/other/scriptBootstrap.js"></script>
 
+<script src="js/other/scriptBootstrap.js"></script>
 
 
 <body>
   <header>
   </header>
+
+
   <?php
-  require BASE_PATH . '/router.php'; ?>
+  define('BASE_PATH', __DIR__);
+
+  require BASE_PATH . '/router.php';
+  ?>
   </div>
 
+  <script src="/fetch.js"></script>
   <script src="user/homeComponent/view/js/script.js"></script>
   <script src="js/common/script.js"></script>
   <script src="/js/common/script.js"></script>

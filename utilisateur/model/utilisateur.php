@@ -36,12 +36,12 @@ class Utilisateur
         if ($connect_db->connect_error) {
             die("Connection failed: " . $connect_db->connect_error);
         }
-        $sql = "SELECT idusers, username, useraddress FROM users";
+        echo ("hERE ");
+        $sql = "SELECT *  FROM users";
         $result = $connect_db->query($sql);
+
         if ($result->num_rows > 0) {
             return $result->fetch_all(MYSQLI_ASSOC);
-        } else {
-            return [];
         }
     }
 

@@ -2,10 +2,6 @@
 var login = false;
 $(document).ready(function () {
 	loadContent("home");
-	// When 'Load Page 1' button is clicked
-	$(".loadPage").click(function () {
-		loadContent("home");
-	});
 });
 
 // Function to load content dynamically using AJAX
@@ -16,7 +12,9 @@ function loadContent(page) {
 		data: { page: page },
 		success: function (response) {
 			// Insert the returned content into the content div
-			hideDisplay();
+			// hideDisplay();
+			console.log(page);
+
 			$("#contentArea").html(response);
 		},
 		error: function () {
@@ -43,7 +41,6 @@ function hideDisplay() {
 	];
 
 	pages.forEach((element) => {
-		console.log(element);
 		$(element).hide();
 	});
 	$;

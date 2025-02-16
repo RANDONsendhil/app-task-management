@@ -26,7 +26,9 @@ class ControllerUtilisateur
 
     public function get_list_users()
     {
-        $users = $this->utilsateurModel->fetch_all_users();
+        $myUserData = $this->utilsateurModel->fetch_all_users();
+
+        echo (' HERFE get list users');
         require(BASE_PATH . '/utilisateur/view/listUser.php');
     }
 

@@ -1,5 +1,5 @@
 <?php
-
+session_start();
 require_once(BASE_PATH . '/config/database.php');
 require_once(BASE_PATH . '/user/homeComponent/model/home.php');
 
@@ -12,6 +12,6 @@ class ControllerHome
 
     public function index()
     {
-        require(BASE_PATH . '/user/homeComponent/view/home.php');
+        require(BASE_PATH . '/user/homeComponent/view/displayHome.php');
     }
 }

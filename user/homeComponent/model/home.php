@@ -1,5 +1,5 @@
 <?php
-class Profil
+class Home
 {
   private $user_id;
   private $user_name;

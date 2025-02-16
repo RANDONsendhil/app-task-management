@@ -1,5 +1,5 @@
 <?php
-
+session_start();
 class UserCreationModel
 {
     private $user_id;
@@ -64,5 +64,45 @@ class UserCreationModel
             return false;
         }
         $stmt->close();
+    }
+
+    // public function display_user($userNumSS)
+    // {
+    //     echo (" calle here ");
+    //     //
+    //     $connect_db = $this->db->connect();
+    //     $sql = "select * from users where numSS='1'";  // Change the id to retrieve specific record
+    //     $resultDisplayUser = $connect_db->query($sql);
+
+    //     $userData = [];
+
+
+    //     if ($resultDisplayUser->num_rows > 0) {
+    //         // Loop through the result and store each row in the array
+    //         while ($row = $resultDisplayUser->fetch_assoc()) {
+    //             $userData[] = $row;  // Add the row to the array
+    //             echo (count($userData));
+    //         }
+    //     } else {
+    //         echo "0 results";
+    //     }
+
+    //     $connect_db->close();
+    // }
+    public function display_user($userNumSS)
+    {
+
+        $connect_db = $this->db->connect();
+        if ($connect_db->connect_error) {
+            die("Connection failed: " . $connect_db->connect_error);
+        }
+        $sql = "SELECT * FROM users";
+        echo (" HERE ");
+        $result = $connect_db->query($sql);
+        if ($result->num_rows > 0) {
+            return $result->fetch_all(MYSQLI_ASSOC);
+        } else {
+            return [];
+        }
     }
 }

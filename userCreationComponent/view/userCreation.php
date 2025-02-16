@@ -7,7 +7,6 @@
     <div id="containerCreationCompte">
 
       <div class="container shadow-lg p-3  bg-body-tertiary rounded">
-
         <form class="row g-2" method="POST" action="/">
           <legend>
             <h5>CRÉER UN COMPTE</h5>

@@ -12,11 +12,12 @@ class IndexUtilisateur
 
     public function __construct()
     {
-        $this->userId =  $this->sanitize_input($_POST["userId"]);
-        $this->uname = $this->sanitize_input($_POST["username"]);
-        $this->userAddress = $_POST["userAddress"];
+        // $this->userId =  $this->sanitize_input($_POST["userId"]);
+        // $this->uname = $this->sanitize_input($_POST["username"]);
+        // $this->userAddress = $_POST["userAddress"];
 
         $controllerUtilisateur = new ControllerUtilisateur();
+        $controllerUtilisateur->index();
         if (($_SERVER['REQUEST_METHOD'] === 'POST') && isset($_POST['save-user'])) {
             $this->addUser($controllerUtilisateur);
         } elseif (($_SERVER['REQUEST_METHOD'] === 'POST')  && isset($_POST['get-users'])) {
@@ -24,7 +25,6 @@ class IndexUtilisateur
         } elseif (($_SERVER['REQUEST_METHOD'] === 'POST')  && isset($_POST['delete-user'])) {
             $this->deleteUser($controllerUtilisateur);
         }
-        $controllerUtilisateur->index();
     }
     public function sanitize_input($data)
     {

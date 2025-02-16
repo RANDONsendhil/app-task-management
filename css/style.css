@@ -12,8 +12,16 @@ html {
 }
 .container {
 	display: flex;
-	/* min-height: 100vh; */
 	transition: margin-left 0.3s; /* Smooth transition when the sidebar toggles */
+}
+
+#containerHome {
+	position: relative;
+}
+.containerContentHome {
+	position: absolute;
+	padding: 0px 250px;
+	margin-left: 250px;
 }
 #navbar-home {
 	color: black;
@@ -47,10 +55,6 @@ html {
 	color: white;
 }
 
-.sidebar a:hover {
-	background-color: #444;
-}
-
 /* Content area */
 #contentArea {
 	margin: auto;
@@ -67,6 +71,18 @@ html {
 		width: 10%;
 		height: auto;
 		padding-top: 20px;
+	}
+
+	@media (max-width: 768px) {
+		.containerContentHome {
+			position: absolute;
+			padding: 0px 50px;
+			margin-left: 50px;
+			top: 25px;
+		}
+		.sidebar {
+			visibility: collapse;
+		}
 	}
 
 	#contentArea {
