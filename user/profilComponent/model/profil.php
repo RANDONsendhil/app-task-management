@@ -30,6 +30,59 @@ class Profil
     $stmt->close();
   }
 
+  public function update_user($objUser)
+  {
+    $connect_db = $this->db->connect();
+    $sql = "UPDATE INTO users SET (genre,
+            numSS,
+            lname,
+            fname,
+            inputEmail,
+            inputPassword,
+            mobileNum,
+            phoneNum,
+            inputAddress,
+            inputCity,
+            inputZip
+            ) VALUES 
+            (?, ?, ?, ?, ? ,?, ?, ?, ?, ? ,? )";
+    //prepare stateement
+    $stmt =  $connect_db->prepare($sql);
+    $stmt->bind_param(
+      "sssssssssss",
+      $objUser->getGenre(),
+      $objUser->getNumSS(),
+      $objUser->getLname(),
+      $objUser->getFname(),
+      $objUser->getInputEmail(),
+      $objUser->getInputPassword(),
+      $objUser->getMobileNum(),
+      $objUser->getPhoneNum(),
+      $objUser->getInputAddress(),
+      $objUser->getInputCity(),
+      $objUser->getinputZip()
+    );
+    echo "<script type='text/javascript'>alert('" . $objUser->getGenre(),
+    $objUser->getNumSS(),
+    $objUser->getLname(),
+    $objUser->getFname(),
+    $objUser->getInputEmail(),
+    $objUser->getInputPassword(),
+    $objUser->getMobileNum(),
+    $objUser->getPhoneNum(),
+    $objUser->getInputAddress(),
+    $objUser->getInputCity(),
+    $objUser->getinputZip() . "DATA INSERTED');</script>";
+    if ($stmt->execute()) {
+      echo "<script type='text/javascript'>alert(' DATA INSERTED');</script>";
+      return true;
+    } else {
+      echo "<script type='text/javascript'>alert(' DATA NOT INSERTED');</script>";
+      return false;
+    }
+  }
+
+
   public function displayUserList()
   {
     $connect_db = $this->db->connect();

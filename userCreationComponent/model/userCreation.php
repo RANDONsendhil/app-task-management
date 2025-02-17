@@ -1,5 +1,4 @@
 <?php
-session_start();
 class UserCreationModel
 {
     private $user_id;
@@ -64,31 +63,56 @@ class UserCreationModel
             return false;
         }
         $stmt->close();
+        $connect_db->close();
     }
 
-    // public function display_user($userNumSS)
-    // {
-    //     echo (" calle here ");
-    //     //
-    //     $connect_db = $this->db->connect();
-    //     $sql = "select * from users where numSS='1'";  // Change the id to retrieve specific record
-    //     $resultDisplayUser = $connect_db->query($sql);
+    public function update_user($objUser)
+    {
+        //echo "<script type='text/javascript'>alert(' update_user');</script>";
+        $connect_db = $this->db->connect();
+        $sql = "UPDATE users 
+        SET genre = ?, 
+            lname = ?, 
+            fname = ?, 
+            inputEmail = ?, 
+            inputPassword = ?, 
+            mobileNum = ?, 
+            phoneNum = ?, 
+            inputAddress = ?, 
+            inputCity = ?, 
+            inputZip = ? 
+        WHERE numSS = ?";
 
-    //     $userData = [];
+        // Prepare the statement
+        $stmt = $connect_db->prepare($sql);
+
+        // Bind parameters to the query ("ssssssssssi" = string, string, string, string, string, string, string, string, string, integer)
+        $stmt->bind_param(
+            "sssssssssss",
+            $objUser->getGenre(),
+            $objUser->getLname(),
+            $objUser->getFname(),
+            $objUser->getInputEmail(),
+            $objUser->getInputPassword(),
+            $objUser->getMobileNum(),
+            $objUser->getPhoneNum(),
+            $objUser->getInputAddress(),
+            $objUser->getInputCity(),
+            $objUser->getinputZip(),
+            $objUser->getNumSS()
+        );
 
 
-    //     if ($resultDisplayUser->num_rows > 0) {
-    //         // Loop through the result and store each row in the array
-    //         while ($row = $resultDisplayUser->fetch_assoc()) {
-    //             $userData[] = $row;  // Add the row to the array
-    //             echo (count($userData));
-    //         }
-    //     } else {
-    //         echo "0 results";
-    //     }
+        if ($stmt->execute()) {
+            echo "<script type='text/javascript'>alert(' DATA INSERTED');</script>";
+            return true;
+        } else {
+            echo "<script type='text/javascript'>alert(' DATA NOT INSERTED');</script>";
+            return false;
+        }
+        $stmt->close();
+    }
 
-    //     $connect_db->close();
-    // }
     public function display_user($userNumSS)
     {
 
@@ -97,7 +121,6 @@ class UserCreationModel
             die("Connection failed: " . $connect_db->connect_error);
         }
         $sql = "SELECT * FROM users";
-        echo (" HERE ");
         $result = $connect_db->query($sql);
         if ($result->num_rows > 0) {
             return $result->fetch_all(MYSQLI_ASSOC);

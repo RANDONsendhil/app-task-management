@@ -1,5 +1,5 @@
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
-  <div class="container-fluid" id="container-nav-bar">
+  <div class="container-fluid">
     <a class="nav-item" href="/">
       <img style="height: 50px;" src="images/logo.png" alt="" srcset="">
     </a>

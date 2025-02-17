@@ -36,7 +36,6 @@ class Utilisateur
         if ($connect_db->connect_error) {
             die("Connection failed: " . $connect_db->connect_error);
         }
-        echo ("hERE ");
         $sql = "SELECT *  FROM users";
         $result = $connect_db->query($sql);
 

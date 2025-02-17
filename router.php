@@ -10,6 +10,7 @@ $routes = [
   '/login' =>  BASE_PATH . '/loginComponent/view/login.php',
   '/home' =>  BASE_PATH . '/user/homeComponent/public/index.php',
   '/profil' =>   BASE_PATH . '/user/profilComponent/public/index.php',
+  '/updateProfil' =>   BASE_PATH . '/user/profilComponent/public/index.php',
   '/name' =>   BASE_PATH . '/utilisateur/public/index.php'
 ];
 

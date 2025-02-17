@@ -1,12 +1,13 @@
   <style>
 .containerLogin {
   margin: auto;
-  /* max-width: 500px; */
-  padding: 40px;
+  max-width: 500px;
+  padding: 39px 11px;
   width: 400px;
   background-color: #fff;
   border-radius: 8px;
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  top: 3px;
 
 }
 

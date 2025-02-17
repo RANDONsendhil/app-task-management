@@ -6,88 +6,90 @@ body,
 html {
 	margin: 0;
 	padding: 0;
-
 	font-family: Arial, sans-serif;
 	background-color: #f4f4f4;
 }
+
 .container {
 	display: flex;
+	/* min-height: 100vh; */
 	transition: margin-left 0.3s; /* Smooth transition when the sidebar toggles */
 }
+* {
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+}
 
-#containerHome {
-	position: relative;
-}
-.containerContentHome {
-	position: absolute;
-	padding: 0px 250px;
-	margin-left: 250px;
-}
-#navbar-home {
-	color: black;
-}
-/* Sidebar styling */
+/* Sidebar Styling */
 .sidebar {
-	width: 250px;
 	position: fixed;
-	top: 0;
-	left: 0;
-	bottom: 0;
 	background-color: #000000;
 	color: white;
 	padding-top: 10px;
-	font-size: 12px;
-	overflow-y: auto;
-	height: 100%; /* Ensures sidebar fills the height */
-}
-#avbar-home {
-	color: black;
+	width: 250px;
+	height: 100vh;
+	padding: 14px;
+	top: 0;
+	font-size: 15px;
 }
 
-.sidebar a {
-	display: block;
-	padding: 10px;
+.sidebar ul {
+	list-style: none;
+	padding: 2px 0;
+}
+
+.sidebar ul li a {
+	color: white;
 	text-decoration: none;
+}
+
+/* Main Container (Navbar + Content) */
+.main-container {
+	margin-left: 250px; /* Same as sidebar width */
+}
+
+/* Navbar Styling */
+.navbarContent {
+	position: fixed;
+	width: calc(100% - 250px);
+	height: 60px;
+	background: #555;
 	color: white;
+	padding: 15px;
+	text-align: center;
+	top: 0;
 }
 
-.nav-item .nav-link {
+/* Content Styling */
+.content {
+	position: absolute;
+	width: calc(100% - 250px);
+	color: rgb(28, 19, 19);
+	padding: 15px;
+	text-align: center;
+	top: 75px;
+}
+#navbarHome {
+	position: relative;
+	width: 100%;
+	height: 60px;
+	background: #555;
 	color: white;
+	padding: 15px;
+	text-align: center;
+	top: 0;
+	background-color: #0a485a !important;
 }
+.contianer-nav-bar {
+	display: flex;
+	-webkit-box-orient: vertical;
+	-webkit-box-direction: normal;
 
-/* Content area */
-#contentArea {
-	margin: auto;
-	margin-left: 250px;
-	padding: 20px;
-	flex-grow: 1;
-	transition: margin-left 0.3s;
-}
-
-/* Media Query for smaller screens */
-@media (max-width: 768px) {
-	.sidebar {
-		position: relative;
-		width: 10%;
-		height: auto;
-		padding-top: 20px;
-	}
-
-	@media (max-width: 768px) {
-		.containerContentHome {
-			position: absolute;
-			padding: 0px 50px;
-			margin-left: 50px;
-			top: 25px;
-		}
-		.sidebar {
-			visibility: collapse;
-		}
-	}
-
-	#contentArea {
-		margin-left: 0; /* Full width on smaller screens */
-	}
+	flex-direction: row;
+	padding-left: 0;
+	margin-bottom: 0;
+	list-style: none;
 }
 
 #containerCreationCompte {
@@ -99,7 +101,22 @@ html {
 h2 {
 	text-align: center;
 }
-
+nav::after {
+	content: "";
+	position: absolute;
+	margin-top: 5px;
+	bottom: 0;
+	left: 0;
+	width: 100%; /* Ensures the line spans the full width of the legend */
+	height: 2px; /* Height of the underline */
+	background: linear-gradient(
+		to right,
+		rgba(211, 211, 211, 0) 0%,
+		rgb(14, 84, 95) 50%,
+		rgba(211, 211, 211, 0) 100%
+	);
+	/* Light gray color with opacity on both edges */
+}
 .form-group {
 	margin-bottom: 20px;
 }
@@ -149,6 +166,7 @@ footer {
 legend {
 	font-weight: bold;
 	position: relative;
+	text-align: center;
 }
 
 legend::after {
@@ -166,51 +184,6 @@ legend::after {
 	);
 	/* Light gray color with opacity on both edges */
 }
-/* Responsive design for mobile screens */
-@media screen and (max-width: 600px) {
-	nav a {
-		float: none;
-		width: 100%;
-		text-align: left;
-	}
-}
-.navbar {
-	border-radius: 5px;
-	background-color: rgb(255, 255, 255) !important;
-	text-decoration: underline;
-}
-.navbar-contianer {
-	height: 100vh;
-}
-.navbar-nav {
-	flex: 1;
-	text-align: center;
-	color: #000;
-	font-weight: 200;
-}
-.navbar-brand {
-	flex: 0;
-}
-.navbar-nav .nav-item {
-	margin: 0px;
-}
-
-#container-nav-bar {
-	display: flex;
-	flex-direction: row;
-	flex-wrap: wrap;
-	align-content: stretch;
-	justify-content: space-evenly;
-	color: white;
-}
-#nar-home {
-	color: white;
-}
-.navbar-light .navbar-nav .nav-link {
-	font-size: large;
-	color: #000;
-}
-
 .container-login {
 	position: relative;
 	transition: transform 0.3s ease;
@@ -281,4 +254,22 @@ nav::after {
 
 	justify-content: space-around;
 	border-radius: 8px;
+}
+
+#container-nav-bar {
+	display: flex;
+	flex-direction: row;
+	flex-wrap: nowrap;
+	justify-content: space-evenly;
+}
+.content-container {
+	display: flex;
+	flex-wrap: wrap;
+	flex-direction: row-reverse;
+	gap: 15px;
+	top: 16px;
+	max-width: 905px;
+	margin: auto;
+	padding: 20px 14px 19px 19px;
+	font-size: 14px;
 }

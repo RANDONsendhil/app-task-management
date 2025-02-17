@@ -3,23 +3,21 @@
 require_once(BASE_PATH . '/config/utils.php');
 require_once(BASE_PATH . '/userCreationComponent/controller/controllerUserCreation.php');
 require_once(BASE_PATH . '/userCreationComponent/model/user.php');
+require_once(BASE_PATH . '/config/utils.php');
 $currentDir = dirname($_SERVER['PHP_SELF']);
 class IndexUserCreation
 {
     private $controllerUserCreation;
+    private $utils;
     public function __construct()
     {
         $this->controllerUserCreation = new ControllerUserCreation();
+        $this->utils = new Utils("");
+
 
         if ($_SERVER['REQUEST_METHOD'] == 'GET') {
-            // Example response data
-            $response = array(
-                "message" => "Data successfully fetched from index.php"
-            );
-            $this->displayUser($this->controllerUserCreation, "1");
 
-            // Return data as JSON
-            echo json_encode($response);
+            $this->displayUser($this->controllerUserCreation, "1");
         }
         if (isset($_POST['create-user'])) {
 
@@ -59,7 +57,12 @@ class IndexUserCreation
 
     public function userCreation($controllerUserCreation, $objUser)
     {
-        $controllerUserCreation->disp($objUser);
+        $controllerUserCreation->createUser($objUser);
+    }
+
+    public function updateUser($objUser)
+    {
+        $this->controllerUserCreation->updateUser($objUser);
     }
 
     public function getIndex()

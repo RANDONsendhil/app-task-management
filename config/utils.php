@@ -1,5 +1,5 @@
 <?php
-class Log
+class Utils
 {
   private $message;
   public function __construct($message)
@@ -18,5 +18,20 @@ class Log
   public function getMessage()
   {
     return $this->message;
+  }
+
+
+  function getCurrentUrl()
+  {
+    $protocol = (!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] !== 'off') ? "https://" : "http://";
+    $host = $_SERVER['HTTP_HOST'];
+    $uri = $_SERVER['REQUEST_URI'];
+
+    return $protocol . $host . $uri;
+  }
+
+  function getUri()
+  {
+    return $_SERVER['REQUEST_URI'];
   }
 }

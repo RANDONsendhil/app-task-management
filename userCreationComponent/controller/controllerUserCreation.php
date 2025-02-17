@@ -25,9 +25,9 @@ class ControllerUserCreation
         }
     }
 
-    public function updatUser($objUser)
+    public function updateUser($objUser)
     {
-        if ($this->userCreationModel->insert_user($objUser)) {
+        if ($this->userCreationModel->update_user($objUser)) {
             return true;
         } else {
             return false;

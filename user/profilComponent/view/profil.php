@@ -1,76 +1,81 @@
 <style>
-  table {
+table {
+  width: 100%;
+  margin: 20px auto;
+  border-collapse: collapse;
+  background-color: #fff;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
 
-    margin: 20px auto;
-    border-collapse: collapse;
-    background-color: #fff;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-  }
+th,
+td {
+  padding: 12px 15px;
+  text-align: left;
+}
 
-  th,
-  td {
-    padding: 12px 15px;
-    text-align: left;
-  }
+th {
+  background-color: #007bff;
+  color: white;
+}
 
-  th {
-    background-color: #007bff;
-    color: white;
-  }
-
-  tr:nth-child(even) {
-    background-color: #f9f9f9;
-  }
-
-  tr:hover {
-    background-color: rgb(193, 193, 193);
-  }
-
-  td strong {
-    color: #333;
-  }
-
-  .btn {
-    background-color: #dc3545;
-    color: white;
-    padding: 10px 20px;
-    font-size: 14px;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-  }
-
-  .btn:hover {
-    background-color: #c82333;
-  }
+tr:nth-child(even) {
+  background-color: #f9f9f9;
+}
 
 
+td strong {
+  color: #333;
+}
 
-  .btn-container {
-    text-align: right;
-    margin-top: 20px;
-  }
+.btn {
+  background-color: #dc3545;
+  color: white;
+  padding: 10px 20px;
+  font-size: 14px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.btn:hover {
+  background-color: #c82333;
+}
 </style>
 
 
-<div id="containerHome">
-  <?php
-  include(BASE_PATH . '/user/homeComponent/view/home.php');
-  ?>
-  <div class=" containerContentHome">
 
-    <div class=" container-card">
-
-      <div class="card">
-        <fieldset>
-          <legend>
-            <h5>Profil</h5>
-          </legend>
+<?php
 
 
-          <table>
-            <tbody>
-              <?php foreach ($dataByNumss as $row): ?>
+
+include(BASE_PATH . '/user/homeComponent/view/home.php');
+?>
+<div class="content">
+
+  <div class="">
+    <fieldset>
+      <legend>
+        <h5>Profil</h5>
+      </legend>
+      <form method="post" action="/updateProfil">
+        <div class="content-container">
+          <div class="container shadow-lg p-3  bg-body-tertiary rounded">
+            <table>
+              <tbody>
+                <?php foreach ($dataByNumss as $row): ?>
+                <?php
+                  $_SESSION['genre'] = $row['genre'];
+                  $_SESSION['numSS'] =  $row['numSS'];
+                  $_SESSION['lname']  =  $row['lname'];
+                  $_SESSION['fname'] = $row['fname'];
+                  $_SESSION['inputEmail'] = $row['inputEmail'];;
+                  $_SESSION['inputPassword'] = $row['inputPassword'];
+                  $_SESSION['mobileNum'] = $row['mobileNum'];
+                  $_SESSION['phoneNum']  = $row['phoneNum'];
+                  $_SESSION['inputAddress'] = $row['inputAddress'];
+                  $_SESSION['inputCity'] = $row['inputCity'];
+                  $_SESSION['inputZip'] = $row['inputZip'];
+                  ?>
                 <tr>
                   <td><strong>Numéro de Sécutié Sociale:</strong></td>
                   <td><?php echo htmlspecialchars($row['numSS']); ?></td>
@@ -111,14 +116,30 @@
                   <td><strong>Code Postal:</strong></td>
                   <td><?php echo htmlspecialchars($row['inputZip']); ?></td>
                 </tr>
-              <?php endforeach; ?>
-            </tbody>
-          </table>
+                <tr>
+                  <td></td>
+                  <td>
+                    <div class="d-flex justify-content-end">
 
-          <div class=" btn-container">
-            <input class="btn" type="submit" name="update-User" value="Modifier">
+                      <input class=" btn btn-primary btn-sm" type="submit" name="display-update-user"
+                        value="Mettre à jour mon Profil">
+
+                    </div>
+
+                  </td>
+                </tr>
+                <?php endforeach; ?>
+              </tbody>
+
+            </table>
+
           </div>
-        </fieldset>
-      </div>
-    </div>
+
+
+        </div>
+      </form>
+
+    </fieldset>
   </div>
+</div>
+</div>

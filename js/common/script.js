@@ -45,3 +45,9 @@ function hideDisplay() {
 	});
 	$;
 }
+
+function redirectPage(page) {
+	console.log("Called redirect ");
+
+	window.location.href = page;
+}
