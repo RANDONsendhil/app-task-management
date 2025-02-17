@@ -23,7 +23,6 @@ $page = isset($_GET['page']) ? $_GET['page'] : 'home';
 <link rel="stylesheet" href="/user/homeComponent/view/css/style.css">
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script src="js/other/jquery-3.6.0.min.js"></script>
-
 <script src="js/other/scriptBootstrap.js"></script>
 
 

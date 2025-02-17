@@ -31,7 +31,6 @@
             }
         }
 
-
         public function displayProfilEditableForm()
         {
 
@@ -41,6 +40,7 @@
         {
 
             $this->controllerProfil->saveProfilController($objUser);
+            session_unset();
         }
 
         function getObjUser()

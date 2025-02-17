@@ -6,7 +6,7 @@
       </div>
       <!-- Menu 1 -->
     <li class="nav-item">
-      <div class="nav-link" href="#submenu1" aria-expanded="false" aria-controls="submenu1">
+      <div href="#submenu1" aria-expanded="false" aria-controls="submenu1">
         Activité
       </div>
       <div class="nav-custom-sidebar">
@@ -20,7 +20,7 @@
 
     <!-- Menu 2 -->
     <li class="nav-item">
-      <div class="nav-link" href="#submenu2" aria-expanded="false" aria-controls="submenu2">
+      <div href="#submenu2" aria-expanded="false" aria-controls="submenu2">
         Paramètres
       </div>
       <!-- <div class="nav-custom-sidebar" onclick="loadContent('profil')"> -->
@@ -35,7 +35,7 @@
 
     <!-- Menu 3 -->
     <li class=" nav-item">
-      <div class="nav-link" href="#submenu3" aria-expanded="false" aria-controls="submenu3">
+      <div href="#submenu3" aria-expanded="false" aria-controls="submenu3">
         Information
       </div>
       <div class="nav-custom-sidebar">
@@ -48,7 +48,7 @@
     </li>
     <!-- Menu 4 -->
     <li class="nav-item">
-      <div class="nav-link" href="#submenu3" aria-expanded="false" aria-controls="submenu4">
+      <div href="#submenu3" aria-expanded="false" aria-controls="submenu4">
 
         Contact
       </div>

@@ -11,10 +11,11 @@ $routes = [
   '/home' =>  BASE_PATH . '/user/homeComponent/public/index.php',
   '/profil' =>   BASE_PATH . '/user/profilComponent/public/index.php',
   '/updateProfil' =>   BASE_PATH . '/user/profilComponent/public/index.php',
-  '/name' =>   BASE_PATH . '/utilisateur/public/index.php'
+  '/name' =>   BASE_PATH . '/utilisateur/public/index.php',
+  '/home/selectDoctor/appointment'  =>   BASE_PATH . '/appointmentComponent/public/index.php',
+  '/home/selectDoctor'  =>   BASE_PATH . '/appointmentComponent/public/index.php',
 ];
 
-// print_r($requestUri);
 // echo '<br>';
 // print_r($routes);s
 // print_r("<br>");
