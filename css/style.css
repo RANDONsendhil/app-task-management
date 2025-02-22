@@ -25,7 +25,7 @@ html {
 .sidebar {
 	position: fixed;
 	background-color: #000000;
-	color: white;
+	color: #17a2b8;
 	padding-top: 10px;
 	width: 250px;
 	height: 100vh;
@@ -239,7 +239,7 @@ nav::after {
 	top: 16px;
 	max-width: 905px;
 	margin: auto;
-	padding: 20px 14px 19px 19px;
+	padding: 20px 0 19px 19px;
 	background-color: #dddddd;
 }
 
@@ -254,6 +254,15 @@ nav::after {
 	justify-content: space-around;
 	border-radius: 8px;
 	font-size: 12px;
+}
+.card-title {
+	font-size: 19px;
+	color: #043646;
+}
+.card-text {
+	font-size: 16px;
+	margin: 2px;
+	/* font-weight: bold; */
 }
 
 #container-nav-bar {
@@ -270,6 +279,6 @@ nav::after {
 	top: 16px;
 	max-width: 905px;
 	margin: auto;
-	padding: 20px 14px 19px 19px;
+	padding: 20px 0px 19px 19px;
 	font-size: 14px;
 }

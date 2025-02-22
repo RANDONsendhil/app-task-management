@@ -13,6 +13,7 @@
         {
             $this->controllerProfil = new ControllerProfil();
             $this->utils = new Utils("");
+            $profilNumSS =  $_SESSION["numSS"];
 
 
 
@@ -23,7 +24,7 @@
                 $this->saveProfil($this->getObjUser());
             }
             if ($this->utils->getUri() == '/profil') {
-                $this->controllerProfil->index($numss = "12345");
+                $this->controllerProfil->index($numss = $profilNumSS);
             }
 
             if ($this->utils->getUri() == '/updateProfil') {
@@ -58,7 +59,6 @@
                 $this->sanitize_input($_POST["inputCity"]),
                 $this->sanitize_input($_POST["inputZip"])
             );
-
             return  $objUser;
         }
         public function sanitize_input($data)

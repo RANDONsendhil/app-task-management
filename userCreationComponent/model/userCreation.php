@@ -128,4 +128,20 @@ class UserCreationModel
             return [];
         }
     }
+
+    public function verifyLogin($email, $password)
+    {
+        $connect_db = $this->db->connect();
+        $sql = "SELECT * FROM users WHERE inputEmail = ? AND inputPassword = ?";
+        $stmt = $connect_db->prepare($sql);
+        $stmt->bind_param("ss", $email, $password);
+        $stmt->execute();
+        $userLoginData = $stmt->get_result();
+
+        if ($row = $userLoginData->fetch_assoc()) {
+            return $row;
+        } else {
+            return false;
+        }
+    }
 }

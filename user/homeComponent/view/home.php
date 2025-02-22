@@ -1,10 +1,58 @@
+<style>
+  .containerlog {
+    display: flex;
+    padding: 9px;
+    color: rgb(230 252 255);
+    align-items: center;
+    justify-content: flex-end;
+    flex-direction: column;
+    font-size: 14px;
+    font-weight: 500;
+  }
+
+  #logo {
+    height: 25px;
+    width: 25px;
+    background: #0a485a;
+  }
+
+  hr {
+    border: none;
+    height: 2px;
+    /* background-color: #ccc; */
+    background-color: white;
+  }
+
+  #for_logout {
+    cursor: pointer;
+    font-size: 11px;
+  }
+</style>
+
+<?php session_start()
+?>
+
 <div class="sidebar">
   <ul class="nav flex-column">
     <li class="nav-item">
       <div id="username-sidebar" class="nav-link" href="#submenu1" aria-expanded="false" aria-controls="submenu1">
-        <a class="nav-link" href="#"> User name</a>
-      </div>
-      <!-- Menu 1 -->
+        <div class="containerlog" id="for_logout" onclick="logout()">
+          <div>
+            <img style="border-radius: 50%;" id="logo" src="/images/image.png" alt="" srcset="">
+          </div>
+          <div>
+            Se déconnecter
+          </div>
+        </div>
+        <hr>
+        <div class="containerlog">
+          <div><?php echo strtoupper($_SESSION["lname"]) ?></div>
+          <div><?php echo ucfirst($_SESSION["fname"]);
+                ?>
+          </div>
+        </div>
+        <hr>
+        <!-- Menu 1 -->
     <li class="nav-item">
       <div href="#submenu1" aria-expanded="false" aria-controls="submenu1">
         Activité
@@ -46,6 +94,7 @@
         </ul>
       </div>
     </li>
+
     <!-- Menu 4 -->
     <li class="nav-item">
       <div href="#submenu3" aria-expanded="false" aria-controls="submenu4">
@@ -60,7 +109,9 @@
       </div>
     </li>
   </ul>
+  <hr>
 </div>
+
 <div class="main-container">
   <div class="container-fluid" id="navbarHome">
     <div class="d-flex justify-content-center align-items-center navbar-container">
@@ -77,3 +128,9 @@
       </ul>
     </div>
   </div>
+
+  <script>
+    function logout() {
+      window.location.href = "/login"; // Redirects to "/profil"
+    }
+  </script>

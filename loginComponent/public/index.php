@@ -2,24 +2,36 @@
 
 require_once(BASE_PATH . '/config/utils.php');
 require_once(BASE_PATH . '/loginComponent/controller/controllerLogin.php');
-$currentDir = dirname($_SERVER['PHP_SELF']);
+require_once(BASE_PATH . '/config/utils.php');
 
 
 class IndexLogin
 {
     private $controllerLogin;
+    private $utils;
     public function __construct()
     {
+        $this->utils = new Utils("");
         $this->controllerLogin = new ControllerLogin();
-        //  $controllerLogin -> index();
+
+        if (($_SERVER['REQUEST_METHOD'] === 'POST') && isset($_POST['connect-profil'])) {
+            $email = htmlspecialchars($_POST["email"]);
+            $password = htmlspecialchars($_POST["password"]);
+
+            if ($this->login($email, $password)) {
+                header("Location: /home");
+            } else {
+                header("Location: /login");
+                exit();
+            }
+        }
     }
 
 
-    public function login($uname, $password)
+    public function login($email, $password)
     {
-        $this->controllerLogin->index();
+        return $this->controllerLogin->indexLogin($email, $password);
     }
 }
 
-$index = new IndexLogin();
-$index->login("", "");
+new IndexLogin();

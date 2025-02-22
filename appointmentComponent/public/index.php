@@ -14,18 +14,31 @@ class IndexAppointment
         $this->controllerAppointment = new ControllerAppointment();
         $this->utils = new Utils("");
 
+        if ($this->utils->getUri() == '/home/displayAppointments') {
+            $this->controllerAppointment->controllerDisplayAppointmentPanel();
+        }
+
         if ($this->utils->getUri() == '/home/selectDoctor/appointment') {
             $doctor_id = isset($_GET['doctor_id']) ? intval($_GET['doctor_id']) : 0;
-
-            $this->controllerAppointment->indexAppointment();
         }
         if ($this->utils->getUri() == '/home/selectDoctor') {
             $this->controllerAppointment->indexSelectDoctor();
         }
-        if (($_SERVER['REQUEST_METHOD'] === 'POST') && isset($_POST['book-appointment'])) {
-            $doctor_id = isset($_POST['book-appointment']) ? intval($_POST['book-appointment']) : 0;
-            echo "<script type='text/javascript'>alert('" .  $doctor_id . "');</script>";
+        if (($_SERVER['REQUEST_METHOD'] === 'POST') && isset($_POST['select-appointment'])) {
+            $doctor_id = isset($_POST['select-appointment']) ? intval($_POST['select-appointment']) : 0;
+            $this->controllerAppointment->indexAppointment($doctor_id);
         }
+        if (($_SERVER['REQUEST_METHOD'] === 'POST') && isset($_POST['reserve-appointment'])) {
+            $doctor_RPPS = $_POST["doctorRPPS"];
+            $user_numSS = $_POST["userNumSS"];
+            $res_date = $_POST["res_date"];
+            $res_time = $_POST["res_time"];
+            $this->indexReserveAppointment($doctor_RPPS, $user_numSS,  $res_date, $res_time);
+        }
+    }
+    public function displayAppointments($numSS)
+    {
+        $this->controllerAppointment->controllerDisplayAppointmentPanel();
     }
 
     public function indexSelectDoctor()
@@ -33,9 +46,14 @@ class IndexAppointment
         $this->controllerAppointment->indexSelectDoctor();
     }
 
-    public function indexAppointment()
+    public function indexAppointment($docId)
     {
-        $this->controllerAppointment->indexAppointment();
+        $this->controllerAppointment->indexAppointment($docId);
+    }
+
+    public function indexReserveAppointment($doctor_RPPS, $user_numSS,  $res_date, $res_time)
+    {
+        $this->controllerAppointment->controlleReserveAppointment($doctor_RPPS, $user_numSS,  $res_date, $res_time);
     }
 }
 

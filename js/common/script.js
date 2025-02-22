@@ -6,8 +6,9 @@ $(document).ready(function () {
 
 // Function to load content dynamically using AJAX
 function loadContent(page) {
+	return;
 	$.ajax({
-		url: "loadContent.php", // This is the PHP file where you handle the dynamic content
+		url: "loadContent_77.php", // This is the PHP file where you handle the dynamic content
 		type: "GET",
 		data: { page: page },
 		success: function (response) {
