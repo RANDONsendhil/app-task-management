@@ -1,32 +1,32 @@
 <style>
-  .containerlog {
-    display: flex;
-    padding: 9px;
-    color: rgb(230 252 255);
-    align-items: center;
-    justify-content: flex-end;
-    flex-direction: column;
-    font-size: 14px;
-    font-weight: 500;
-  }
+.containerlog {
+  display: flex;
+  padding: 9px;
+  color: rgb(230 252 255);
+  align-items: center;
+  justify-content: flex-end;
+  flex-direction: column;
+  font-size: 14px;
+  font-weight: 500;
+}
 
-  #logo {
-    height: 25px;
-    width: 25px;
-    background: #0a485a;
-  }
+#logo {
+  height: 25px;
+  width: 25px;
+  background: #0a485a;
+}
 
-  hr {
-    border: none;
-    height: 2px;
-    /* background-color: #ccc; */
-    background-color: white;
-  }
+hr {
+  border: none;
+  height: 2px;
+  /* background-color: #ccc; */
+  background-color: white;
+}
 
-  #for_logout {
-    cursor: pointer;
-    font-size: 11px;
-  }
+#for_logout {
+  cursor: pointer;
+  font-size: 11px;
+}
 </style>
 
 <?php session_start()
@@ -36,6 +36,13 @@
   <ul class="nav flex-column">
     <li class="nav-item">
       <div id="username-sidebar" class="nav-link" href="#submenu1" aria-expanded="false" aria-controls="submenu1">
+
+        <div>
+          <a class="nav-item" href="/home">
+            <img style="height: 50px; margin-left: 40px;border-radius: 4px;" src="/images/logo.png">
+          </a>
+        </div>
+
         <div class="containerlog" id="for_logout" onclick="logout()">
           <div>
             <img style="border-radius: 50%;" id="logo" src="/images/image.png" alt="" srcset="">
@@ -130,7 +137,7 @@
   </div>
 
   <script>
-    function logout() {
-      window.location.href = "/login"; // Redirects to "/profil"
-    }
+  function logout() {
+    window.location.href = "/login"; // Redirects to "/profil"
+  }
   </script>

@@ -11,6 +11,12 @@
   unset($_SESSION['status']);
   unset($_SESSION['message']);
   ?>
+
+ <style>
+.modal-dialog {
+  color: rgb(7, 45, 112);
+}
+ </style>
  <div class="content">
    <fieldset>
      <legend>
@@ -50,10 +56,11 @@
  </div>
  <!-- Bootstrap Success Modal -->
  <div class="modal fade" id="successModal" tabindex="-1" aria-labelledby="successModalLabel" aria-hidden="false">
+
    <div class="modal-dialog">
      <div class="modal-content">
        <div class="modal-header">
-         <h5 class="modal-title" id="successModalLabel"></h5>
+         <h5 class="modal-title" id="successModalLabel" style="color: #0c3783;">Information sur votre rendez vous</h5>
          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
        </div>
        <div class="modal-body">

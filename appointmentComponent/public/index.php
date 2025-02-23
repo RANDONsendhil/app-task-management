@@ -14,9 +14,10 @@ class IndexAppointment
         $this->controllerAppointment = new ControllerAppointment();
         $this->utils = new Utils("");
 
-        if ($this->utils->getUri() == '/home/displayAppointments') {
-            $this->controllerAppointment->controllerDisplayAppointmentPanel();
-        }
+
+        // if ($this->utils->getUri() == '/home/displayAppointments') {
+        //     $this->displayAppointments();
+        // }
 
         if ($this->utils->getUri() == '/home/selectDoctor/appointment') {
             $doctor_id = isset($_GET['doctor_id']) ? intval($_GET['doctor_id']) : 0;
@@ -35,8 +36,22 @@ class IndexAppointment
             $res_time = $_POST["res_time"];
             $this->indexReserveAppointment($doctor_RPPS, $user_numSS,  $res_date, $res_time);
         }
+        if (($_SERVER['REQUEST_METHOD'] === 'POST')  && isset($_POST['delete-appointment'])) {
+
+            if (isset($_POST['idAppointment'])) {
+                ($_POST['idAppointment']) . "');</script>";
+                if ($this->deleteAppointment((int)$_POST['idAppointment'])) {
+                    // header("Location: " . $_SERVER['PHP_SELF']);
+                }
+            }
+        }
+
+        if (($_SERVER['REQUEST_METHOD'] === 'POST')  && isset($_POST['display-appointments'])) {
+
+            $this->displayAppointments();
+        }
     }
-    public function displayAppointments($numSS)
+    public function displayAppointments()
     {
         $this->controllerAppointment->controllerDisplayAppointmentPanel();
     }
@@ -54,6 +69,18 @@ class IndexAppointment
     public function indexReserveAppointment($doctor_RPPS, $user_numSS,  $res_date, $res_time)
     {
         $this->controllerAppointment->controlleReserveAppointment($doctor_RPPS, $user_numSS,  $res_date, $res_time);
+    }
+
+    public function deleteAppointment($id)
+    {
+
+        return $this->controllerAppointment->controllerDeleteAppointment($id);
+    }
+
+    public function withtouRerouteListAppointments($numSS)
+    {
+
+        $this->controllerAppointment->controllerDisplayAppointments($numSS);
     }
 }
 

@@ -34,4 +34,16 @@ class Utils
   {
     return $_SERVER['REQUEST_URI'];
   }
+
+
+  function format_weekDay_to_FR_Date($weekday)
+  {
+    $date = new DateTime($weekday);
+    $formatter = new IntlDateFormatter(
+      'fr_FR',
+      IntlDateFormatter::FULL,
+      IntlDateFormatter::NONE
+    );
+    return  ucfirst($formatter->format($date));
+  }
 }

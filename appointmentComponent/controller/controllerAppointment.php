@@ -36,7 +36,6 @@ class ControllerAppointment
         }
     }
 
-
     public function controllerDisplayAppointments($numSS)
     {
         return $this->appointmentModel->get_appointments($numSS);
@@ -46,5 +45,12 @@ class ControllerAppointment
 
         $getUsersAppointments = $this->controllerDisplayAppointments($_SESSION["numSS"]);
         require(BASE_PATH . '/appointmentComponent/view/displayListAppointments.php');
+    }
+    public function controllerDeleteAppointment($id)
+    {
+
+        $this->appointmentModel->delete_appointment_byId($id);
+        $this->controllerDisplayAppointmentPanel();
+        return true;
     }
 }
