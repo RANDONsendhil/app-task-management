@@ -14,11 +14,6 @@ class IndexAppointment
         $this->controllerAppointment = new ControllerAppointment();
         $this->utils = new Utils("");
 
-
-        // if ($this->utils->getUri() == '/home/displayAppointments') {
-        //     $this->displayAppointments();
-        // }
-
         if ($this->utils->getUri() == '/home/selectDoctor/appointment') {
             $doctor_id = isset($_GET['doctor_id']) ? intval($_GET['doctor_id']) : 0;
         }
@@ -39,9 +34,9 @@ class IndexAppointment
         if (($_SERVER['REQUEST_METHOD'] === 'POST')  && isset($_POST['delete-appointment'])) {
 
             if (isset($_POST['idAppointment'])) {
-                ($_POST['idAppointment']) . "');</script>";
+                ($_POST['idAppointment']);
                 if ($this->deleteAppointment((int)$_POST['idAppointment'])) {
-                    // header("Location: " . $_SERVER['PHP_SELF']);
+                    return;
                 }
             }
         }

@@ -35,7 +35,6 @@ unset($_SESSION['message']);
             </tr>
           </thead>
           <tbody class="table-group-divider">
-
             <?php
               $date = new DateTime($row['date']);
               $formatter = new IntlDateFormatter(
@@ -46,7 +45,6 @@ unset($_SESSION['message']);
             <?php foreach ($getUsersAppointments as $row): ?>
             <tr>
               <td scope='row'> <?= htmlspecialchars($row['id']) ?></td>
-
 
               </th>
               <td>

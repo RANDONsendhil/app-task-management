@@ -46,6 +46,5 @@ class Controllerprofil
     {
 
         $this->userCreationModel->update_user($objUser);
-        //require(BASE_PATH . '/user/profilComponent/view/profil.php');
     }
 }

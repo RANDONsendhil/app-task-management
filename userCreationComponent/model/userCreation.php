@@ -44,26 +44,16 @@ class UserCreationModel
             $objUser->getInputCity(),
             $objUser->getinputZip()
         );
-        echo "<script type='text/javascript'>alert('" . $objUser->getGenre(),
-        $objUser->getNumSS(),
-        $objUser->getLname(),
-        $objUser->getFname(),
-        $objUser->getInputEmail(),
-        $objUser->getInputPassword(),
-        $objUser->getMobileNum(),
-        $objUser->getPhoneNum(),
-        $objUser->getInputAddress(),
-        $objUser->getInputCity(),
-        $objUser->getinputZip() . "DATA INSERTED');</script>";
         if ($stmt->execute()) {
-            echo "<script type='text/javascript'>alert(' DATA INSERTED');</script>";
+            $_SESSION['statusCreationProfil'] = "success";
+            $_SESSION['message'] = "Votre profil est à jour avec succès";
             return true;
         } else {
-            echo "<script type='text/javascript'>alert(' DATA NOT INSERTED');</script>";
+            $_SESSION['statusCreationProfil'] = "error";
+            $_SESSION['message'] = "Echec de mise à jour du profil !" . $stmt->error;
             return false;
         }
         $stmt->close();
-        $connect_db->close();
     }
 
     public function update_user($objUser)
@@ -102,12 +92,13 @@ class UserCreationModel
             $objUser->getNumSS()
         );
 
-
         if ($stmt->execute()) {
-            echo "<script type='text/javascript'>alert(' DATA INSERTED');</script>";
+            $_SESSION['statusUpdateProfil'] = "success";
+            $_SESSION['message'] = "Votre profil est à jour avec succès";
             return true;
         } else {
-            echo "<script type='text/javascript'>alert(' DATA NOT INSERTED');</script>";
+            $_SESSION['statusUpdateProfil'] = "error";
+            $_SESSION['message'] = "Echec de mise à jour du profil !" . $stmt->error;
             return false;
         }
         $stmt->close();
@@ -127,6 +118,7 @@ class UserCreationModel
         } else {
             return [];
         }
+        $stmt->close();
     }
 
     public function verifyLogin($email, $password)
@@ -143,5 +135,6 @@ class UserCreationModel
         } else {
             return false;
         }
+        $stmt->close();
     }
 }

@@ -29,6 +29,8 @@
 
             if ($this->utils->getUri() == '/updateProfil') {
                 $this->controllerProfil->displayProfilEditableFormPublic();
+                header('Location: user/profilComponent/view/profil.php');
+                exit();
             }
         }
 
@@ -39,9 +41,8 @@
         }
         public function saveProfil($objUser)
         {
-
             $this->controllerProfil->saveProfilController($objUser);
-            session_unset();
+            // session_unset();
         }
 
         function getObjUser()

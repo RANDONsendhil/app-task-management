@@ -27,6 +27,11 @@ hr {
   cursor: pointer;
   font-size: 11px;
 }
+
+#profil_name {
+  color: #15caff;
+  font-size: large;
+}
 </style>
 
 <?php session_start()
@@ -42,20 +47,22 @@ hr {
             <img style="height: 50px; margin-left: 40px;border-radius: 4px;" src="/images/logo.png">
           </a>
         </div>
-
+        <hr>
         <div class="containerlog" id="for_logout" onclick="logout()">
           <div>
-            <img style="border-radius: 50%;" id="logo" src="/images/image.png" alt="" srcset="">
+            <img style="border-radius: 50%;" id="logo" src="/images/se_deconnecter.png" alt="" srcset="">
           </div>
-          <div>
+          <div style="color:#2f87e1">
             Se déconnecter
           </div>
         </div>
         <hr>
         <div class="containerlog">
-          <div><?php echo strtoupper($_SESSION["lname"]) ?></div>
-          <div><?php echo ucfirst($_SESSION["fname"]);
-                ?>
+          <div class="containerlog" id="profil_name">
+            <div><?php echo strtoupper($_SESSION["lname"]) ?></div>
+            <div><?php echo ucfirst($_SESSION["fname"]);
+                  ?>
+            </div>
           </div>
         </div>
         <hr>
@@ -139,5 +146,9 @@ hr {
   <script>
   function logout() {
     window.location.href = "/login"; // Redirects to "/profil"
+    <?php
+      session_destroy();
+
+      ?>
   }
   </script>

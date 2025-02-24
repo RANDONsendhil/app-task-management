@@ -1,6 +1,11 @@
 <main>
   <?php
   include(BASE_PATH . "/index/nav.php");
+  session_start();
+  $status = isset($_SESSION['statusCreationProfil']) ? $_SESSION['statusCreationProfil'] : null;
+  $message = isset($_SESSION['messageCreationProfil']) ? $_SESSION['messageCreationProfil'] : "";
+  unset($_SESSION['statusCreationProfil']);
+  unset($_SESSION['messageCreationProfil']);
   ?>
   <fieldset>
 
@@ -85,4 +90,37 @@
 <?php
 include(BASE_PATH . "/index/footer.php")
 ?>
+
+
+<div class="modal fade" id="retCreationModel" tabindex="-1" aria-labelledby="retCreationModelLabel" aria-hidden="false">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="retCreationModelLabel" style="color: #0c3783;">Information.</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body" id="message">
+        Votre réservation a été bien prise en compte.
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fermer</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+var status = <?php echo json_encode($status); ?>;
+var message = <?php echo json_encode($message); ?>;
+console.log(status);
+
+if (status === "success") {
+  var retCreationModel = new bootstrap.Modal(document.getElementById('retCreationModel'));
+  document.getElementById("message").style.color = "#13168f";
+  document.getElementById("message").innerHTML = "<h5>Votre compte a été crée avec succès</h5>";
+  retCreationModel.show();
+} else if (status === "error") {
+
+}
+</script>
 </body>

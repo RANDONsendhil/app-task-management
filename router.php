@@ -25,6 +25,7 @@ $routes = [
 // print_r("CURRENT DIR" . $currentDir);
 function route_controller($requestUri, $routes)
 {
+  // echo "<script> alert(" . $_SESSION['isloggedIn'] . ") </script>";
   array_key_exists($requestUri, $routes) ? require  $routes[$requestUri] : abort();
 }
 function abort()

@@ -4,7 +4,13 @@ define('BASE_PATH', __DIR__);
 
 include(BASE_PATH . '/user/homeComponent/view/home.php');
 session_start();
+
+$status = isset($_SESSION['retStatus']) ? $_SESSION['retStatus'] : null;
+$message = isset($_SESSION['retMessage']) ? $_SESSION['retMessage'] : "";
+unset($_SESSION['statusDelete']);
+unset($_SESSION['message']);
 ?>
+
 
 <div class="container-card">
 
@@ -89,17 +95,48 @@ session_start();
               <div class="fg-col-4">
                 <input class="btn btn-secondary btn-sm" value=" Abandonner" onclick="redirectPage('/profil')">
               </div>
-
               <div class="g-col-4">
                 <input class="btn btn-primary btn-sm" type="submit" name="save-update-profil"
                   value="Mettre à jour mon Profil">
               </div>
             </div>
           </div>
-
         </form>
       </div>
     </div>
-
   </fieldset>
 </div>
+
+
+
+<div class="modal fade" id="returnModel" tabindex="-1" aria-labelledby="returnModelLabel" aria-hidden="false">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="returnModelLabel" style="color: #0c3783;">Information.</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body" id="message">
+        Votre réservation a été bien prise en compte.
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fermer</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+var status = <?php echo json_encode($status); ?>;
+var message = <?php echo json_encode($message); ?>;
+console.log(" ---------------> " + status);
+
+if (status === "success") {
+  var returnModel = new bootstrap.Modal(document.getElementById('returnModel'));
+  document.getElementById("message").innerHTML = message;
+  returnModel.show();
+} else if (status === "error") {
+  var errorModal = new bootstrap.Modal(document.getElementById('errorModal'));
+  errorModal.show();
+}
+</script>
