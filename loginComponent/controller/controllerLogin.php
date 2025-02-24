@@ -19,6 +19,7 @@ class ControllerLogin
     public function indexLogin($email, $password)
     {
         $ret = $this->userCreationModel->verifyLogin($email, $password);
+
         if ($ret != null) {
             $_SESSION["lname"] = $ret["lname"];
             $_SESSION["fname"] = $ret["fname"];

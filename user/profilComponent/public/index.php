@@ -16,7 +16,6 @@
             $profilNumSS =  $_SESSION["numSS"];
 
 
-
             if (($_SERVER['REQUEST_METHOD'] === 'POST') && isset($_POST['update-profil'])) {
                 $this->displayProfilEditableForm();
             }
@@ -26,12 +25,40 @@
             if ($this->utils->getUri() == '/profil') {
                 $this->controllerProfil->index($numss = $profilNumSS);
             }
+            if ($this->utils->getUri() == '/find-doctors') {
+                echo ("<script>alert(" . $this->utils->getUri() . ") </script>");
+                $this->controllerProfil->findDoctor();
+            }
+            if ($this->utils->getUri() == '/contact-assistant') {
+                $this->contactAssistant();
+            }
+            if ($this->utils->getUri() == '/emergency-numbers') {
+                $this->displayUrgentNumbers();
+            }
 
             if ($this->utils->getUri() == '/updateProfil') {
                 $this->controllerProfil->displayProfilEditableFormPublic();
-                header('Location: user/profilComponent/view/profil.php');
+                // header('Location: user/profilComponent/view/profil.php');
                 exit();
             }
+        }
+
+        public function findDoctor()
+        {
+
+            $this->controllerProfil->findDoctor();
+        }
+
+        public function contactAssistant()
+        {
+
+            $this->controllerProfil->contactAssistant();
+        }
+
+        public function displayUrgentNumbers()
+        {
+
+            $this->controllerProfil->displayUrgentNumbers();
         }
 
         public function displayProfilEditableForm()
@@ -39,10 +66,10 @@
 
             $this->controllerProfil->displayProfilEditableFormPublic();
         }
+
         public function saveProfil($objUser)
         {
             $this->controllerProfil->saveProfilController($objUser);
-            // session_unset();
         }
 
         function getObjUser()

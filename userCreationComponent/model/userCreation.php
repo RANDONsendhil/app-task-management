@@ -46,11 +46,11 @@ class UserCreationModel
         );
         if ($stmt->execute()) {
             $_SESSION['statusCreationProfil'] = "success";
-            $_SESSION['message'] = "Votre profil est à jour avec succès";
+            $_SESSION['messageCreationProfil'] = "Votre profil est à jour avec succès";
             return true;
         } else {
             $_SESSION['statusCreationProfil'] = "error";
-            $_SESSION['message'] = "Echec de mise à jour du profil !" . $stmt->error;
+            $_SESSION['messageCreationProfil'] = "Echec de mise à jour du profil !" . $stmt->error;
             return false;
         }
         $stmt->close();
@@ -131,6 +131,7 @@ class UserCreationModel
         $userLoginData = $stmt->get_result();
 
         if ($row = $userLoginData->fetch_assoc()) {
+            echo ("<script> alert(" . $row . ") </script>");
             return $row;
         } else {
             return false;

@@ -17,14 +17,11 @@ class IndexLogin
         if (($_SERVER['REQUEST_METHOD'] === 'POST') && isset($_POST['connect-profil'])) {
             $email = htmlspecialchars($_POST["email"]);
             $password = htmlspecialchars($_POST["password"]);
-
             if ($this->login($email, $password)) {
-                $_SESSION['statusLogin'] = "success";
-                $_SESSION['messageLogin'] = "Votre profil est à jour avec succès";
                 header("Location: /home");
             } else {
                 $_SESSION['statusLogin'] = "error";
-                $_SESSION['messageLogin'] = "Adresse Mail ou mot de passe inconnu";
+                $_SESSION['messageLogin'] = "Identifiant ou mot de passe non reconnu!";
                 header("Location: /login");
                 exit();
             }

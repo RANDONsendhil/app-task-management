@@ -47,4 +47,19 @@ class Controllerprofil
 
         $this->userCreationModel->update_user($objUser);
     }
+
+    public function findDoctor()
+    {
+        require(BASE_PATH . '/user/profilComponent/view/findDoctor.php');
+    }
+
+    public function contactAssistant()
+    {
+        require(BASE_PATH . '/user/profilComponent/view/contact.php');
+    }
+
+    public function displayUrgentNumbers()
+    {
+        require(BASE_PATH . '/user/profilComponent/view/urgentNumbers.php');
+    }
 }

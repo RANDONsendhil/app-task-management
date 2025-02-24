@@ -46,6 +46,8 @@ include(BASE_PATH . '/user/homeComponent/view/home.php');
 session_start();
 $status = isset($_SESSION['statusUpdateProfil']) ? $_SESSION['statusUpdateProfil'] : null;
 $message = isset($_SESSION['message']) ? $_SESSION['message'] : "";
+unset($_SESSION['statusUpdateProfil']);
+unset($_SESSION['message']);
 
 ?>
 <div class="content">

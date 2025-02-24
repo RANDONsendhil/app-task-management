@@ -38,24 +38,24 @@ include(BASE_PATH . '/user/homeComponent/view/home.php');
           <a href="/home/doctors" class="btn btn-info btn-sm">Afficher les medecins</a>
         </div>
         <div class="card-body">
-          <h4 class="card-title">Special title treatment</h4>
+          <h4 class="card-title">Titre 4</h4>
           <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
-          <a href="#" class="btn btn-info btn-sm">Go somewhere</a>
+          <a href="#" class="btn btn-info btn-sm">Btn</a>
         </div>
         <div class="card-body">
-          <h4 class="card-title">Special title treatment</h4>
+          <h4 class="card-title">Titre 5</h4>
           <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
-          <a href="#" class="btn btn-info btn-sm">Go somewhere</a>
+          <a href="#" class="btn btn-info btn-sm">Btn</a>
         </div>
         <div class="card-body">
-          <h4 class="card-title">Special title treatment</h4>
+          <h4 class="card-title">Titre 6</h4>
           <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
-          <a href="#" class="btn btn-info btn-sm">Go somewhere</a>
+          <a href="#" class="btn btn-info btn-sm">Btn</a>
         </div>
         <div class="card-body">
-          <h4 class="card-title">Special title treatment</h4>
+          <h4 class="card-title">Titre </h4>
           <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
-          <a href="#" class="btn btn-info btn-sm">Go somewhere</a>
+          <a href="#" class="btn btn-info btn-sm">Btn</a>
         </div>
       </div>
     </div>

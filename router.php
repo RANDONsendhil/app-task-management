@@ -17,6 +17,9 @@ $routes = [
   '/home/selectDoctor'  =>   BASE_PATH . '/appointmentComponent/public/index.php',
   '/home/bookAppoinment'  =>   BASE_PATH . '/appointmentComponent/public/index.php',
   '/home/displayAppointments'  =>   BASE_PATH . '/appointmentComponent/public/index.php',
+  '/contact-assistant'  =>   BASE_PATH . '/user/profilComponent/public/index.php',
+  '/find-doctors'  =>   BASE_PATH . '/user/profilComponent/public/index.php',
+  '/emergency-numbers'  =>   BASE_PATH . '/user/profilComponent/public/index.php',
 ];
 
 // echo '<br>';

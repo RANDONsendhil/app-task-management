@@ -88,7 +88,7 @@ hr {
       <!-- <div class="nav-custom-sidebar" onclick="loadContent('profil')"> -->
       <div class="nav-custom-sidebar">
         <ul class="nav flex-column submenu">
-          <li><a class=" nav-link" href="/profil"><span> <img style="height: 39px;" src="/images/person_1.svg" alt=""
+          <li><a class="nav-link" href="/profil"><span> <img style="height: 39px;" src="/images/person_1.svg" alt=""
                   srcset=""></span><span>Profil</span></a>
           </li>
         </ul>
@@ -101,10 +101,10 @@ hr {
         Information
       </div>
       <div class="nav-custom-sidebar">
-        <ul class="nav flex-column submenu" onclick="loadContent('findSpecialist')">
+        <ul class="nav flex-column submenu">
 
-          <li><a class="nav-link" href="#"><span> <img style="height: 30px;" src="/images/location.png" alt=""
-                  srcset=""></span><span>Trouver un medecin</span></a></li>
+          <li><a class="nav-link" href="find-doctors"><span> <img style="height: 30px;" src="/images/location.png"
+                  alt="" srcset=""></span><span>Trouver un medecin</span></a></li>
         </ul>
       </div>
     </li>
@@ -117,8 +117,8 @@ hr {
       </div>
       <div class="nav-custom-sidebar" id="nav-contact">
         <ul class="nav flex-column submenu">
-          <li><a class="nav-link" href="#"><span> <img style="height: 30px;" src="/images/mail.png" alt=""
-                  srcset=""></span><span>Contact Assistant</span></a></li>
+          <li><a class="nav-link" href="/contact-assistant"><span> <img style="height: 30px;" src="/images/mail.png"
+                  alt="" srcset=""></span><span>Contact Assistant</span></a></li>
         </ul>
       </div>
     </li>
@@ -131,7 +131,7 @@ hr {
     <div class="d-flex justify-content-center align-items-center navbar-container">
       <ul class="contianer-nav-bar navbar-nav mx-auto ">
         <li class=" nav-item mx-2">
-          <a id="numeroUrgence" class="nav-link" href="/contactNumUrg" style="color: white;">Numeréo urgences</a>
+          <a id="numeroUrgence" class="nav-link" href="/emergency-numbers" style="color: white;">Numéros urgence</a>
         </li>
         <li class="nav-item nav-item mx-2 ">
           <a class=" nav-link" href="#" style="color: white;">Questions fréquentes</a>
@@ -146,9 +146,5 @@ hr {
   <script>
   function logout() {
     window.location.href = "/login"; // Redirects to "/profil"
-    <?php
-      session_destroy();
-
-      ?>
   }
   </script>

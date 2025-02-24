@@ -12,7 +12,7 @@
       <div class="collapse navbar-collapse">
         <ul class="navbar-nav mx-auto ">
           <li class="nav-item mx-2">
-            <a id="creation_compte_link" class="nav-link" href="/">Création de compte</a>
+            <a id="creation_compte_link" class="nav-link" href="/emergency-numbers">Création de compte</a>
           </li>
           <li class="nav-item nav-item mx-2">
             <a class="nav-link" href="#">Questions fréquentes</a>
