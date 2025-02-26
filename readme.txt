@@ -1,13 +1,41 @@
-/mvc-php/
-    /PHP_PROJECT/
-        /controllers/
-            ComponentController.php
-        /models/
-            Component.php
-        /views/
-            componentView.php
-        /public/
-            indexComponent.php
+/app-cabinet-medicalp/
+    |--/adminComponent/
+       |--/controllers/controllerAdmin.php
+       |--/model/admin.php  
+       |--/public/index.php
+       |--/view/admin.php
+    |--/appointmentComponent/
+       |--/controllers/controllerAppointment.php
+       |--/model/appointment.php  
+       |--/public/index.php
+       |--/view/appointment.php
+    |--/loginComponent/
+       |--/controllers/controllerLogin.php
+       |--/model/login.php  
+       |--/public/index.php
+       |--/view/login.php
+    |--/user/
+        |--/homeComponent
+            |--/controllers/controllerHome.php
+            |--/model/home.php  
+            |--/public/index.php
+            |--/view/home.php
+        |--/profilComponent
+            |--/controllers/controllerProfil.php
+            |--/model/profil.php  
+            |--/public/index.php
+            |--/view/profil.php
+    |--/userCreationComponent
+        |--/controllers/controllerUserCreation.php
+        |--/model/userCreation.php  
+        |--/public/index.php
+        |--/view/userCreation.php
+     
     /config/
-        database.php
+        |--/database.php
+        |--/utils.php
+    /images
+    /css
+    /js
+    router.php
     index.php     
