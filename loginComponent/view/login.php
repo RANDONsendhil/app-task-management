@@ -38,7 +38,7 @@
           <div class="container-sm shadow-lg p-3 mb-5 bg-body-tertiary rounded">
             <form id="loginForm" method="POST" action="/login/submit-login">
               <div class="form-group">
-                <label for="username">Identifiant</label>
+                <label for="username">Email</label>
                 <input type="text" name="email" id="email" required><br><br>
                 <label for="password">Mot de Passe</label>
                 <input type="text" name="password" id="password" required>

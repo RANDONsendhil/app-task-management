@@ -131,7 +131,7 @@ class UserCreationModel
         $userLoginData = $stmt->get_result();
 
         if ($row = $userLoginData->fetch_assoc()) {
-            echo ("<script> alert(" . $row . ") </script>");
+
             return $row;
         } else {
             return false;

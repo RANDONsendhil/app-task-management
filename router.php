@@ -20,6 +20,10 @@ $routes = [
   '/contact-assistant'  =>   BASE_PATH . '/user/profilComponent/public/index.php',
   '/find-doctors'  =>   BASE_PATH . '/user/profilComponent/public/index.php',
   '/emergency-numbers'  =>   BASE_PATH . '/user/profilComponent/public/index.php',
+  '/admin'  =>   BASE_PATH . '/adminComponent/public/index.php',
+  '/admin/submit-login-admin'  =>   BASE_PATH . '/adminComponent/public/index.php',
+  '/admin/home' =>   BASE_PATH . '/adminComponent/public/index.php',
+  '/admin/profil-admin' =>   BASE_PATH . '/adminComponent/public/index.php',
 ];
 
 // echo '<br>';
