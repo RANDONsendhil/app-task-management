@@ -45,9 +45,9 @@ td strong {
 include(BASE_PATH . '/adminComponent/view/home/ad_home.php');
 session_start();
 $status = isset($_SESSION['statusUpdateProfilAdmin']) ? $_SESSION['statusUpdateProfilAdmin'] : null;
-$messageAdmin = isset($_SESSION['messageAdmin']) ? $_SESSION['messageAdmin'] : "";
+$messageAdmin = isset($_SESSION['messageUpdateProfilAdmin']) ? $_SESSION['messageUpdateProfilAdmin'] : "";
 unset($_SESSION['statusUpdateProfilAdmin']);
-unset($_SESSION['messageAdmin']);
+unset($_SESSION['messageUpdateProfilAdmin']);
 
 ?>
 <div class="content">
@@ -64,7 +64,7 @@ unset($_SESSION['messageAdmin']);
               <tbody>
                 <?php foreach ($dataAdminById as $row): ?>
                 <?php
-                  $_SESSION['id_amdin'] = $row['id_amdin'];
+                  $_SESSION['id_admin'] = $row['id_admin'];
                   $_SESSION['password'] =  $row['password'];
                   $_SESSION['fname']  =  $row['fname'];
                   $_SESSION['lname'] = $row['lname'];
@@ -73,8 +73,8 @@ unset($_SESSION['messageAdmin']);
 
                   ?>
                 <tr>
-                  <td><strong>Numéro de Sécutié Sociale:</strong></td>
-                  <td><?php echo htmlspecialchars($row['id_amdin']); ?></td>
+                  <td><strong>ID ADMIN:</strong></td>
+                  <td><?php echo htmlspecialchars($row['id_admin']); ?></td>
                 </tr>
                 <tr>
                   <td><strong>Nom:</strong></td>

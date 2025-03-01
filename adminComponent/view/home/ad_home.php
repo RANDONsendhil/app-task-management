@@ -1,37 +1,37 @@
 <style>
-.containerlog {
-  display: flex;
-  padding: 9px;
-  color: rgb(230 252 255);
-  align-items: center;
-  justify-content: flex-end;
-  flex-direction: column;
-  font-size: 14px;
-  font-weight: 500;
-}
+  .containerlog {
+    display: flex;
+    padding: 9px;
+    color: rgb(230 252 255);
+    align-items: center;
+    justify-content: flex-end;
+    flex-direction: column;
+    font-size: 14px;
+    font-weight: 500;
+  }
 
-#logo {
-  height: 25px;
-  width: 25px;
-  background: #0a485a;
-}
+  #logo {
+    height: 25px;
+    width: 25px;
+    background: #0a485a;
+  }
 
-hr {
-  border: none;
-  height: 2px;
-  /* background-color: #ccc; */
-  background-color: white;
-}
+  hr {
+    border: none;
+    height: 2px;
+    /* background-color: #ccc; */
+    background-color: white;
+  }
 
-#for_logout {
-  cursor: pointer;
-  font-size: 11px;
-}
+  #for_logout {
+    cursor: pointer;
+    font-size: 11px;
+  }
 
-#profil_name {
-  color: #15caff;
-  font-size: large;
-}
+  #profil_name {
+    color: #15caff;
+    font-size: large;
+  }
 </style>
 
 <?php session_start()
@@ -58,15 +58,16 @@ hr {
         </div>
         <hr>
         <div class="containerlog">
-          <div class="containerlog" id="profil_name">
-            <div><?php echo strtoupper($_SESSION["lname"]) ?></div>
-            <div><?php echo ucfirst($_SESSION["fname"]);
-                  ?>
-            </div>
+
+          <div>ID ADMIN: <?php echo strtoupper($_SESSION["id_admin"]) ?></div>
+          <div><?php echo strtoupper($_SESSION["lname"]) ?></div>
+          <div><?php echo ucfirst($_SESSION["fname"]);
+                ?>
           </div>
         </div>
-        <hr>
-        <!-- Menu 1 -->
+      </div>
+      <hr>
+      <!-- Menu 1 -->
     <li class="nav-item">
       <div href="#submenu1" aria-expanded="false" aria-controls="submenu1">
         Activité
@@ -133,7 +134,7 @@ hr {
   </div>
 
   <script>
-  function logout() {
-    window.location.href = "/admin"; // Redirects to "/profil"
-  }
+    function logout() {
+      window.location.href = "/admin"; // Redirects to "/profil"
+    }
   </script>

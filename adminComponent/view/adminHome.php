@@ -15,21 +15,29 @@ include(BASE_PATH . '/adminComponent/view/home/ad_home.php');
           <div class="card-body">
             <h4 class="card-title">Afficher les rendez-vous patient</h4>
             <p class="card-text">Consulter ou Supprimer un rendez-vous des patients </p>
-            <a href="/admin/home/getallAppointments" class="btn btn-info btn-sm">Rendez-vous</a>
+            <form action="/admin/home/display-appointment-patients" method="post">
+              <button name="display-appointments-admin-patients" value="display-appointment-admin-patients"
+                class="btn btn-info btn-sm">Afficher les rendez-vous
+                patients</button>
+            </form>
+
           </div>
           <div class="card-body">
             <h4 class="card-title">Afficher les Rendez-vous médecin</h4>
-            <p class="card-text">Consulter ou Supprimer un rendez-vous des patients</p>
-            <form action="/home/displayAppointments" method="post">
-              <button name="display-appointments-patients" value="display-appointments-patients"
-                class="btn btn-info btn-sm">Afficher mes
-                rendez-vous</button>
+            <p class="card-text">Consulter ou Supprimer un rendez-vous des docteurs</p>
+            <form action="/admin/home/display-appointment-doctors" method="post">
+              <button name="display-appointment-admin-doctors" value="display-appointment-admin-doctors"
+                class="btn btn-info btn-sm">Afficher les
+                rendez-vous Médecin</button>
             </form>
           </div>
           <div class="card-body">
             <h4 class="card-title">Les Medecins</h4>
             <p class="card-text">Afficher la liste des médecin du cabinet</p>
-            <a href="/home/doctors" class="btn btn-info btn-sm">Afficher les medecins</a>
+            <form action="/admin/home/display-doctors" method="post">
+              <button name="display-admin-doctors" value="display-appointment-admin-doctors"
+                class="btn btn-info btn-sm">Afficher les Médecins</button>
+            </form>
           </div>
         </div>
       </div>

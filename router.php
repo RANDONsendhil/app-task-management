@@ -24,6 +24,10 @@ $routes = [
   '/admin/submit-login-admin'  =>   BASE_PATH . '/adminComponent/public/index.php',
   '/admin/home' =>   BASE_PATH . '/adminComponent/public/index.php',
   '/admin/profil-admin' =>   BASE_PATH . '/adminComponent/public/index.php',
+  '/updateProfil-admin' =>   BASE_PATH . '/adminComponent/public/index.php',
+  '/admin/home/display-appointment-patients' =>   BASE_PATH . '/adminComponent/public/index.php',
+  '/admin/home/display-appointment-doctors' =>   BASE_PATH . '/adminComponent/public/index.php',
+  '/admin/home/display-doctors' =>   BASE_PATH . '/adminComponent/public/index.php',
 ];
 
 // echo '<br>';
