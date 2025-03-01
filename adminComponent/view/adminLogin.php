@@ -1,19 +1,19 @@
 <style>
-.containerLogin {
-  margin: auto;
-  max-width: 500px;
-  padding: 39px 11px;
-  width: 400px;
-  background-color: #fff;
-  border-radius: 8px;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-  top: 3px;
+  .containerLogin {
+    margin: auto;
+    max-width: 500px;
+    padding: 39px 11px;
+    width: 400px;
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    top: 3px;
 
-}
+  }
 
-.btn {
-  width: 175px;
-}
+  .btn {
+    width: 175px;
+  }
 </style>
 
 <?php
@@ -26,13 +26,13 @@ unset($_SESSION['messageLoginAdmin']);
 ?>
 <main>
   <?php
-  // include(BASE_PATH . "/index/nav.php")
+  include(BASE_PATH . "/index/navAdmin.php")
   ?>
   <fieldset>
     <div class="containerLogin">
 
       <legend>
-        <h5 class="text-center m-0">SE CONNECTER ADMIN</h5>
+        <h5 class="text-center m-0">SE CONNECTER</h5>
       </legend>
       <div class="container-mb-10">
         <div class="container-sm shadow-lg p-3 mb-5 bg-body-tertiary rounded">
@@ -82,23 +82,23 @@ include(BASE_PATH . "/index/footer.php")
 </div>
 
 <script>
-document.addEventListener("DOMContentLoaded", function() {
-  document.getElementById("loginFormAdmin").addEventListener("keypress", function(event) {
-    if (event.key === "Enter") {
-      event.preventDefault(); // Prevent default form submission
-      document.getElementById("loginButtonAdmin").click(); // Simulate button click
-    }
+  document.addEventListener("DOMContentLoaded", function() {
+    document.getElementById("loginFormAdmin").addEventListener("keypress", function(event) {
+      if (event.key === "Enter") {
+        event.preventDefault(); // Prevent default form submission
+        document.getElementById("loginButtonAdmin").click(); // Simulate button click
+      }
+    });
   });
-});
 
-var status = <?php echo json_encode($status); ?>;
-var message = <?php echo json_encode($message); ?>;
-if (status === "success") {
+  var status = <?php echo json_encode($status); ?>;
+  var message = <?php echo json_encode($message); ?>;
+  if (status === "success") {
 
-} else if (status === "error") {
-  var modelLoginAdmin = new bootstrap.Modal(document.getElementById('modelLoginAdmin'));
-  document.getElementById("message").style.color = "#13168f";
-  document.getElementById("message").innerHTML = "<h5>" + message + "</h5>";
-  modelLoginAdmin.show();
-}
+  } else if (status === "error") {
+    var modelLoginAdmin = new bootstrap.Modal(document.getElementById('modelLoginAdmin'));
+    document.getElementById("message").style.color = "#13168f";
+    document.getElementById("message").innerHTML = "<h5>" + message + "</h5>";
+    modelLoginAdmin.show();
+  }
 </script>

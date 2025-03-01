@@ -31,9 +31,9 @@ class IndexAdmin
     // if ($this->utils->getUri() == '/admin/home/display-appointment-doctors') {
     //   $this->indexAdminAppointmentDoctors();
     // }
-    if ($this->utils->getUri() == '/admin/home/display-doctors') {
-      $this->indexAdminDisplayDoctors();
-    }
+    // if ($this->utils->getUri() == '/admin/home/display-doctors') {
+    //   $this->indexAdminDisplayDoctors();
+    // }
 
     if ($this->utils->getUri() == '/admin/profil-admin') {
       $this->controllerAdmin->displayAdminProfilById($_SESSION["id_admin"]);
@@ -72,6 +72,16 @@ class IndexAdmin
         }
       }
     }
+
+    if (($_SERVER['REQUEST_METHOD'] === 'POST') && isset($_POST['delete-admin-patient-id'])) {
+      if (isset($_POST['id_delete_admin_patient'])) {
+        if ($this->deletePatientById($_POST['id_delete_admin_patient'])) {
+          //header("Location: /admin/home/display-appointment-doctors");
+        }
+      }
+    }
+
+
     if (($_SERVER['REQUEST_METHOD'] === 'POST')  && isset($_POST['display-appointments-admin-patients'])) {
 
       $this->indexAdminAppointmentPatients();
@@ -86,8 +96,10 @@ class IndexAdmin
       $this->indexAdminDisplayDoctors();
     }
 
+    if (($_SERVER['REQUEST_METHOD'] === 'POST')  && isset($_POST['display-list-admin-patients'])) {
 
-
+      $this->indexAdminDisplayUsers();
+    }
 
     if (($_SERVER['REQUEST_METHOD'] === 'POST') && isset($_POST['updateProfil-admin'])) {
       $this->displayAdminProfilUpdate($this->getObjUserAdmin());
@@ -96,6 +108,24 @@ class IndexAdmin
     if (($_SERVER['REQUEST_METHOD'] === 'POST') && isset($_POST['display-update-admin'])) {
       $this->displayAdminProfilToUpdate($_SESSION["id_admin"]);
     }
+    if (($_SERVER['REQUEST_METHOD'] === 'POST') && isset($_POST['display-list-admins'])) {
+      $this->displayListAdmin();
+    }
+  }
+  public function displayListAdmin()
+  {
+    $this->controllerAdmin->controllerDisplayListAdmin();
+  }
+
+
+  public function deletePatientById($numSS)
+  {
+    $this->controllerAdmin->controllerAdminDeleteUserBynumSS($numSS);
+  }
+
+  public function indexAdminDisplayUsers()
+  {
+    $this->controllerAdmin->controllerDisplayUsers();
   }
 
   public function deleteAppointmentPatientByIdAppoint($id)

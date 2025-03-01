@@ -216,4 +216,63 @@ WHERE id_admin = ?";
 
     $stmt->close();
   }
+  public function display_list_users()
+  {
+
+    $connect_db = $this->db->connect();
+    if ($connect_db->connect_error) {
+      die("Connection failed: " . $connect_db->connect_error);
+    }
+    $query = "SELECT * FROM users";
+
+    // Exécution de la requête
+    $result = $connect_db->query($query);
+    if ($result->num_rows > 0) {
+      return $result;
+      $stmt->close();
+    } else {
+      return [];
+    }
+  }
+
+  public function modelAdminDeleteUserBynumSS($numSS)
+  {
+    $connect_db = $this->db->connect();
+    if ($connect_db->connect_error) {
+      die("Connection failed: " . $connect_db->connect_error);
+    }
+
+    $deleteSql = "DELETE FROM users WHERE numSS = ?";
+    $stmt = $connect_db->prepare($deleteSql);
+    $stmt->bind_param("s", $numSS);
+
+    if ($stmt->execute()) {
+      $_SESSION['statusDeleteAdminPatient'] = "success";
+      $_SESSION['messageDeleteAdminPatient'] = "Utilsateur " . $numSS . "a bien été supprimé!";
+      return true;
+    } else {
+      $_SESSION['statusDeleteAdminPatient'] = "error";
+      $_SESSION['messageDeleteAdminPatient'] = "Error deleting reservation: " . $stmt->error;
+      return true;
+    }
+
+
+    $stmt->close();
+  }
+
+  public function controllerDisplayListAdmin()
+  {
+    $connect_db = $this->db->connect();
+    $sql = "SELECT * FROM admin";
+    $result = $connect_db->query($sql);
+
+
+    if ($result->num_rows > 0) {
+      return $result;
+    } else {
+      return;
+    }
+
+    $connect_db->close();
+  }
 }

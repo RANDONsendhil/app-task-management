@@ -28,6 +28,8 @@ $routes = [
   '/admin/home/display-appointment-patients' =>   BASE_PATH . '/adminComponent/public/index.php',
   '/admin/home/display-appointment-doctors' =>   BASE_PATH . '/adminComponent/public/index.php',
   '/admin/home/display-doctors' =>   BASE_PATH . '/adminComponent/public/index.php',
+  '/admin/home/display-list-admin-patients' =>   BASE_PATH . '/adminComponent/public/index.php',
+  '/admin/home/display-list-admins' =>   BASE_PATH . '/adminComponent/public/index.php'
 ];
 
 // echo '<br>';

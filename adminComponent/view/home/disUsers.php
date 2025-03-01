@@ -19,22 +19,14 @@ th {
 }
 
 tr:nth-child(even) {
-  background-color: #f9f9f9;
+  background-color: rgb(179, 179, 179);
 }
 
 td strong {
   color: #333;
 }
 
-.btn {
-  background-color: #dc3545;
-  color: white;
-  padding: 10px 20px;
-  font-size: 14px;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
-}
+
 
 .btn:hover {
   background-color: #c82333;
@@ -51,63 +43,69 @@ td strong {
 <?php
 include(BASE_PATH . '/adminComponent/view/home/ad_home.php');
 session_start();
-$statusAdminDeletedDoctor = isset($_SESSION['statusDeleteAppointmentAdminDoctor']) ? $_SESSION['statusDeleteAppointmentAdminDoctor'] : null;
-$messageAdminDeletedDoctor = isset($_SESSION['messageDeleteAppointmentAdminDoctor']) ? $_SESSION['messageDeleteAppointmentAdminDoctor'] : "";
-unset($_SESSION['statusDeleteAppointmentAdminDoctor']);
-unset($_SESSION['messageDeleteAppointmentAdminDoctor']);
+$statusDeleteAdminPatient = isset($_SESSION['statusDeleteAdminPatient']) ? $_SESSION['statusDeleteAdminPatient'] : null;
+$messageAdminDeletePatients = isset($_SESSION['messageDeleteAdminPatient']) ? $_SESSION['messageDeleteAdminPatient'] : "";
+unset($_SESSION['statusDeleteAdminPatient']);
+unset($_SESSION['messageDeleteAdminPatient']);
 ?>
 
 <div class="content">
   <fieldset>
     <legend>
-      <h5>Profil ADMIN</h5>
+
+      <h5>LISTES DES PATIENTS</h5>
     </legend>
 
 
-    <?php if (!empty($dataDisplayAppointmentDoctors)): ?>
+    <?php if (!empty($dataAdminlistUsers)): ?>
 
     <?php
       // Supposons que $dataDisplayAppointmentPatients est le résultat d'une requête MySQLi
-      $rowCount = $dataDisplayAppointmentDoctors->num_rows;
+      $rowCount = $dataAdminlistUsers->num_rows;
       ?>
 
-    <div class="content-container">
+    <div class="content-container" style="max-width: 1100px;">
       <div class="container shadow-lg p-3 bg-body-tertiary rounded">
         <?php if ($rowCount > 0): ?>
         <?php if ($rowCount > 10): ?>
         <!-- Conteneur scrollable si plus de 5 lignes -->
-        <div style="max-height:300px; overflow-y:auto; border:1px solid #ddd;">
+        <div style="max-height:500px; overflow-y:auto; border:1px solid #ddd;">
           <?php endif; ?>
 
           <table>
             <thead>
               <tr>
-                <th scope="col">ID </th>
-                <th scope="col">ID Médécin</th>
-                <th scope="col">Nom et Prénom</th>
-                <th scope="col">Spécialisation</th>
-                <th scope="col">Date</th>
-                <th scope="col">Créneau</th>
+                <th scope="col">Num. Séc Sociale</th>
+                <th scope="col">Genre</th>
+                <th scope="col">Nom</th>
+                <th scope="col">Prénom</th>
+                <th scope="col">Téléphone</th>
+                <th scope="col">Email</th>
+                <th scope="col">Adresse</th>
                 <th scope="col">Supprimer</th>
               </tr>
             </thead>
             <tbody class="table-group-divider">
-              <?php while ($row = $dataDisplayAppointmentDoctors->fetch_assoc()): ?>
+              <?php while ($row = $dataAdminlistUsers->fetch_assoc()): ?>
 
               <tr>
-                <td><?= htmlspecialchars($row["id"]) ?></td>
-                <td><?= htmlspecialchars($row["doctor_id"]) ?></td>
-                <td><?= htmlspecialchars($row["full_name"]) ?></td>
-                <td><?= htmlspecialchars($row["specialization"]) ?></td>
-                <td><?= htmlspecialchars($row["date"]) ?></td>
-                <td><?= htmlspecialchars($row["slot"]) ?></td>
+                <td><?= htmlspecialchars($row["numSS"]) ?></td>
+                <td><?= htmlspecialchars($row["genre"]) ?></td>
+                <td><?= htmlspecialchars($row["lname"]) ?></td>
+                <td><?= htmlspecialchars($row["fname"]) ?></td>
+                <td><?= htmlspecialchars($row["mobileNum"]) ?></td>
+                <td><?= htmlspecialchars($row["inputEmail"]) ?></td>
+                <td>
+                  <?= htmlspecialchars($row["inputAddress"]) ?>
+                  <?= htmlspecialchars($row["inputCity"]) ?>
+                  <?= htmlspecialchars($row["inputZip"]) ?>
+                </td>
 
                 <td>
-                  <form method="POST">
-                    <input type="hidden" name="id_appointement_doctor_delete"
-                      value="<?= htmlspecialchars($row["id"]) ?>">
-                    <button type="submit" class="btn" name='delete-appointment-doctor'
-                      value='delete-appointment-doctor'>🗑
+                  <form method="POST" action="/admin/home/display-list-admin-patients">
+                    <input type="hidden" name="id_delete_admin_patient" value="<?= $row["numSS"] ?>">
+                    <button class="btn btn-danger btn-sm" type="submit" name='delete-admin-patient-id'
+                      value='delete-admin-patient-id'>🗑
                       Supprimer</button>
                   </form>
                 </td>
@@ -139,12 +137,12 @@ unset($_SESSION['messageDeleteAppointmentAdminDoctor']);
 </div>
 
 <!-- Bootstrap Success Modal -->
-<div class="modal fade" id="modalDeleteAppointmentDoctorLabel" tabindex="-1"
-  aria-labelledby="modalDeleteAppointmentDoctorLabelLabel" aria-hidden="false">
+<div class="modal fade" id="modalDeletePatientLabel" tabindex="-1" aria-labelledby="modalDeletePatientLabelLabel"
+  aria-hidden="false">
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="modalDeleteAppointmentDoctorLabelDoctorLabel">Information ADMIN</h5>
+        <h5 class="modal-title" id="modalDeletePatientLabel">Information ADMIN</h5>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
@@ -158,13 +156,13 @@ unset($_SESSION['messageDeleteAppointmentAdminDoctor']);
 </div>
 
 <script>
-var status = <?php echo json_encode($statusAdminDeletedDoctor); ?>;
-var message = <?php echo json_encode($messageAdminDeletedDoctor); ?>;
+var status = <?php echo json_encode($statusDeleteAdminPatient); ?>;
+var message = <?php echo json_encode($messageAdminDeletePatients); ?>;
 if (status === "success") {
-  var modalDeleteAppointmentDoctorLabel = new bootstrap.Modal(document.getElementById(
-    'modalDeleteAppointmentDoctorLabel'));
+  var modalDeletePatientLabel = new bootstrap.Modal(document.getElementById(
+    'modalDeletePatientLabel'));
   document.getElementById("message").innerHTML = message;
-  modalDeleteAppointmentDoctorLabel.show();
+  modalDeletePatientLabel.show();
 } else if (status === "error") {
   var errorModal = new bootstrap.Modal(document.getElementById('errorModal'));
   errorModal.show();

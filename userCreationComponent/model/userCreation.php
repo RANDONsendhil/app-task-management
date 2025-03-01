@@ -58,7 +58,6 @@ class UserCreationModel
 
     public function update_user($objUser)
     {
-        //echo "<script type='text/javascript'>alert(' update_user');</script>";
         $connect_db = $this->db->connect();
         $sql = "UPDATE users 
         SET genre = ?, 

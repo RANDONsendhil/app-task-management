@@ -26,7 +26,6 @@
                 $this->controllerProfil->index($numss = $profilNumSS);
             }
             if ($this->utils->getUri() == '/find-doctors') {
-                echo ("<script>alert(" . $this->utils->getUri() . ") </script>");
                 $this->controllerProfil->findDoctor();
             }
             if ($this->utils->getUri() == '/contact-assistant') {

@@ -48,6 +48,12 @@ class ControllerAdmin
     require(BASE_PATH . '/adminComponent/view/profilAdmin.php');
   }
 
+  public function controllerDisplayUsers()
+  {
+    $dataAdminlistUsers = $this->modelAdmin->display_list_users();
+    require(BASE_PATH . '/adminComponent/view/home/disUsers.php');
+  }
+
   public function displayAdminProfilById($id)
   {
     $dataAdminById = $this->modelAdmin->displayAdminById($id);
@@ -58,6 +64,12 @@ class ControllerAdmin
   {
     $dataAdminById = $this->modelAdmin->displayAdminById($id);
     require(BASE_PATH . '/adminComponent/view/home/updateProfilAdmin.php');
+  }
+
+  public function   controllerDisplayListAdmin()
+  {
+    $dataListAdmin = $this->modelAdmin->controllerDisplayListAdmin();
+    require(BASE_PATH . '/adminComponent/view/home/disAdmin.php');
   }
 
 
@@ -71,8 +83,6 @@ class ControllerAdmin
   {
 
     $dataDisplayAppointmentPatients = $this->modelAdmin->disAppointementUser();
-
-
     require(BASE_PATH . '/adminComponent/view/home/disAppointementUser.php');
   }
 
@@ -95,10 +105,14 @@ class ControllerAdmin
   }
   public function controllerAdminDeleteAppointmentDoctorByIdAppoint($id)
   {
-
-
     $dataDisplayAppointmentDoctors = $this->modelAdmin->deleteAppointmentDoctorByIdAppoint($id);
     $this->controllerDisplayAppointmentDoctors();
+    return true;
+  }
+  public function controllerAdminDeleteUserBynumSS($numSS)
+  {
+    $dataAdminlistUsers = $this->modelAdmin->modelAdminDeleteUserBynumSS($numSS);
+    $this->controllerDisplayUsers();
     return true;
   }
 }

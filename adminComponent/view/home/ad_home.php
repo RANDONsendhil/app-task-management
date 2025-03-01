@@ -119,17 +119,7 @@
 <div class="main-container">
   <div class="container-fluid" id="navbarHome">
     <div class="d-flex justify-content-center align-items-center navbar-container">
-      <ul class="contianer-nav-bar navbar-nav mx-auto ">
-        <li class=" nav-item mx-2">
-          <a id="numeroUrgence" class="nav-link" href="/emergency-numbers" style="color: white;">Numéros urgence</a>
-        </li>
-        <li class="nav-item nav-item mx-2 ">
-          <a class=" nav-link" href="#" style="color: white;">Questions fréquentes</a>
-        </li>
-        <li class="nav-item nav-item mx-2">
-          <a class=" nav-link" href="#" style="color: white;">Professionnels de santé</a>
-        </li>
-      </ul>
+      <h1>ADMIN</h1>
     </div>
   </div>
 
