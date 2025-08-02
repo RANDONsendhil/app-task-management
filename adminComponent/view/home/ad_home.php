@@ -1,37 +1,37 @@
 <style>
-  .containerlog {
-    display: flex;
-    padding: 9px;
-    color: rgb(230 252 255);
-    align-items: center;
-    justify-content: flex-end;
-    flex-direction: column;
-    font-size: 14px;
-    font-weight: 500;
-  }
+.containerlog {
+  display: flex;
+  padding: 9px;
+  color: rgb(230 252 255);
+  align-items: center;
+  justify-content: flex-end;
+  flex-direction: column;
+  font-size: 14px;
+  font-weight: 500;
+}
 
-  #logo {
-    height: 25px;
-    width: 25px;
-    background: #0a485a;
-  }
+#logo {
+  height: 25px;
+  width: 25px;
+  background: #0a485a;
+}
 
-  hr {
-    border: none;
-    height: 2px;
-    /* background-color: #ccc; */
-    background-color: white;
-  }
+hr {
+  border: none;
+  height: 2px;
+  /* background-color: #ccc; */
+  background-color: white;
+}
 
-  #for_logout {
-    cursor: pointer;
-    font-size: 11px;
-  }
+#for_logout {
+  cursor: pointer;
+  font-size: 11px;
+}
 
-  #profil_name {
-    color: #15caff;
-    font-size: large;
-  }
+#profil_name {
+  color: #15caff;
+  font-size: large;
+}
 </style>
 
 <?php session_start()
@@ -97,21 +97,6 @@
     </li>
 
     <!-- Menu 3 -->
-    <li class=" nav-item">
-      <div href="#submenu3" aria-expanded="false" aria-controls="submenu3">
-        Information
-      </div>
-      <div class="nav-custom-sidebar">
-        <ul class="nav flex-column submenu">
-
-          <li><a class="nav-link" href="find-doctors"><span> <img style="height: 30px;" src="/images/location.png"
-                  alt="" srcset=""></span><span>Trouver un medecin</span></a></li>
-        </ul>
-      </div>
-    </li>
-
-    <!-- Menu 4 -->
-
   </ul>
   <hr>
 </div>
@@ -124,7 +109,7 @@
   </div>
 
   <script>
-    function logout() {
-      window.location.href = "/admin"; // Redirects to "/profil"
-    }
+  function logout() {
+    window.location.href = "/admin"; // Redirects to "/profil"
+  }
   </script>

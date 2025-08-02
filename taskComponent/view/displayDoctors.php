@@ -4,25 +4,21 @@
 }
  </style>
  <?php
-  include(BASE_PATH . '/adminComponent/view/home/ad_home.php');
-  session_start();
-  $status = isset($_SESSION['statusUpdateProfilAdmin']) ? $_SESSION['statusUpdateProfilAdmin'] : null;
-  $messageAdmin = isset($_SESSION['messageUpdateProfilAdmin']) ? $_SESSION['messageUpdateProfilAdmin'] : "";
-  unset($_SESSION['statusUpdateProfilAdmin']);
-  unset($_SESSION['messageUpdateProfilAdmin']);
+  include(BASE_PATH . '/user/homeComponent/view/home.php');
+
 
   ?>
  <div class="content">
    <fieldset>
      <legend>
-       <h5>LES MÉDECIN DU CABINET</h5>
+       <h5>Liste des Docteurs</h5>
      </legend>
 
      <div class="content-container">
        <div id="containerCreationCompte">
          <div class="container-card">
            <div class="card">
-             <?php foreach ($listDoctorsAdmin as $row): ?>
+             <?php foreach ($dataDisplayDoctors as $row): ?>
              <div class="card-body">
                <?php ?>
 
@@ -35,8 +31,6 @@
 
                <p class="card-text"><?php echo ($row["phone"]); ?></p>
                <p class="card-text"><?php echo ($row["email"]); ?></p>
-
-
              </div>
              <?php endforeach; ?>
            </div>

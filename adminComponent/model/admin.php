@@ -110,9 +110,6 @@ WHERE id_admin = ?";
     $connect_db->close();
   }
 
-  public function displayDoctors() {}
-
-
   public function deleteAppointmentPatientByIdAppoint($id)
   {
 
@@ -255,8 +252,6 @@ WHERE id_admin = ?";
       $_SESSION['messageDeleteAdminPatient'] = "Error deleting reservation: " . $stmt->error;
       return true;
     }
-
-
     $stmt->close();
   }
 

@@ -1,6 +1,7 @@
 <?php
 // Get the 'page' parameter from the URL (default to 'home' if not set)
 $page = isset($_GET['page']) ? $_GET['page'] : 'home';
+header('Content-Type: text/html; charset=utf-8');
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -8,7 +9,7 @@ $page = isset($_GET['page']) ? $_GET['page'] : 'home';
 <head>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.5, user-scalable=yes">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <title>Cabinet Médical d'Orléans, Loiret</title>
+  <title>Gestion de Projet V1</title>
 </head>
 <link rel="icon" href="/images/favicon.ico" type="image/x-icon">
 <script src="/js/other/jquery-3.6.0.min.js"></script>

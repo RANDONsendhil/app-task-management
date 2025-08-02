@@ -55,7 +55,7 @@ unset($_SESSION['messageUpdateProfilAdmin']);
   <div class="">
     <fieldset>
       <legend>
-        <h5>Profil ADMIN</h5>
+        <h5>PROFIL(ADMIN)</h5>
       </legend>
       <form method="post" action="/updateProfil-admin">
         <div class="content-container">

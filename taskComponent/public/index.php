@@ -17,6 +17,10 @@ class IndexAppointment
         if ($this->utils->getUri() == '/home/selectDoctor/appointment') {
             $doctor_id = isset($_GET['doctor_id']) ? intval($_GET['doctor_id']) : 0;
         }
+
+        // if ($this->utils->getUri() == '/home/displayListDoctors') {
+        //     $this->displayDoctors();
+        // }
         if ($this->utils->getUri() == '/home/selectDoctor') {
             $this->controllerAppointment->indexSelectDoctor();
         }
@@ -45,10 +49,19 @@ class IndexAppointment
 
             $this->displayAppointments();
         }
+
+        if (($_SERVER['REQUEST_METHOD'] === 'POST')  && isset($_POST['home-display-doctors'])) {
+            $this->displayDoctors();
+        }
     }
     public function displayAppointments()
     {
         $this->controllerAppointment->controllerDisplayAppointmentPanel();
+    }
+
+    public function displayDoctors()
+    {
+        $this->controllerAppointment->controllerDisplayDocotors();
     }
 
     public function indexSelectDoctor()

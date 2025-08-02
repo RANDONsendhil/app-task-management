@@ -5,15 +5,24 @@ $requestUri = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
 $currentDir = dirname($_SERVER['PHP_SELF']);
 
 $routes = [
-  '/' =>  BASE_PATH . '/userCreationComponent/public/index.php',
-  '/userCreation' =>  BASE_PATH . '/userCreationComponent/public/index.php',
+  '/' =>  BASE_PATH . '/loginComponent/view/login.php',
   '/login' =>  BASE_PATH . '/loginComponent/view/login.php',
+  '/userCreation' =>  BASE_PATH . '/userCreationComponent/public/index.php',
+  '/home' =>  BASE_PATH . '/user/homeComponent/public/index.php',
+  '/home/selectProject/project' =>  BASE_PATH . '/projectComponent/public/index.php',
+
+
+
+
+
+  '/userCreation' =>  BASE_PATH . '/userCreationComponent/public/index.php',
   '/login/submit-login'  =>   BASE_PATH . '/loginComponent/public/index.php',
   '/home' =>  BASE_PATH . '/user/homeComponent/public/index.php',
   '/profil' =>   BASE_PATH . '/user/profilComponent/public/index.php',
   '/updateProfil' =>   BASE_PATH . '/user/profilComponent/public/index.php',
   '/name' =>   BASE_PATH . '/utilisateur/public/index.php',
   '/home/selectDoctor/appointment'  =>   BASE_PATH . '/appointmentComponent/public/index.php',
+  '/home/displayListDoctors'  =>   BASE_PATH . '/appointmentComponent/public/index.php',
   '/home/selectDoctor'  =>   BASE_PATH . '/appointmentComponent/public/index.php',
   '/home/bookAppoinment'  =>   BASE_PATH . '/appointmentComponent/public/index.php',
   '/home/displayAppointments'  =>   BASE_PATH . '/appointmentComponent/public/index.php',
