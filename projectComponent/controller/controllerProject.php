@@ -19,7 +19,19 @@ class ControllerProject
 
     public function indexProject($id)
     {
+        $projectTasks = $this->projectModel->get_tasks_by_project_id($id);
         $resultProjectById = $this->projectModel->get_project_by_id($id);
+        echo "<script>alert('resultProjectById: " . json_encode($projectTasks) . "');</script>";
+        if (!$resultProjectById) {
+            echo "<script>alert('Project not found.');</script>";
+            return;
+        }
+        require(BASE_PATH . '/projectComponent/view/displayProjectDetails.php');
+    }
+
+    public function getTasksByProjectId($id)
+    {
+        $projectTasks = $this->projectModel->get_tasks_by_project_id($id);
         require(BASE_PATH . '/projectComponent/view/displayProjectDetails.php');
     }
 

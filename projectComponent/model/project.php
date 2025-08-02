@@ -19,8 +19,7 @@ class ProjectModel
             die("Connection failed: " . $connect_db->connect_error);
         }
 
-        // Debug: Check if ID is received
-        echo "<script>alert('Searching for project with ID: " . $id . "');</script>";
+
 
         $stmt = $connect_db->prepare("SELECT * FROM projects WHERE id = ?");
         $stmt->bind_param("i", $id); // "i" means integer
@@ -28,15 +27,11 @@ class ProjectModel
 
         $result = $stmt->get_result();
 
-        // Debug: Check number of rows found
+
 
 
         $resultProjectById = $result->fetch_assoc(); // Fetch user data
 
-        echo "<script>
-  alert('resultProjectById: " . json_encode($resultProjectById) . "');
-   
-</script>";
         $stmt->close();
         $connect_db->close();
         return $resultProjectById; // Return user data or null if not found
@@ -58,6 +53,7 @@ class ProjectModel
             $projects = $result->fetch_all(MYSQLI_ASSOC);
             $stmt->close();
             $connect_db->close();
+
             return $projects;
         } else {
             $stmt->close();
@@ -66,29 +62,33 @@ class ProjectModel
         }
     }
 
-    public function reserveAppointment($doctor_RPPS, $user_numSS,  $res_date, $res_time)
+
+    public function get_tasks_by_project_id($id)
     {
-        $sql = "INSERT INTO reservation (numSS, id_doctor, date, slot) VALUES (?, ?, ?, ?)";
-
         $connect_db = $this->db->connect();
-        $stmt = $connect_db->prepare($sql);
-        $stmt->bind_param("siss", $user_numSS, $doctor_RPPS, $res_date, $res_time);
-
-        // Execute query
-        if ($stmt->execute()) {
-            $_SESSION['status'] = "success";
-            $_SESSION['message'] = "Votre Rendez-vous a éte bien prise en compte";
-            return true;
-        } else {
-            $_SESSION['status'] = "error";
-            $_SESSION['message'] = "Error: " . $stmt->error;
-            return false;
+        if ($connect_db->connect_error) {
+            die("Connection failed: " . $connect_db->connect_error);
         }
-        $stmt->close();
-        $connect_db->close();
+
+        $stmt = $connect_db->prepare("SELECT * FROM tasks WHERE id = ?");
+        $stmt->bind_param("i", $id); // "i" means integer
+        $stmt->execute();
+        echo "<script>
+              alert('resultProjectById: " . json_encode($id) . "');
+
+            </script>";
+        $result = $stmt->get_result();
+        if ($result->num_rows > 0) {
+            $tasks = $result->fetch_all(MYSQLI_ASSOC);
+            $stmt->close();
+            $connect_db->close();
+            return $tasks;
+        } else {
+            $stmt->close();
+            $connect_db->close();
+            return [];
+        }
     }
-
-
     public function get_appointments($numSS)
     {
         $connect_db = $this->db->connect();

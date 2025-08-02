@@ -46,9 +46,9 @@ class IndexAppointment
         //     $this->displayDoctors();
         // }
     }
-    public function displayAppointments()
+    public function displayProjectTasksByProjectId($projectId)
     {
-        $this->controllerAppointment->controllerDisplayAppointmentPanel();
+        $this->controllerProject->getTasksByProjectId($projectId);
     }
 
     public function displayDoctors()
