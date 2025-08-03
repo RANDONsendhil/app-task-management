@@ -38,27 +38,28 @@ class ControllerProject
     {
         if ($this->projectModel->create_task($objTask)) {
             $projectTasks = $this->projectModel->get_tasks_by_project_id($_SESSION["projectId"]);
+              
             return true;
         } else {
             return false;
         }
     }
-
-    public function updateTask($objTask)
-    {
-        if ($this->projectModel->update_task($objTask)) {
-            $projectTasks = $this->projectModel->get_tasks_by_project_id($_SESSION["projectId"]);
-            return true;
-        } else {
-            return false;
-        }
-    }
-
-        public function deleteTask($idTask)
+    
+    public function deleteTask($idTask)
     {
         if ($this->projectModel->delete_task_by_id($idTask)) {
             $projectTasks = $this->projectModel->get_tasks_by_project_id($_SESSION["projectId"]);
  
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    public function updateTask($task)
+    {
+        if ($this->projectModel->update_task($task)) {
+            $projectTasks = $this->projectModel->get_tasks_by_project_id($_SESSION["projectId"]);
             return true;
         } else {
             return false;

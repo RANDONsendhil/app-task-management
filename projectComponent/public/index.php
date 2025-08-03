@@ -6,7 +6,7 @@ require_once(BASE_PATH . '/projectComponent/model/task.php');
 $currentDir = dirname($_SERVER['PHP_SELF']);
 
 
-class IndexAppointment
+class IndexProject
 {
     private $controllerProject;
     private $utils;
@@ -27,14 +27,15 @@ class IndexAppointment
             if (isset($_POST['idproject'])) {
                 // Check if we're in edit mode
                 if (isset($_POST['edit_mode']) && $_POST['edit_mode'] == '1' && isset($_POST['task_id'])) {
-                    // Update existing task
+
                     if ($this->controllerProject->updateTask($this->getObjTaskForUpdate())) {
-                        $this->controllerProject->indexProject($_SESSION["projectId"]);
+                        header("Location: " . $_SERVER['REQUEST_URI']);
+                        exit();
                     }
                 } else {
-                    // Create new task
                     if ($this->controllerProject->createTask($this->getObjTask())) {
-                        $this->controllerProject->indexProject($_SESSION["projectId"]);
+                        header("Location: " . $_SERVER['REQUEST_URI']);
+                        exit();
                     }
                 }
             }
@@ -45,15 +46,18 @@ class IndexAppointment
             if (isset($_POST['idTask'])) {
 
                 if ($this->controllerProject->deleteTask($_POST['idTask'])) {
-                    $this->controllerProject->indexProject($_SESSION["projectId"]);
+                    header("Location: " . $_SERVER['REQUEST_URI']);
+                    exit();
                 }
             }
+        }
+        if ($_SERVER['REQUEST_METHOD'] === 'GET' && isset($_SESSION["projectId"])) {
+            $this->controllerProject->indexProject($_SESSION["projectId"]);
         }
     }
 
     function getObjTask()
     {
-
         $objTask = new Task(
             $this->sanitize_input($_SESSION["projectId"]),
             $this->sanitize_input($_POST["titre"]),
@@ -98,38 +102,6 @@ class IndexAppointment
     {
         $this->controllerProject->getTasksByProjectId($projectId);
     }
-
-    public function displayDoctors()
-    {
-        $this->controllerAppointment->controllerDisplayDocotors();
-    }
-
-    public function indexSelectDoctor()
-    {
-        $this->controllerAppointment->indexSelectDoctor();
-    }
-
-    public function indexAppointment($docId)
-    {
-        $this->controllerAppointment->indexAppointment($docId);
-    }
-
-    public function indexReserveAppointment($doctor_RPPS, $user_numSS,  $res_date, $res_time)
-    {
-        $this->controllerAppointment->controlleReserveAppointment($doctor_RPPS, $user_numSS,  $res_date, $res_time);
-    }
-
-    public function deleteAppointment($id)
-    {
-
-        return $this->controllerAppointment->controllerDeleteAppointment($id);
-    }
-
-    public function withtouRerouteListAppointments($numSS)
-    {
-
-        $this->controllerAppointment->controllerDisplayAppointments($numSS);
-    }
 }
 
-new IndexAppointment();
+new IndexProject();
