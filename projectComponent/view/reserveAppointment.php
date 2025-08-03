@@ -1,49 +1,49 @@
 <style>
-  #containerAppoint {
-    display: flex;
-    flex-direction: row-reverse;
-    justify-content: space-around;
-    align-items: flex-start;
-    align-content: stretch;
-    margin: auto;
-  }
+#containerAppoint {
+  display: flex;
+  flex-direction: row-reverse;
+  justify-content: space-around;
+  align-items: flex-start;
+  align-content: stretch;
+  margin: auto;
+}
 
-  table {
-    width: 100%;
-    border-collapse: collapse;
-  }
+table {
+  width: 100%;
+  border-collapse: collapse;
+}
 
-  table,
-  th,
-  td {
-    border: 1px solid black;
-  }
+table,
+th,
+td {
+  border: 1px solid black;
+}
 
-  th,
-  td {
-    gap: 10px;
-    padding: 10px;
-    text-align: center;
-  }
+th,
+td {
+  gap: 10px;
+  padding: 10px;
+  text-align: center;
+}
 
-  button {
-    display: flex;
-    padding: 3px 10px;
-    margin: 5px;
-    cursor: pointer;
-    border-radius: 5px;
-    font-size: 15px;
-  }
+button {
+  display: flex;
+  padding: 3px 10px;
+  margin: 5px;
+  cursor: pointer;
+  border-radius: 5px;
+  font-size: 15px;
+}
 
-  button.disabled {
-    background-color: #ccc;
-    cursor: not-allowed;
-  }
+button.disabled {
+  background-color: #ccc;
+  cursor: not-allowed;
+}
 
-  #tableSlot {
-    font-size: 15px;
-    color: navy;
-  }
+#tableSlot {
+  font-size: 15px;
+  color: navy;
+}
 </style>
 
 <?php
@@ -137,30 +137,30 @@ function format_weekDay_to_FR_Date($weekday)
           <table id="tableSlot">
             <tr>
               <?php foreach ($nextWeekdays as $weekday): ?>
-                <th><?php
+              <th><?php
                     echo format_weekDay_to_FR_Date($weekday) ?></th>
               <?php endforeach; ?>
             </tr>
             <tr>
               <?php foreach ($nextWeekdays as $weekday): ?>
-                <td>
-                  <?php foreach ($morningSlots as $slot): ?>
-                    <button style="background:#1c8cad" type="button" class="btn btn-primary btn-sm" data-bs-toggle="modal"
-                      data-bs-target="#btnSelectSlot" class="<?php echo isPastTime($slot, $weekday) ? 'disabled' : ''; ?>"
-                      <?php echo isPastTime($slot, $weekday) ? 'disabled' : ''; ?> onclick="displayConfirmModal(this)"
-                      value=<?php echo json_encode(["slot" => $slot, 'date' => $weekday]) ?>>
-                      <?php echo $slot; ?> </button>
-                  <?php endforeach; ?>
+              <td>
+                <?php foreach ($morningSlots as $slot): ?>
+                <button style="background:#1c8cad" type="button" class="btn btn-primary btn-sm" data-bs-toggle="modal"
+                  data-bs-target="#btnSelectSlot" class="<?php echo isPastTime($slot, $weekday) ? 'disabled' : ''; ?>"
+                  <?php echo isPastTime($slot, $weekday) ? 'disabled' : ''; ?> onclick="displayConfirmModal(this)"
+                  value=<?php echo json_encode(["slot" => $slot, 'date' => $weekday]) ?>>
+                  <?php echo $slot; ?> </button>
+                <?php endforeach; ?>
 
-                  <?php foreach ($afternoonSlots as $slot): ?>
-                    <button style="background:#1c8cad" type="button" class="btn btn-primary btn-sm" data-bs-toggle="modal"
-                      data-bs-target="#btnSelectSlot" class="<?php echo isPastTime($slot, $weekday) ? 'disabled' : ''; ?>"
-                      <?php echo isPastTime($slot, $weekday) ? 'disabled' : ''; ?> onclick="displayConfirmModal(this)"
-                      value=<?php echo json_encode(["slot" => $slot, 'date' =>  $weekday])  ?>>
-                      <?php echo $slot; ?>
-                    </button>
-                  <?php endforeach; ?>
-                </td>
+                <?php foreach ($afternoonSlots as $slot): ?>
+                <button style="background:#1c8cad" type="button" class="btn btn-primary btn-sm" data-bs-toggle="modal"
+                  data-bs-target="#btnSelectSlot" class="<?php echo isPastTime($slot, $weekday) ? 'disabled' : ''; ?>"
+                  <?php echo isPastTime($slot, $weekday) ? 'disabled' : ''; ?> onclick="displayConfirmModal(this)"
+                  value=<?php echo json_encode(["slot" => $slot, 'date' =>  $weekday])  ?>>
+                  <?php echo $slot; ?>
+                </button>
+                <?php endforeach; ?>
+              </td>
               <?php endforeach; ?>
             </tr>
           </table>
@@ -281,29 +281,29 @@ function format_weekDay_to_FR_Date($weekday)
   </div>
 </form>
 <script>
-  document.getElementById("btnSelectSlot").addEventListener("submit", function(event) {
-    event.preventDefault(); // Empêche la soumission classique du formulaire
-    var modal = bootstrap.Modal.getInstance(document.getElementById('btnSelectSlot'));
-    modal.hide(); // Ferme le modal après soumission
-    $('.modal-backdrop').remove();
+document.getElementById("btnSelectSlot").addEventListener("submit", function(event) {
+  event.preventDefault(); // Empêche la soumission classique du formulaire
+  var modal = bootstrap.Modal.getInstance(document.getElementById('btnSelectSlot'));
+  modal.hide(); // Ferme le modal après soumission
+  $('.modal-backdrop').remove();
 
-  });
-  var dataJson;
+});
+var dataJson;
 
-  function displayConfirmModal(params) {
-    let data = JSON.parse(params.value);
-    const date = document.getElementById('dateAppointment');
-    const time = document.getElementById('timeAppointment');
-    date.innerHTML = data.date;
-    time.innerHTML = data.slot;
-    const setdate = document.getElementById('setval_date');
-    const settime = document.getElementById('setval_time');
-    setdate.value = data.date;
-    settime.value = data.slot;
-    dataJson = data;
-  }
+function displayConfirmModal(params) {
+  let data = JSON.parse(params.value);
+  const date = document.getElementById('dateAppointment');
+  const time = document.getElementById('timeAppointment');
+  date.innerHTML = data.date;
+  time.innerHTML = data.slot;
+  const setdate = document.getElementById('setval_date');
+  const settime = document.getElementById('setval_time');
+  setdate.value = data.date;
+  settime.value = data.slot;
+  dataJson = data;
+}
 
-  function getJsonData() {
-    return dataJson;
-  }
+function getJsonData() {
+  return dataJson;
+}
 </script>

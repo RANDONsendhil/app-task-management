@@ -1,7 +1,8 @@
 <?php
-
+session_start();
 require_once(BASE_PATH . '/config/utils.php');
 require_once(BASE_PATH . '/projectComponent/controller/controllerProject.php');
+require_once(BASE_PATH . '/projectComponent/model/task.php');
 $currentDir = dirname($_SERVER['PHP_SELF']);
 
 
@@ -15,37 +16,84 @@ class IndexAppointment
         $this->utils = new Utils("");
 
         if (($_SERVER['REQUEST_METHOD'] === 'POST') && isset($_POST['select-project'])) {
-            $project_id = isset($_POST['select-project']) ? intval($_POST['select-project']) : 0;
-            $this->controllerProject->indexProject($project_id);
+            $_SESSION["projectId"]  = isset($_POST['select-project']) ? intval($_POST['select-project']) : 0;
+
+            $this->controllerProject->indexProject($_SESSION["projectId"]);
+            $this->displayProjectTasksByProjectId($_SESSION["projectId"]);
         }
 
+        if (($_SERVER['REQUEST_METHOD'] === 'POST') && isset($_POST['submit-task'])) {
 
-        // if (($_SERVER['REQUEST_METHOD'] === 'POST') && isset($_POST['reserve-appointment'])) {
-        //     $doctor_RPPS = $_POST["doctorRPPS"];
-        //     $user_numSS = $_POST["userNumSS"];
-        //     $res_date = $_POST["res_date"];
-        //     $res_time = $_POST["res_time"];
-        //     $this->indexReserveAppointment($doctor_RPPS, $user_numSS,  $res_date, $res_time);
-        // }
-        // if (($_SERVER['REQUEST_METHOD'] === 'POST')  && isset($_POST['delete-appointment'])) {
+            if (isset($_POST['idproject'])) {
+                // Check if we're in edit mode
+                if (isset($_POST['edit_mode']) && $_POST['edit_mode'] == '1' && isset($_POST['task_id'])) {
+                    // Update existing task
+                    if ($this->controllerProject->updateTask($this->getObjTaskForUpdate())) {
+                        $this->controllerProject->indexProject($_SESSION["projectId"]);
+                    }
+                } else {
+                    // Create new task
+                    if ($this->controllerProject->createTask($this->getObjTask())) {
+                        $this->controllerProject->indexProject($_SESSION["projectId"]);
+                    }
+                }
+            }
+        }
 
-        //     if (isset($_POST['idAppointment'])) {
-        //         ($_POST['idAppointment']);
-        //         if ($this->deleteAppointment((int)$_POST['idAppointment'])) {
-        //             return;
-        //         }
-        //     }
-        // }
+        if (($_SERVER['REQUEST_METHOD'] === 'POST') && isset($_POST['delete-task'])) {
 
-        // if (($_SERVER['REQUEST_METHOD'] === 'POST')  && isset($_POST['display-appointments'])) {
+            if (isset($_POST['idTask'])) {
 
-        //     $this->displayAppointments();
-        // }
-
-        // if (($_SERVER['REQUEST_METHOD'] === 'POST')  && isset($_POST['home-display-doctors'])) {
-        //     $this->displayDoctors();
-        // }
+                if ($this->controllerProject->deleteTask($_POST['idTask'])) {
+                    $this->controllerProject->indexProject($_SESSION["projectId"]);
+                }
+            }
+        }
     }
+
+    function getObjTask()
+    {
+
+        $objTask = new Task(
+            $this->sanitize_input($_SESSION["projectId"]),
+            $this->sanitize_input($_POST["titre"]),
+            $this->sanitize_input($_POST["description"]),
+            $this->sanitize_input($_POST["statut"]),
+            $this->sanitize_input($_POST["assignee_id"]),
+            $this->sanitize_input($_POST["priorite"]),
+            $this->sanitize_input($_POST["date_echeance"]),
+            date('Y-m-d H:i:s') // Auto-set creation date
+        );
+
+        return  $objTask;
+    }
+
+    function getObjTaskForUpdate()
+    {
+        $objTask = new Task(
+            $this->sanitize_input($_SESSION["projectId"]),
+            $this->sanitize_input($_POST["titre"]),
+            $this->sanitize_input($_POST["description"]),
+            $this->sanitize_input($_POST["statut"]),
+            $this->sanitize_input($_POST["assignee_id"]),
+            $this->sanitize_input($_POST["priorite"]),
+            $this->sanitize_input($_POST["date_echeance"]),
+            null, // Keep original creation date
+            $this->sanitize_input($_POST["task_id"]) // Include task ID for update
+        );
+
+        return  $objTask;
+    }
+
+    function sanitize_input($data)
+    {
+        if ($data === null || $data === '') {
+            return '';
+        }
+        return htmlspecialchars(strip_tags(trim($data)));
+    }
+
+
     public function displayProjectTasksByProjectId($projectId)
     {
         $this->controllerProject->getTasksByProjectId($projectId);

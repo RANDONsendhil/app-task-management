@@ -1,8 +1,4 @@
 <?php
-
-require_once(BASE_PATH . '/config/database.php');
-require_once(BASE_PATH . '/appointmentComponent/model/appointment.php');
-
 ini_set('memory_limit', '256M'); // Increase to 256MB
 
 class ControllerAppointment

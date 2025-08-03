@@ -92,7 +92,7 @@ include(BASE_PATH . '/user/homeComponent/view/home.php');
             <?php foreach ($listProjects as $row): ?>
 
             <div class="card-body">
-              <?php ?>
+
               <form action='/home/selectProject/project' method='POST'>
                 <div class="project-header">
                   <h4>
