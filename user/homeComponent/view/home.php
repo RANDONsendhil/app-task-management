@@ -42,27 +42,24 @@ hr {
     <li class="nav-item">
       <div id="username-sidebar" class="nav-link" href="#submenu1" aria-expanded="false" aria-controls="submenu1">
 
-        <div>
-          <a class="nav-item" href="/home">
-            <img style="height: 50px; margin-left: 40px;border-radius: 4px;" src="/images/logo.png">
-          </a>
-        </div>
-        <hr>
-        <div class="containerlog" id="for_logout" onclick="logout()">
-          <div>
-            <img style="border-radius: 50%;" id="logo" src="/images/se_deconnecter.png" alt="" srcset="">
-          </div>
-          <div style="color:#2f87e1">
-            Se déconnecter
-          </div>
-        </div>
-        <hr>
+      <hr>
         <div class="containerlog">
           <div class="containerlog" id="profil_name">
             <div><?php echo strtoupper($_SESSION["lname"]) ?></div>
             <div><?php echo ucfirst($_SESSION["fname"]);
                   ?>
             </div>
+          </div>
+        </div>
+        <hr>
+        
+   
+        <div class="containerlog" id="for_logout" onclick="logout()">
+          <div>
+            <img style="border-radius: 50%;" id="logo" src="/images/se_deconnecter.png" alt="" srcset="">
+          </div>
+          <div style="color:#2f87e1">
+            Se déconnecter
           </div>
         </div>
         <hr>
@@ -129,17 +126,7 @@ hr {
 <div class="main-container">
   <div class="container-fluid" id="navbarHome">
     <div class="d-flex justify-content-center align-items-center navbar-container">
-      <ul class="contianer-nav-bar navbar-nav mx-auto ">
-        <li class=" nav-item mx-2">
-          <a id="numeroUrgence" class="nav-link" href="/emergency-numbers" style="color: white;">Numéros urgence</a>
-        </li>
-        <li class="nav-item nav-item mx-2 ">
-          <a class=" nav-link" href="#" style="color: white;">Questions fréquentes</a>
-        </li>
-        <li class="nav-item nav-item mx-2">
-          <a class=" nav-link" href="#" style="color: white;">Professionnels de santé</a>
-        </li>
-      </ul>
+     <h3>GESTION DE PROJECT V1</h3>
     </div>
   </div>
 

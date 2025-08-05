@@ -44,12 +44,6 @@
                 <input type="text" name="password" id="password" required>
                 <div class="d-grid gap-2 mt-4 d-flex justify-content-center">
                   <div class="grid text-center d-inline-flex gap-1">
-
-                    <div class="fg-col-3">
-
-                      <input class="btn btn-info btn-sm" id="compteCreation" type="submit"
-                        onclick="window.location.href='/'" value="Je crée un Compte">
-                    </div>
                     <div class="g-col-3">
                       <input id="loginButton" class="btn btn-primary btn-sm" name="connect-profil" type="submit"
                         value="Se Connecter">

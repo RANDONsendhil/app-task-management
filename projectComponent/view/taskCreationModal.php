@@ -1,10 +1,5 @@
-<?php
-// Task Creation Modal Component
-// This component contains the modal for creating and editing tasks
-?>
 
 <style>
-  /* Task Creation Modal */
   .task-modal {
     display: none;
     position: fixed;

@@ -1,6 +1,7 @@
 <?php
 
 require_once(BASE_PATH . '/user/homeComponent/controller/controllerHome.php');
+require_once(BASE_PATH . '/user/homeComponent/model/project.php');
 require_once(BASE_PATH . '/config/utils.php');
 $currentDir = dirname($_SERVER['PHP_SELF']);
 
@@ -12,48 +13,58 @@ class IndexHome
     private $utils;
     public function __construct()
     {
-        $this->controllerHome = new ControllerHome();
+
         $this->utils = new Utils("");
         $this->controllerHome = new ControllerHome();
 
-        if (($_SERVER['REQUEST_METHOD'] === 'POST') && isset($_POST['save-user'])) {
-            return;
-        } else {
-            if ($this->displayHome()) {
-                $this->displayProjects();
+
+        if (($_SERVER['REQUEST_METHOD'] === 'POST') && isset($_POST['submit-project'])) {
+
+            if ($this->controllerHome->controllerCreateProject($this->getProjetData())) {
+                header("Location: " . $_SERVER['REQUEST_URI']);
+                exit();
+               
             }
         }
 
-        // if ($this->utils->getUri() == '/home/selectDoctor/appointment') {
-        //     $doctor_id = isset($_GET['doctor_id']) ? intval($_GET['doctor_id']) : 0;
-        // }
+        if (($_SERVER['REQUEST_METHOD'] === 'POST') && isset($_POST['submit-edit-project'])) {
+            $edit_project_id = $this->sanitize_input($_POST["project_id"]);
 
-        //$this->displayProjects();
-        // }
-        // if ($this->utils->getUri() == '/home/selectDoctor') {
-        //     $this->controllerHome->indexSelectProject();
-        // }
-        // if (($_SERVER['REQUEST_METHOD'] === 'POST') && isset($_POST['select-appointment'])) {
-        //     $doctor_id = isset($_POST['select-appointment']) ? intval($_POST['select-appointment']) : 0;
-        //     $this->controllerHome->indexAppointment($doctor_id);
-        // }
-        // if (($_SERVER['REQUEST_METHOD'] === 'POST') && isset($_POST['reserve-appointment'])) {
-        //     $doctor_RPPS = $_POST["doctorRPPS"];
-        //     $user_numSS = $_POST["userNumSS"];
-        //     $res_date = $_POST["res_date"];
-        //     $res_time = $_POST["res_time"];
-        //     $this->indexReserveAppointment($doctor_RPPS, $user_numSS,  $res_date, $res_time);
-        // }
-        // if (($_SERVER['REQUEST_METHOD'] === 'POST')  && isset($_POST['delete-appointment'])) {
+            if ($this->controllerHome->controllerEditProject($edit_project_id, $this->getProjetData())) {
+                header("Location: " . $_SERVER['REQUEST_URI']);
+                exit();
+            }
+        }
 
-        //     if (isset($_POST['idAppointment'])) {
-        //         ($_POST['idAppointment']);
-        //         if ($this->deleteAppointment((int)$_POST['idAppointment'])) {
-        //             return;
-        //         }
-        //     }
-        // }
+        if (($_SERVER['REQUEST_METHOD'] === 'POST') && isset($_POST['delete-project'])) {
+            $delete_project_id = $this->sanitize_input($_POST["delete-project"]);
 
+            if ($this->controllerHome->controllerDeleteProject($delete_project_id)) {
+                header("Location: " . $_SERVER['REQUEST_URI']);
+                exit();
+            }
+        }
+
+        $this->displayProjects();
+    }
+
+    function getProjetData()
+    {
+        $objProject = new Project(
+            $this->sanitize_input($_POST["nom"]),
+            $this->sanitize_input($_POST["description"]),
+            $this->sanitize_input($_POST["date_debut"]),
+            $this->sanitize_input($_POST["date_fin"]),
+            $this->sanitize_input($_POST["cree_par_user_id"])
+        );
+        return  $objProject;
+    }
+
+
+
+    public function sanitize_input($data)
+    {
+        return htmlspecialchars(stripslashes(trim($data)));
     }
 
     public function displayProjects()
@@ -62,22 +73,13 @@ class IndexHome
     }
 
 
-    public function indexAddProject($doctor_RPPS, $user_numSS,  $res_date, $res_time)
-    {
-        $this->controllerHome->controllerAddProject($doctor_RPPS, $user_numSS,  $res_date, $res_time);
-    }
-
     public function deleteProject($id)
     {
 
         return $this->controllerHome->controllerDeleteProject($id);
     }
 
-    public function withtouRerouteListAppointments($numSS)
-    {
 
-        $this->controllerHome->controllerDisplayAppointments($numSS);
-    }
 
     public function displayHome()
     {

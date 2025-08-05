@@ -3,69 +3,33 @@ session_start();
 require_once(BASE_PATH . '/config/database.php');
 class User
 {
-  public $genre;
-  public $numSS;
-  public $lname;
-  public $fname;
+  
+  public $name;
   public $inputEmail;
   public $inputPassword;
-  public $mobileNum;
-  public $phoneNum;
-  public $inputAddress;
-  public $inputCity;
-  public $inputZip;
-
+  public $role;
+  public $date_creation;
 
   public function __construct(
-    $genre,
-    $numSS,
-    $lname,
-    $fname,
+    
+    $name,
     $inputEmail,
     $inputPassword,
-    $mobileNum,
-    $phoneNum,
-    $inputAddress,
-    $inputCity,
-    $inputZip,
-
+    $role,
+    $date_creation
   ) {
-
-    $this->genre = $genre;
-    $this->numSS = $numSS;
-    $this->lname = $lname;
-    $this->fname = $fname;
+    $this->name = $name;
     $this->inputEmail = $inputEmail;
     $this->inputPassword = $inputPassword;
-    $this->mobileNum = $mobileNum;
-    $this->phoneNum = $phoneNum;
-    $this->inputAddress = $inputAddress;
-    $this->inputCity = $inputCity;
-    $this->inputZip = $inputZip;
+    $this->role = $role;
+    $this->date_creation = $date_creation ? $date_creation : date('Y-m-d H:i:s');
   }
-
-  function getGenre()
+  function getName()
   {
-    return $this->genre;
+    return $this->name;
   }
-
-  function getNumSS()
-  {
-    return $this->numSS;
-  }
-
-  function getLname()
-  {
-    return $this->lname;
-  }
-
-  function getFname()
-  {
-    return $this->fname;
-  }
-
   function getInputEmail()
-  {
+  { 
     return $this->inputEmail;
   }
 
@@ -74,28 +38,13 @@ class User
     return $this->inputPassword;
   }
 
-  function getMobileNum()
+  function getRole()
   {
-    return $this->mobileNum;
+    return $this->role;
   }
 
-  function getPhoneNum()
+  function getDateCreation()
   {
-    return $this->phoneNum;
+    return $this->date_creation;
   }
-
-  function getInputAddress()
-  {
-    return $this->inputAddress;
-  }
-
-  function getInputCity()
-  {
-    return $this->inputCity;
-  }
-
-  function getinputZip()
-  {
-    return $this->inputZip;
-  }
-}
+  } 

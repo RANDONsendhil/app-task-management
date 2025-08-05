@@ -84,6 +84,24 @@
 
   .board-table thead {
     background: #f8f9fd;
+    position: relative;
+  }
+
+  .board-table thead::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 2px;
+    background: linear-gradient(90deg, #0085ff, #6161ff, #0085ff);
+    background-size: 200% 100%;
+    animation: shimmer 3s ease-in-out infinite;
+  }
+
+  @keyframes shimmer {
+    0% { background-position: -200% 0; }
+    100% { background-position: 200% 0; }
   }
 
   .board-table th {
@@ -94,6 +112,77 @@
     color: #676879;
     border-bottom: 1px solid #e6e9ef;
     border-right: 1px solid #e6e9ef;
+    cursor: pointer;
+    position: relative;
+    transition: all 0.3s ease;
+    user-select: none;
+    background: linear-gradient(135deg, #f8f9fd, #e6e9ef);
+  }
+
+  .board-table th:hover {
+    background: linear-gradient(135deg, #e6e9ef, #d0d4da);
+    transform: translateY(-1px);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  }
+
+  .board-table th.sortable {
+    border-right: 1px solid rgba(255, 255, 255, 0.3);
+  }
+
+  .board-table th.sortable::after {
+    content: '';
+    display: inline-block;
+    width: 0;
+    height: 0;
+    margin-left: 8px;
+    vertical-align: middle;
+    border-left: 4px solid transparent;
+    border-right: 4px solid transparent;
+    border-top: 4px solid #676879;
+    opacity: 0.4;
+    transition: all 0.3s ease;
+  }
+
+  .board-table th.sortable:hover::after {
+    opacity: 0.8;
+    transform: scale(1.2);
+  }
+
+  .board-table th.sort-asc {
+    background: linear-gradient(135deg, #e3f2fd, #bbdefb);
+    color: #1976d2;
+    box-shadow: 0 2px 8px rgba(25, 118, 210, 0.2);
+  }
+
+  .board-table th.sort-asc::after {
+    border-top: 6px solid #1976d2;
+    border-bottom: 0;
+    border-left: 4px solid transparent;
+    border-right: 4px solid transparent;
+    opacity: 1;
+    transform: translateY(-1px);
+  }
+
+  .board-table th.sort-desc {
+    background: linear-gradient(135deg, #e3f2fd, #bbdefb);
+    color: #1976d2;
+    box-shadow: 0 2px 8px rgba(25, 118, 210, 0.2);
+  }
+
+  .board-table th.sort-desc::after {
+    border-bottom: 6px solid #1976d2;
+    border-top: 0;
+    border-left: 4px solid transparent;
+    border-right: 4px solid transparent;
+    opacity: 1;
+    transform: translateY(1px);
+  }
+
+  .board-table th.sort-asc:hover,
+  .board-table th.sort-desc:hover {
+    background: linear-gradient(135deg, #bbdefb, #90caf9);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(25, 118, 210, 0.3);
   }
 
   .board-table th:last-child {
@@ -112,7 +201,9 @@
   }
 
   .board-table tbody tr:hover {
-    background: #f8f9fd;
+    background: linear-gradient(135deg, #f8f9fd, #ffffff);
+    transform: translateY(-1px);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
   }
 
   .project-name-cell {
@@ -426,13 +517,13 @@
     <thead>
       <tr>
         <th style="width: 40px;"></th>
-        <th style="width: 100px;">Task ID</th>
-        <th style="width: 200px;">Titre</th>
-        <th style="width: 250px;">Description</th>
-        <th style="width: 120px;">Statut</th>
-        <th style="width: 100px;">Assigné ID</th>
-        <th style="width: 100px;">Priorité</th>
-        <th style="width: 120px;">Date Échéance</th>
+        <th class="sortable" data-column="id" onclick="sortTaskTable('id')" style="width: 100px;">Task ID</th>
+        <th class="sortable" data-column="titre" onclick="sortTaskTable('titre')" style="width: 200px;">Titre</th>
+        <th class="sortable" data-column="description" onclick="sortTaskTable('description')" style="width: 250px;">Description</th>
+        <th class="sortable" data-column="statut" onclick="sortTaskTable('statut')" style="width: 120px;">Statut</th>
+        <th class="sortable" data-column="assignee" onclick="sortTaskTable('assignee')" style="width: 100px;">Assigné ID</th>
+        <th class="sortable" data-column="priorite" onclick="sortTaskTable('priorite')" style="width: 100px;">Priorité</th>
+        <th class="sortable" data-column="date_echeance" onclick="sortTaskTable('date_echeance')" style="width: 120px;">Date Échéance</th>
         <th style="width: 80px;">Actions</th>
       </tr>
     </thead>
@@ -568,3 +659,198 @@
     </tbody>
   </table>
 </div>
+
+<script>
+// Task Table Sorting Functionality
+let currentTaskSort = { column: null, direction: 'asc' };
+
+function sortTaskTable(column) {
+  const table = document.querySelector('.board-table tbody');
+  const rows = Array.from(table.querySelectorAll('.task-row'));
+  
+  // Determine sort direction
+  if (currentTaskSort.column === column) {
+    currentTaskSort.direction = currentTaskSort.direction === 'asc' ? 'desc' : 'asc';
+  } else {
+    currentTaskSort.direction = 'asc';
+  }
+  currentTaskSort.column = column;
+
+  // Update header classes
+  document.querySelectorAll('.board-table th').forEach(th => {
+    th.classList.remove('sort-asc', 'sort-desc');
+  });
+  
+  const currentHeader = document.querySelector(`th[data-column="${column}"]`);
+  if (currentHeader) {
+    currentHeader.classList.add(currentTaskSort.direction === 'asc' ? 'sort-asc' : 'sort-desc');
+  }
+
+  // Sort rows
+  rows.sort((a, b) => {
+    let aValue, bValue;
+    
+    switch(column) {
+      case 'id':
+        aValue = parseInt(a.getAttribute('data-task-id'));
+        bValue = parseInt(b.getAttribute('data-task-id'));
+        break;
+      case 'titre':
+        aValue = a.getAttribute('data-task-title').toLowerCase();
+        bValue = b.getAttribute('data-task-title').toLowerCase();
+        break;
+      case 'description':
+        aValue = a.getAttribute('data-task-description').toLowerCase();
+        bValue = b.getAttribute('data-task-description').toLowerCase();
+        break;
+      case 'statut':
+        aValue = a.getAttribute('data-task-status').toLowerCase();
+        bValue = b.getAttribute('data-task-status').toLowerCase();
+        break;
+      case 'assignee':
+        aValue = a.getAttribute('data-task-assignee') || '';
+        bValue = b.getAttribute('data-task-assignee') || '';
+        break;
+      case 'priorite':
+        // Sort by priority order: urgent > high > medium > low
+        const priorityOrder = { 'urgent': 4, 'high': 3, 'medium': 2, 'low': 1 };
+        aValue = priorityOrder[a.getAttribute('data-task-priority')] || 0;
+        bValue = priorityOrder[b.getAttribute('data-task-priority')] || 0;
+        break;
+      case 'date_echeance':
+        aValue = new Date(a.getAttribute('data-task-due-date') || '9999-12-31');
+        bValue = new Date(b.getAttribute('data-task-due-date') || '9999-12-31');
+        break;
+      default:
+        return 0;
+    }
+
+    if (aValue < bValue) return currentTaskSort.direction === 'asc' ? -1 : 1;
+    if (aValue > bValue) return currentTaskSort.direction === 'asc' ? 1 : -1;
+    return 0;
+  });
+
+  // Re-append sorted rows
+  rows.forEach(row => table.appendChild(row));
+  
+  // Keep the add-item-row at the bottom
+  const addItemRow = table.querySelector('.add-item-row');
+  if (addItemRow) {
+    table.appendChild(addItemRow);
+  }
+  
+  // Reapply task filters if they exist
+  if (typeof applyTaskFilters === 'function') {
+    applyTaskFilters();
+  }
+}
+
+// Task Filtering Functionality
+function applyTaskFilters() {
+  const statusFilter = document.getElementById('statusFilter');
+  const priorityFilter = document.getElementById('priorityFilter');
+  const assigneeFilter = document.getElementById('assigneeFilter');
+  
+  const statusValue = statusFilter ? statusFilter.value : '';
+  const priorityValue = priorityFilter ? priorityFilter.value : '';
+  const assigneeValue = assigneeFilter ? assigneeFilter.value : '';
+  
+  const taskRows = document.querySelectorAll('.task-row');
+  let visibleCount = 0;
+  
+  taskRows.forEach(row => {
+    const taskStatus = row.getAttribute('data-task-status');
+    const taskPriority = row.getAttribute('data-task-priority');
+    const taskAssignee = row.getAttribute('data-task-assignee');
+    
+    let shouldShow = true;
+    
+    // Status filter
+    if (statusValue && taskStatus !== statusValue) {
+      shouldShow = false;
+    }
+    
+    // Priority filter
+    if (priorityValue && taskPriority !== priorityValue) {
+      shouldShow = false;
+    }
+    
+    // Assignee filter
+    if (assigneeValue) {
+      if (assigneeValue === 'unassigned' && taskAssignee) {
+        shouldShow = false;
+      } else if (assigneeValue !== 'unassigned' && taskAssignee !== assigneeValue) {
+        shouldShow = false;
+      }
+    }
+    
+    if (shouldShow) {
+      row.classList.remove('hidden');
+      row.style.display = '';
+      visibleCount++;
+    } else {
+      row.classList.add('hidden');
+      row.style.display = 'none';
+    }
+  });
+  
+  // Update filter stats
+  updateTaskFilterStats(visibleCount, taskRows.length);
+}
+
+function updateTaskFilterStats(visibleCount, totalCount) {
+  const statsElement = document.querySelector('.filter-stats');
+  if (statsElement) {
+    if (visibleCount === totalCount) {
+      statsElement.textContent = `${totalCount} tâche${totalCount !== 1 ? 's' : ''}`;
+      statsElement.style.color = '#676879';
+    } else {
+      statsElement.textContent = `${visibleCount} sur ${totalCount} tâche${totalCount !== 1 ? 's' : ''}`;
+      statsElement.style.color = '#0085ff';
+      statsElement.style.fontWeight = '600';
+    }
+  }
+}
+
+// Initialize task filters
+document.addEventListener('DOMContentLoaded', function() {
+  const statusFilter = document.getElementById('statusFilter');
+  const priorityFilter = document.getElementById('priorityFilter');
+  const assigneeFilter = document.getElementById('assigneeFilter');
+  const clearFiltersBtn = document.getElementById('clearFilters');
+  
+  if (statusFilter) {
+    statusFilter.addEventListener('change', applyTaskFilters);
+  }
+  
+  if (priorityFilter) {
+    priorityFilter.addEventListener('change', applyTaskFilters);
+  }
+  
+  if (assigneeFilter) {
+    assigneeFilter.addEventListener('change', applyTaskFilters);
+  }
+  
+  if (clearFiltersBtn) {
+    clearFiltersBtn.addEventListener('click', function() {
+      if (statusFilter) statusFilter.value = '';
+      if (priorityFilter) priorityFilter.value = '';
+      if (assigneeFilter) assigneeFilter.value = '';
+      applyTaskFilters();
+    });
+  }
+  
+  // Add filter stats element if it doesn't exist
+  const filtersContainer = document.querySelector('.task-filters');
+  if (filtersContainer && !document.querySelector('.filter-stats')) {
+    const statsElement = document.createElement('div');
+    statsElement.className = 'filter-stats';
+    filtersContainer.appendChild(statsElement);
+    
+    // Initial filter application
+    setTimeout(() => {
+      applyTaskFilters();
+    }, 100);
+  }
+});
+</script>

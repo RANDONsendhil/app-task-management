@@ -20,10 +20,10 @@ class ControllerLogin
     {
         $ret = $this->userCreationModel->verifyLogin($email, $password);
 
-        if ($ret != null) {
-            $_SESSION["lname"] = $ret["lname"];
-            $_SESSION["fname"] = $ret["fname"];
-            $_SESSION["numSS"] = $ret["numSS"];
+        if ($ret != null && $ret["role"] == "admin") {
+            $_SESSION["lname"] = $ret["nom"];
+            $_SESSION["fname"] = $ret["role"];
+            $_SESSION["numSS"] = $ret["email"];
             return true;
         } else {
             return false;

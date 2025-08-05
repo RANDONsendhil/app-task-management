@@ -13,26 +13,23 @@
         {
             $this->controllerProfil = new ControllerProfil();
             $this->utils = new Utils("");
-            $profilNumSS =  $_SESSION["numSS"];
 
 
             if (($_SERVER['REQUEST_METHOD'] === 'POST') && isset($_POST['update-profil'])) {
                 $this->displayProfilEditableForm();
             }
-            if (($_SERVER['REQUEST_METHOD'] === 'POST') && isset($_POST['save-update-profil'])) {
-                $this->saveProfil($this->getObjUser());
+            if (($_SERVER['REQUEST_METHOD'] === 'POST') && isset($_POST['create-user'])) {
+        
+                $this->addUser();
+            }
+            if (($_SERVER['REQUEST_METHOD'] === 'POST') && isset($_POST['update-user'])) {
+                $this->updateUser($_POST['user_id']);
+            }
+              if (($_SERVER['REQUEST_METHOD'] === 'POST') && isset($_POST['delete-user'])) {
+                $this->deleteUser($_POST['user_id']);
             }
             if ($this->utils->getUri() == '/profil') {
-                $this->controllerProfil->index($numss = $profilNumSS);
-            }
-            if ($this->utils->getUri() == '/find-doctors') {
-                $this->controllerProfil->findDoctor();
-            }
-            if ($this->utils->getUri() == '/contact-assistant') {
-                $this->contactAssistant();
-            }
-            if ($this->utils->getUri() == '/emergency-numbers') {
-                $this->displayUrgentNumbers();
+                $this->controllerProfil->getProfils();
             }
 
             if ($this->utils->getUri() == '/updateProfil') {
@@ -42,51 +39,49 @@
             }
         }
 
-        public function findDoctor()
-        {
-
-            $this->controllerProfil->findDoctor();
+   public function deleteUser($userId){
+            $this->controllerProfil->controllerDeleteUser($userId);
         }
 
-        public function contactAssistant()
-        {
-
-            $this->controllerProfil->contactAssistant();
-        }
-
-        public function displayUrgentNumbers()
-        {
-
-            $this->controllerProfil->displayUrgentNumbers();
-        }
 
         public function displayProfilEditableForm()
         {
 
             $this->controllerProfil->displayProfilEditableFormPublic();
         }
-
-        public function saveProfil($objUser)
-        {
-            $this->controllerProfil->saveProfilController($objUser);
+         public function updateUser($id){
+            $this->controllerProfil->controllerUpdateUser($id,$this->getObjUser());
         }
 
-        function getObjUser()
+
+
+        public function addUser()
         {
-            $objUser = new User(
-                $this->sanitize_input($_POST["genre"]),
-                $this->sanitize_input($_POST["numSS"]),
-                $this->sanitize_input($_POST["lname"]),
-                $this->sanitize_input($_POST["fname"]),
-                $this->sanitize_input($_POST["inputEmail"]),
-                $this->sanitize_input($_POST["inputPassword"]),
-                $this->sanitize_input($_POST["mobileNum"]),
-                $this->sanitize_input($_POST["phoneNum"]),
-                $this->sanitize_input($_POST["inputAddress"]),
-                $this->sanitize_input($_POST["inputCity"]),
-                $this->sanitize_input($_POST["inputZip"])
-            );
-            return  $objUser;
+           
+                $objUser = $this->getObjUser();
+              
+                if ($objUser) {
+                    $this->controllerProfil->controllerAddUser($objUser);
+                }
+        }   
+
+        public function getObjUser()
+        {   
+            if (isset($_POST["user_name"]) && isset($_POST["user_email"]) && isset($_POST["user_password"]) && isset($_POST["user_role"])) {
+
+                $objUser = new User(
+                    $this->sanitize_input($_POST["user_name"]),
+                    $this->sanitize_input($_POST["user_email"]),
+                    $this->sanitize_input($_POST["user_password"]),
+                    $this->sanitize_input($_POST["user_role"]),
+                    date('Y-m-d H:i:s')
+                );
+           
+                return $objUser;
+            } else {
+                echo "<script>alert('Veuillez remplir tous les champs');</script>";
+                return null;
+            }
         }
         public function sanitize_input($data)
         {
@@ -95,3 +90,5 @@
     }
 
     new IndexProfil();
+
+    

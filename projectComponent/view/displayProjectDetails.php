@@ -620,27 +620,9 @@ include(BASE_PATH . '/user/homeComponent/view/home.php');
             </div>
           </div>
 
-          <div class="tile-description">
-            <span class="tile-label">Description du projet</span>
-            <div style="margin-top: 10px; font-weight: normal;">
-              <?php echo ($resultProjectById["description"]); ?>
-            </div>
-          </div>
-
-          <div class="tile-actions">
-            <button type="button" class="tile-btn tile-btn-primary" onclick="openTaskModal()">
-              Ajouter une tâche
-            </button>
-            <button type="button" class="tile-btn tile-btn-success"
-              onclick="modifyProject(<?php echo ($resultProjectById['id']); ?>)">
-              Modifier le projet
-            </button>
-            <button type="button" class="tile-btn tile-btn-danger"
-              onclick="deleteProject(<?php echo ($resultProjectById['id']); ?>)">
-              Supprimer le projet
-            </button>
-            <button type="button" class="tile-btn tile-btn-secondary" onclick="goBack()">
-              Retour
+         
+            <button type="button" class="tile-btn tile-btn-secondary" onclick="closeProjectModal()">
+              Fermer
             </button>
           </div>
         </div>
@@ -743,8 +725,6 @@ include(BASE_PATH . '/user/homeComponent/view/home.php');
 
   <?php include 'taskCreationModal.php'; ?>
 
-  <?php include 'projectCreationModal.php'; ?>
-
 </div>
 
 <script>
@@ -801,43 +781,6 @@ include(BASE_PATH . '/user/homeComponent/view/home.php');
     // Reset hidden fields
     document.getElementById('edit_mode').value = '0';
     document.getElementById('task_id').value = '';
-  }
-
-  // Project Creation Modal Functions
-  function openProjectCreationModal() {
-    // Reset modal for create mode
-    resetProjectCreationModal();
-    document.getElementById('projectCreationModalTitle').textContent = 'Créer un nouveau projet';
-    document.getElementById('projectCreationSubmitText').textContent = 'Créer le projet';
-    document.getElementById('project_edit_mode').value = '0';
-    document.getElementById('project_creation_id').value = '';
-
-    // Set default dates
-    const today = new Date().toISOString().split('T')[0];
-    const nextMonth = new Date();
-    nextMonth.setMonth(nextMonth.getMonth() + 1);
-    const nextMonthDate = nextMonth.toISOString().split('T')[0];
-    
-    document.getElementById('project_date_debut').value = today;
-    document.getElementById('project_date_fin').value = nextMonthDate;
-
-    document.getElementById('projectCreationModal').style.display = 'block';
-    document.body.style.overflow = 'hidden'; // Prevent scrolling
-  }
-
-  function closeProjectCreationModal() {
-    document.getElementById('projectCreationModal').style.display = 'none';
-    document.body.style.overflow = 'auto'; // Restore scrolling
-    // Reset form
-    resetProjectCreationModal();
-  }
-
-  function resetProjectCreationModal() {
-    document.getElementById('projectCreationForm').reset();
-
-    // Reset hidden fields
-    document.getElementById('project_edit_mode').value = '0';
-    document.getElementById('project_creation_id').value = '';
   }
 
   function submitTaskForm(event) {
@@ -943,132 +886,17 @@ include(BASE_PATH . '/user/homeComponent/view/home.php');
     return false; // Always prevent default form submission
   }
 
-  function submitProjectCreationForm(event) {
-    // Prevent default form submission
-    if (event) {
-      event.preventDefault();
-    }
-
-    // Get form data
-    const form = document.getElementById('projectCreationForm');
-    const formData = new FormData(form);
-
-    // Check if we're in edit mode
-    const editMode = document.getElementById('project_edit_mode').value;
-    const isEditing = editMode === '1';
-
-    // Validate required fields
-    const nom = formData.get('nom');
-    const dateDebut = formData.get('date_debut');
-    const dateFin = formData.get('date_fin');
-
-    if (!nom || nom.trim() === '') {
-      alert('Veuillez saisir un nom pour le projet');
-      return false;
-    }
-
-    if (!dateDebut) {
-      alert('Veuillez sélectionner une date de début');
-      return false;
-    }
-
-    if (!dateFin) {
-      alert('Veuillez sélectionner une date de fin');
-      return false;
-    }
-
-    // Validate date order
-    if (new Date(dateDebut) >= new Date(dateFin)) {
-      alert('La date de fin doit être postérieure à la date de début');
-      return false;
-    }
-
-    // Show loading state
-    const submitButton = form.querySelector('button[name="submit-project"]');
-    const originalText = submitButton.textContent;
-    submitButton.textContent = isEditing ? 'Mise à jour en cours...' : 'Création en cours...';
-    submitButton.disabled = true;
-
-    // Debug: Log form data
-    console.log('Project Creation Form data:');
-    for (let [key, value] of formData.entries()) {
-      console.log(key + ': ' + value);
-    }
-
-    // Submit form with AJAX to the current page (which handles the POST)
-    fetch(window.location.href, {
-        method: 'POST',
-        body: formData
-      })
-      .then(response => {
-        console.log('Response status:', response.status);
-        if (!response.ok) {
-          throw new Error('Erreur réseau: ' + response.status);
-        }
-        return response.text(); // Changed from json() to text() to handle any response
-      })
-      .then(data => {
-        console.log('Response data:', data);
-
-        // Try to parse as JSON, fallback to treating as success
-        let result;
-        try {
-          result = JSON.parse(data);
-        } catch (e) {
-          // If not JSON, assume success if no error in response
-          result = {
-            success: true,
-            message: isEditing ? 'Projet mis à jour avec succès' : 'Projet créé avec succès'
-          };
-        }
-
-        if (result.success !== false) {
-          alert(isEditing ? 'Projet mis à jour avec succès!' : 'Projet créé avec succès!');
-          closeProjectCreationModal();
-
-          // Reload page to show the new project
-          setTimeout(() => {
-            window.location.reload();
-          }, 1000);
-
-        } else {
-          alert('Erreur lors de ' + (isEditing ? 'la mise à jour' : 'la création') + ': ' + (result.message || 'Erreur inconnue'));
-        }
-      })
-      .catch(error => {
-        console.error('Erreur:', error);
-        alert('Erreur lors de ' + (isEditing ? 'la mise à jour' : 'la création') + ' du projet. Le projet pourrait avoir été ' + (isEditing ? 'mis à jour' : 'créé') + ' malgré l\'erreur.');
-
-        // Close modal and reload
-        closeProjectCreationModal();
-        setTimeout(() => {
-          window.location.reload();
-        }, 1000);
-      })
-      .finally(() => {
-        // Restore button state
-        submitButton.textContent = originalText;
-        submitButton.disabled = false;
-      });
-
-    return false; // Always prevent default form submission
-  }
-
   // Close modal with Escape key
   document.addEventListener('keydown', function(event) {
     if (event.key === 'Escape') {
       const taskModal = document.getElementById('taskModal');
       const projectModal = document.getElementById('projectModal');
-      const projectCreationModal = document.getElementById('projectCreationModal');
 
       if (taskModal && taskModal.style.display === 'block') {
         closeTaskModal();
       }
       if (projectModal && projectModal.style.display === 'block') {
         closeProjectModal();
-      }
-      if (projectCreationModal && projectCreationModal.style.display === 'block') {
-        closeProjectCreationModal();
       }
     }
   });
@@ -1082,12 +910,6 @@ include(BASE_PATH . '/user/homeComponent/view/home.php');
       const nextWeek = new Date();
       nextWeek.setDate(nextWeek.getDate() + 7);
       dateEcheanceField.value = nextWeek.toISOString().split('T')[0];
-    }
-
-    // Add form submission handler for project creation
-    const projectCreationForm = document.getElementById('projectCreationForm');
-    if (projectCreationForm) {
-      projectCreationForm.addEventListener('submit', submitProjectCreationForm);
     }
 
     // Add search functionality to assignee dropdown
@@ -1241,6 +1063,8 @@ include(BASE_PATH . '/user/homeComponent/view/home.php');
     document.getElementById('edit_mode').value = '1';
     document.getElementById('task_id').value = taskId;
 
+    // Reset all form fields before populating
+    resetTaskModal();
     // Pre-fill form fields
     populateTaskForm(taskData);
 
@@ -1277,13 +1101,15 @@ include(BASE_PATH . '/user/homeComponent/view/home.php');
 
     // Handle assignee selection
     const assigneeSelect = document.getElementById('assignee_id');
-    if (assigneeSelect && taskData.assignee_id) {
-      assigneeSelect.value = taskData.assignee_id;
+    if (assigneeSelect) {
+      assigneeSelect.value = taskData.assignee_id || '';
     }
 
     // Handle date
     if (taskData.date_echeance && taskData.date_echeance !== '-') {
       document.getElementById('date_echeance').value = taskData.date_echeance;
+    } else {
+      document.getElementById('date_echeance').value = '';
     }
   }
 

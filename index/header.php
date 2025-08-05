@@ -5,19 +5,7 @@
     </a>
     <!------ NAV BAR ITEM ------>
     <div class="d-flex justify-content-center align-items-center navbar-container">
-      <div class="collapse navbar-collapse">
-        <ul class="navbar-nav mx-auto ">
-          <li class="nav-item mx-2">
-            <a class="nav-link" href="/">Création de compte</a>
-          </li>
-          <li class="nav-item nav-item mx-2">
-            <a class="nav-link" href="#">Questions fréquentes</a>
-          </li>
-          <li class="nav-item nav-item mx-2">
-            <a class="nav-link" href="#">Professionnels de santé</a>
-          </li>
-        </ul>
-      </div>
+   
     </div>
     <!------ NAV BAR ITEM ------>
     <div class="container-login">
