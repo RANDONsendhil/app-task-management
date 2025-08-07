@@ -969,23 +969,6 @@ document.addEventListener('DOMContentLoaded', function() {
   <?php endif; ?>
 
 
-    <?php if (isset($_SESSION['project_creation_status']) && $_SESSION['project_creation_status'] === 'success'): ?>
-      showNotification('<?php echo addslashes($_SESSION['project_creation_message']); ?>', 'success');
-      <?php unset($_SESSION['project_creation_status'], $_SESSION['project_creation_message']); ?>
-    <?php endif; ?>
-
-    <?php if (isset($_SESSION['project_deletion_status']) && $_SESSION['project_deletion_status'] === 'success'): ?>
-      showNotification('<?php echo addslashes($_SESSION['project_deletion_message']); ?>', 'success');
-      <?php unset($_SESSION['project_deletion_status'], $_SESSION['project_deletion_message']); ?>
-    <?php endif; ?>
-
-    <?php if (isset($_SESSION['project_edit_status']) && $_SESSION['project_edit_status'] === 'success'): ?>
-      showNotification('<?php echo addslashes($_SESSION['project_edit_message']); ?>', 'success');
-      <?php unset($_SESSION['project_edit_status'], $_SESSION['project_edit_message']); ?>
-    <?php endif; ?>
-
-
-
   const statusFilter = document.getElementById('statusFilter');
   const priorityFilter = document.getElementById('priorityFilter');
   const assigneeFilter = document.getElementById('assigneeFilter');
