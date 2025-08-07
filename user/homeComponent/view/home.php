@@ -86,36 +86,34 @@ hr {
       <div class="nav-custom-sidebar">
         <ul class="nav flex-column submenu">
           <li><a class="nav-link" href="/profil"><span> <img style="height: 39px;" src="/images/person_1.svg" alt=""
-                  srcset=""></span><span>Profil</span></a>
+                  srcset=""></span><span>Utilisateurs</span></a>
           </li>
         </ul>
       </div>
     </li>
 
-    <!-- Menu 3 -->
-    <li class=" nav-item">
-      <div href="#submenu3" aria-expanded="false" aria-controls="submenu3">
-        Information
+    <!-- Menu 3 - DISABLED -->
+    <li class="nav-item">
+      <div href="#submenu3" aria-expanded="false" aria-controls="submenu3" style="opacity: 0.5; cursor: not-allowed;">
+        Information (Indisponible)
       </div>
-      <div class="nav-custom-sidebar">
+      <div class="nav-custom-sidebar" style="pointer-events: none; opacity: 0.5;">
         <ul class="nav flex-column submenu">
-
-          <li><a class="nav-link" href="find-doctors"><span> <img style="height: 30px;" src="/images/location.png"
-                  alt="" srcset=""></span><span>Trouver un medecin</span></a></li>
+          <li><span class="nav-link disabled" style="color: #6c757d; cursor: not-allowed;"><span> <img style="height: 30px; opacity: 0.5;" src="/images/location.png"
+                  alt="" srcset=""></span><span>Information</span></span></li>
         </ul>
       </div>
     </li>
 
-    <!-- Menu 4 -->
+    <!-- Menu 4 - DISABLED -->
     <li class="nav-item">
-      <div href="#submenu3" aria-expanded="false" aria-controls="submenu4">
-
-        Contact
+      <div href="#submenu3" aria-expanded="false" aria-controls="submenu4" style="opacity: 0.5; cursor: not-allowed;">
+        Contact (Indisponible)
       </div>
-      <div class="nav-custom-sidebar" id="nav-contact">
+      <div class="nav-custom-sidebar" id="nav-contact" style="pointer-events: none; opacity: 0.5;">
         <ul class="nav flex-column submenu">
-          <li><a class="nav-link" href="/contact-assistant"><span> <img style="height: 30px;" src="/images/mail.png"
-                  alt="" srcset=""></span><span>Contact Assistant</span></a></li>
+          <li><span class="nav-link disabled" style="color: #6c757d; cursor: not-allowed;"><span> <img style="height: 30px; opacity: 0.5;" src="/images/mail.png"
+                  alt="" srcset=""></span><span>Contact Assistant</span></span></li>
         </ul>
       </div>
     </li>

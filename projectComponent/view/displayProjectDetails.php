@@ -580,7 +580,7 @@ include(BASE_PATH . '/user/homeComponent/view/home.php');
 
   <?php if ($resultProjectById): ?>
 
-    <?php include 'taskManagementTable.php'; ?>
+    <?php include 'taskComponent/view/taskManagementTable.php'; ?>
 
     <!-- Project Details Modal -->
     <div id="projectModal" class="project-modal">
@@ -722,8 +722,7 @@ include(BASE_PATH . '/user/homeComponent/view/home.php');
       </div>
     </div>
   </div>
-
-  <?php include 'taskCreationModal.php'; ?>
+ 
 
 </div>
 
@@ -755,135 +754,9 @@ include(BASE_PATH . '/user/homeComponent/view/home.php');
     document.body.style.overflow = 'auto'; // Restore scrolling
   }
 
-  // Task Modal Functions
-  function openTaskModal() {
-    // Reset modal for create mode
-    resetTaskModal();
-    document.getElementById('taskModalTitle').textContent = 'Créer une nouvelle tâche';
-    document.getElementById('taskSubmitText').textContent = 'Créer la tâche';
-    document.getElementById('edit_mode').value = '0';
-    document.getElementById('task_id').value = '';
-
-    document.getElementById('taskModal').style.display = 'block';
-    document.body.style.overflow = 'hidden'; // Prevent scrolling
-  }
-
   function closeTaskModal() {
     document.getElementById('taskModal').style.display = 'none';
     document.body.style.overflow = 'auto'; // Restore scrolling
-    // Reset form
-    resetTaskModal();
-  }
-
-  function resetTaskModal() {
-    document.getElementById('taskForm').reset();
-
-    // Reset hidden fields
-    document.getElementById('edit_mode').value = '0';
-    document.getElementById('task_id').value = '';
-  }
-
-  function submitTaskForm(event) {
-    // Prevent default form submission
-    if (event) {
-      event.preventDefault();
-    }
-
-    // Get project ID from session or PHP
-    const sessionProjectId =
-      <?php echo isset($_SESSION['current_project_id']) ? $_SESSION['current_project_id'] : 'null'; ?>;
-    const formProjectId = <?php echo isset($resultProjectById['id']) ? $resultProjectById['id'] : 'null'; ?>;
-    const projectId = sessionProjectId || formProjectId;
-
- 
-
-    if (!projectId) {
-      alert('Erreur: Aucun projet sélectionné. Impossible de créer la tâche.');
-      return false;
-    }
-
-    // Get form data
-    const form = document.getElementById('taskForm');
-    const formData = new FormData(form);
-
-    // Ensure project ID is set correctly
-    formData.set('projet_id', projectId);
-    formData.set('idproject', projectId); // This is what the backend expects
-
-    // Check if we're in edit mode
-    const editMode = document.getElementById('edit_mode').value;
-    const isEditing = editMode === '1';
-
-    // Validate required fields
-    const titre = formData.get('titre');
-    if (!titre || titre.trim() === '') {
-      alert('Veuillez saisir un titre pour la tâche');
-      return false;
-    }
-
-    // Show loading state
-    const submitButton = form.querySelector('button[name="submit-task"]');
-    const originalText = submitButton.textContent;
-    submitButton.textContent = isEditing ? 'Mise à jour en cours...' : 'Création en cours...';
-    submitButton.disabled = true;
-
-    // Debug: Log form data
-    console.log('Form data:');
-    for (let [key, value] of formData.entries()) {
-      console.log(key + ': ' + value);
-    }
-
-    // Submit form with AJAX to the current page (which handles the POST)
-    fetch(window.location.href, {
-        method: 'POST',
-        body: formData
-      })
-      .then(response => {
-        console.log('Response status:', response.status);
-        if (!response.ok) {
-          throw new Error('Erreur réseau: ' + response.status);
-        }
-        return response.text(); // Changed from json() to text() to handle any response
-      })
-      .then(data => {
-        console.log('Response data:', data);
-
-        // Try to parse as JSON, fallback to treating as success
-        let result;
-        try {
-          result = JSON.parse(data);
-        } catch (e) {
-          // If not JSON, assume success if no error in response
-          result = {
-            success: true,
-            message: isEditing ? 'Tâche mise à jour avec succès' : 'Tâche créée avec succès'
-          };
-        }
-
-        if (result.success !== false) {
-          alert(isEditing ? 'Tâche mise à jour avec succès!' : 'Tâche créée avec succès!');
-          closeTaskModal();
-
-          // No need to reload - the server redirect will handle page refresh
-
-        } else {
-          alert('Erreur lors de ' + (isEditing ? 'la mise à jour' : 'la création') + ': ' + (result.message || 'Erreur inconnue'));
-        }
-      })
-      .catch(error => {
-        console.error('Erreur:', error);
-        alert('Erreur lors de ' + (isEditing ? 'la mise à jour' : 'la création') + ' de la tâche. La tâche pourrait avoir été ' + (isEditing ? 'mise à jour' : 'créée') + ' malgré l\'erreur.');
-
-        // Close modal - no need to reload as server handles redirect
-        closeTaskModal();
-      })
-      .finally(() => {
-        // Restore button state
-        submitButton.textContent = originalText;
-        submitButton.disabled = false;
-      });
-
-    return false; // Always prevent default form submission
   }
 
   // Close modal with Escape key
@@ -985,18 +858,7 @@ include(BASE_PATH . '/user/homeComponent/view/home.php');
     updateFilterStats(visibleCount, totalCount);
     updateEmptyState(visibleCount);
   }
-
-  function clearAllFilters() {
-    const statusFilter = document.getElementById('statusFilter');
-    const priorityFilter = document.getElementById('priorityFilter');
-    const assigneeFilter = document.getElementById('assigneeFilter');
-
-    if (statusFilter) statusFilter.value = '';
-    if (priorityFilter) priorityFilter.value = '';
-    if (assigneeFilter) assigneeFilter.value = '';
-
-    applyTaskFilters();
-  }
+ 
 
   function updateFilterStats(visibleCount, totalCount) {
     // Add or update filter stats display
@@ -1046,33 +908,7 @@ include(BASE_PATH . '/user/homeComponent/view/home.php');
       }
     }
   }
-
-  // Task Management Functions
-  function editTask(taskId) {
-    // Find task data from the table row
-    const taskData = getTaskDataFromTable(taskId);
-
-    if (!taskData) {
-      alert('Erreur: Impossible de récupérer les données de la tâche');
-      return;
-    }
-
-    // Set modal to edit mode
-    document.getElementById('taskModalTitle').textContent = 'Modifier la tâche';
-    document.getElementById('taskSubmitText').textContent = 'Mettre à jour la tâche';
-    document.getElementById('edit_mode').value = '1';
-    document.getElementById('task_id').value = taskId;
-
-    // Reset all form fields before populating
-    resetTaskModal();
-    // Pre-fill form fields
-    populateTaskForm(taskData);
-
-    // Open modal
-    document.getElementById('taskModal').style.display = 'block';
-    document.body.style.overflow = 'hidden';
-  }
-
+ 
   function getTaskDataFromTable(taskId) {
     // Find the task row by task ID using data attribute
     const taskRow = document.querySelector(`tr[data-task-id="${taskId}"]`);
@@ -1113,10 +949,5 @@ include(BASE_PATH . '/user/homeComponent/view/home.php');
     }
   }
 
-  function deleteTask(taskId) {
-    if (confirm('Êtes-vous sûr de vouloir supprimer cette tâche? Cette action est irréversible.')) {
-      // Send delete request
-      window.location.href = '/task/delete/' + taskId;
-    }
-  }
+  
 </script>

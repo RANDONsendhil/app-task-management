@@ -2,7 +2,10 @@
 session_start();
 require_once(BASE_PATH . '/config/utils.php');
 require_once(BASE_PATH . '/projectComponent/controller/controllerProject.php');
-require_once(BASE_PATH . '/projectComponent/model/task.php');
+require_once(BASE_PATH . '/user/homeComponent/controller/controllerHome.php');
+ 
+require_once(BASE_PATH . '/taskComponent/model/task.php');
+require_once(BASE_PATH . '/taskComponent/model/taskObj.php');
 $currentDir = dirname($_SERVER['PHP_SELF']);
 
 
@@ -10,36 +13,58 @@ class IndexProject
 {
     private $controllerProject;
     private $utils;
+    private $controllerHome;
     public function __construct()
     {
         $this->controllerProject = new ControllerProject();
+        $this->controllerHome = new ControllerHome();
         $this->utils = new Utils("");
 
         if (($_SERVER['REQUEST_METHOD'] === 'POST') && isset($_POST['select-project'])) {
             $_SESSION["projectId"]  = isset($_POST['select-project']) ? intval($_POST['select-project']) : 0;
 
             $this->controllerProject->indexProject($_SESSION["projectId"]);
-            $this->displayProjectTasksByProjectId($_SESSION["projectId"]);
+          
         }
 
-        if (($_SERVER['REQUEST_METHOD'] === 'POST') && isset($_POST['submit-task'])) {
+        // if (($_SERVER['REQUEST_METHOD'] === 'POST') && isset($_POST['submit-task'])) {
+           
+        //     if (isset($_POST['idproject'])) {
+        //         // Check if we're in edit mode
+        //         if (isset($_POST['edit_mode']) && $_POST['edit_mode'] == '1' && isset($_POST['idtask'])) {
+                
+        //             if ($this->controllerProject->updateTask($this->getObjTaskForUpdate())) {
+        //                 header("Location: " . $_SERVER['REQUEST_URI']);
+        //                 exit();
+        //             }
+        //         } else {
+        //              echo("<script>alert('else: submit-task submit-task de la tâche: " .$_POST['idtask'] . "');</script>");
+        //             if ($this->controllerProject->createTask($this->getObjTask())) {
+        //                 header("Location: " . $_SERVER['REQUEST_URI']);
+        //                 exit();
+        //             }
+        //         }
+        //     }
+        //       $this->displayProjectTasksByProjectId($_SESSION["projectId"]);
+        // }
 
-            if (isset($_POST['idproject'])) {
-                // Check if we're in edit mode
-                if (isset($_POST['edit_mode']) && $_POST['edit_mode'] == '1' && isset($_POST['task_id'])) {
-
-                    if ($this->controllerProject->updateTask($this->getObjTaskForUpdate())) {
-                        header("Location: " . $_SERVER['REQUEST_URI']);
-                        exit();
-                    }
-                } else {
+if (($_SERVER['REQUEST_METHOD'] === 'POST') && isset($_POST['submit-task'])) {
+    
                     if ($this->controllerProject->createTask($this->getObjTask())) {
                         header("Location: " . $_SERVER['REQUEST_URI']);
                         exit();
                     }
-                }
-            }
-        }
+}
+
+if (($_SERVER['REQUEST_METHOD'] === 'POST') && isset($_POST['submit-edit-task'])) {
+    
+                    if ($this->controllerProject->updateTask($this->getObjTaskForUpdate())) {
+                        header("Location: " . $_SERVER['REQUEST_URI']);
+                        exit();
+                    }
+}
+
+
 
         if (($_SERVER['REQUEST_METHOD'] === 'POST') && isset($_POST['delete-task'])) {
 
@@ -54,7 +79,17 @@ class IndexProject
         if ($_SERVER['REQUEST_METHOD'] === 'GET' && isset($_SESSION["projectId"])) {
             $this->controllerProject->indexProject($_SESSION["projectId"]);
         }
+           if (($_SERVER['REQUEST_METHOD'] === 'POST') && isset($_POST['export-pdf'])) {
+            $project_id = $this->sanitize_input($_POST["export_project_pdf"]);
+
+            if ($this->controllerHome->controllerExportProjectToPDF($project_id)) {
+                header("Location: " . $_SERVER['REQUEST_URI']);
+                exit();
+            }
+        }
+
     }
+
 
     function getObjTask()
     {
@@ -83,7 +118,7 @@ class IndexProject
             $this->sanitize_input($_POST["priorite"]),
             $this->sanitize_input($_POST["date_echeance"]),
             null, // Keep original creation date
-            $this->sanitize_input($_POST["task_id"]) // Include task ID for update
+            $this->sanitize_input($_POST["task_id"]) // Include task ID for update (corrected field name)
         );
 
         return  $objTask;

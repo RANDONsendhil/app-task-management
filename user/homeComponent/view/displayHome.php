@@ -74,6 +74,11 @@ include(BASE_PATH . '/user/homeComponent/view/home.php');
     transition: all 0.2s ease;
   }
 
+  .action-btn:hover {
+    background: #e9ecef;
+    transform: translateY(-1px);
+  }
+
   .date-label {
     font-weight: 600;
     color: #6c757d;
@@ -650,6 +655,76 @@ include(BASE_PATH . '/user/homeComponent/view/home.php');
       window.initializeProjectFilters();
     }
   });
+
+  // Export project function - PDF only
+  function exportProject(projectId) {
+    // Generate PDF directly from the application
+ 
+    showExportNotification('Génération du PDF en cours...', 'info, Project ID');
+  }
+
+  // Show export notification
+  function showExportNotification(message, type = 'success') {
+    // Create notification element
+    const notification = document.createElement('div');
+    const bgColor = type === 'success' ? '#28a745' : type === 'info' ? '#007bff' : '#dc3545';
+    
+    notification.style.cssText = `
+      position: fixed;
+      top: 20px;
+      right: 20px;
+      background: ${bgColor};
+      color: white;
+      padding: 12px 20px;
+      border-radius: 6px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+      z-index: 10000;
+      font-weight: 500;
+      animation: slideInRight 0.3s ease;
+      max-width: 300px;
+    `;
+    notification.textContent = message;
+
+    // Add animation keyframes
+    if (!document.querySelector('#exportNotificationStyles')) {
+      const style = document.createElement('style');
+      style.id = 'exportNotificationStyles';
+      style.textContent = `
+        @keyframes slideInRight {
+          from {
+            transform: translateX(100%);
+            opacity: 0;
+          }
+          to {
+            transform: translateX(0);
+            opacity: 1;
+          }
+        }
+        @keyframes fadeOut {
+          from {
+            opacity: 1;
+          }
+          to {
+            opacity: 0;
+            transform: translateX(100%);
+          }
+        }
+      `;
+      document.head.appendChild(style);
+    }
+
+    document.body.appendChild(notification);
+
+    // Remove notification after 3 seconds
+    setTimeout(() => {
+      notification.style.animation = 'fadeOut 0.3s ease forwards';
+      setTimeout(() => {
+        if (document.body.contains(notification)) {
+          document.body.removeChild(notification);
+        }
+      }, 300);
+    }, 3000);
+  }
 </script>
   <div id="projectCreationModal" class="project-creation-modal" style="display:none;">
     <div class="project-creation-modal-content">
@@ -801,6 +876,7 @@ include(BASE_PATH . '/user/homeComponent/view/home.php');
               <th class="sortable" data-column="date_fin" onclick="sortTable('date_fin')">Date fin</th>
               <th class="sortable" data-column="date_creation" onclick="sortTable('date_creation')">Date création</th>
               <th class="sortable" data-column="status" onclick="sortTable('status')">Statut</th>
+              <th style="width: 60px;">EXPORT PDF</th>
               <th style="width: 60px;">Afficher</th>
               <th style="width: 120px;">Actions</th>
             </tr>
@@ -870,6 +946,14 @@ include(BASE_PATH . '/user/homeComponent/view/home.php');
                       <?php echo $statusText; ?>
                     </span>
                   </td>
+                  <form method="post">
+                  <td class="project-actions-cell">
+                    <input type='hidden' name='export_project_pdf' value='<?php echo htmlspecialchars($row['id']); ?>'>
+                    <button type="submit" name="export-pdf" class="action-btn export-btn" title="Exporter en PDF" onclick="event.stopPropagation(); exportProject(<?php echo $row['id']; ?>)" style="display:flex;justify-content:center;align-items:center;">
+                      📄
+                    </button>
+                    </form>
+                  </td>
 
                   <td class="project-actions-cell">
                     <form action='/home/selectProject/project' method='POST' style="display:flex;justify-content:center;align-items:center;">
@@ -896,7 +980,7 @@ include(BASE_PATH . '/user/homeComponent/view/home.php');
               <?php endforeach; ?>
             <?php else: ?>
               <tr>
-                <td colspan="8" class="no-projects-row">
+                <td colspan="10" class="no-projects-row">
                   Aucun projet trouvé.
                   <a href="#" onclick="openProjectCreationModal()">Créer votre premier projet</a>
                 </td>
@@ -929,4 +1013,4 @@ include(BASE_PATH . '/user/homeComponent/view/home.php');
     </div>
   </fieldset>
 </div>
-<!-- Project Creation Modal -->
+ 

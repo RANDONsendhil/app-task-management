@@ -36,6 +36,15 @@ class IndexHome
             }
         }
 
+        if (($_SERVER['REQUEST_METHOD'] === 'POST') && isset($_POST['export-pdf'])) {
+            $project_id = $this->sanitize_input($_POST["export_project_pdf"]);
+
+            if ($this->controllerHome->controllerExportProjectToPDF($project_id)) {
+                header("Location: " . $_SERVER['REQUEST_URI']);
+                exit();
+            }
+        }
+
         if (($_SERVER['REQUEST_METHOD'] === 'POST') && isset($_POST['delete-project'])) {
             $delete_project_id = $this->sanitize_input($_POST["delete-project"]);
 
@@ -44,6 +53,21 @@ class IndexHome
                 exit();
             }
         }
+
+        // Handle PDF export request
+        // if (($_SERVER['REQUEST_METHOD'] === 'GET') && isset($_GET['export_pdf']) && isset($_GET['project_id'])) {
+        //     $project_id = intval($_GET["export-project-name"]);
+             
+        //     if ($project_id > 0) {
+        //         if ($this->controllerHome->controllerExportProjectToPDF($project_id)) {
+        //             exit(); // PDF output is sent directly
+        //         } else {
+        //             // Redirect back with error
+        //             header("Location: " . $_SERVER['REQUEST_URI'] . "?error=pdf_export_failed");
+        //             exit();
+        //         }
+        //     }
+        // }
 
         $this->displayProjects();
     }

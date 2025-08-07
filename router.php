@@ -13,8 +13,6 @@ $routes = [
 
 
 
-
-
   '/userCreation' =>  BASE_PATH . '/userCreationComponent/public/index.php',
   '/login/submit-login'  =>   BASE_PATH . '/loginComponent/public/index.php',
   '/home' =>  BASE_PATH . '/user/homeComponent/public/index.php',

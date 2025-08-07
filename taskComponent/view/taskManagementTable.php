@@ -455,8 +455,8 @@
 <div class="taskPanel-board">
   <div class="board-header">
     <h1 class="board-title">
-      <div class="board-icon">P</div>
-      <?php echo htmlspecialchars($resultProjectById["nom"]); ?>
+      <div class="board-icon">T</div>
+      TASK - <?php echo htmlspecialchars($resultProjectById["nom"]); ?>
     </h1>
     <div class="board-actions">
       <button class="monday-btn monday-btn-primary" onclick="openTaskModal()">
@@ -465,6 +465,12 @@
       <button class="monday-btn monday-btn-secondary" onclick="openProjectModal()">
         Détails projet
       </button>
+    <form method="post">
+       <input type='hidden' name='export_project_pdf' value='<?php echo htmlspecialchars($resultProjectById['id']); ?>'>
+                    <button type="submit" name="export-pdf"  class="monday-btn monday-btn-secondary" title="Exporter en PDF" onclick="exportProjectToPDF(<?php echo $resultProjectById['id']; ?>)">
+          📄 Export PDF
+        </button>
+      </form>
     </div>
   </div>
 
@@ -511,7 +517,7 @@
       <button id="clearFilters" class="filter-clear-btn">Effacer les filtres</button>
     </div>
   </div>
-
+ 
   <!-- Task Management Table -->
   <table class="board-table">
     <thead>
@@ -529,6 +535,8 @@
     </thead>
     <tbody>
       <!-- Tasks Rows -->
+
+ 
       <?php if (isset($projectTasks) && !empty($projectTasks)): ?>
         <?php foreach ($projectTasks as $task): ?>
           <tr class="task-row" onclick="editTask(<?php echo $task['id']; ?>)"
@@ -622,7 +630,7 @@
                   ✏️
                 </button>
                 <form method="post">
-                  <input type='hidden' name='idTask' value='<?= $task['id'] ?>'>
+                  <input type='hidden' name='idTask' value="<?php echo $task['id']; ?>">
                   <button class="action-btn" type="submit" name="delete-task" value="<?php echo $task['id']; ?>"
                     onclick="event.stopPropagation();"
                     title="Supprimer">
@@ -658,6 +666,7 @@
       </tr>
     </tbody>
   </table>
+    <?php include 'taskCreationModal.php'; ?>
 </div>
 
 <script>
@@ -853,4 +862,72 @@ document.addEventListener('DOMContentLoaded', function() {
     }, 100);
   }
 });
+
+// Export project to PDF function
+function exportProjectToPDF(projectId) {
+  // Show notification
+  showExportNotification('Génération du PDF en cours...', 'info');
+}
+// Show export notification
+function showExportNotification(message, type = 'success') {
+  // Create notification element
+  const notification = document.createElement('div');
+  const bgColor = type === 'success' ? '#00c875' : type === 'info' ? '#0085ff' : '#e2445c';
+  
+  notification.style.cssText = `
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    background: ${bgColor};
+    color: white;
+    padding: 12px 20px;
+    border-radius: 6px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+    z-index: 10000;
+    font-weight: 500;
+    animation: slideInRight 0.3s ease;
+    max-width: 300px;
+  `;
+  notification.textContent = message;
+
+  // Add animation keyframes
+  if (!document.querySelector('#exportNotificationStyles')) {
+    const style = document.createElement('style');
+    style.id = 'exportNotificationStyles';
+    style.textContent = `
+      @keyframes slideInRight {
+        from {
+          transform: translateX(100%);
+          opacity: 0;
+        }
+        to {
+          transform: translateX(0);
+          opacity: 1;
+        }
+      }
+      @keyframes fadeOut {
+        from {
+          opacity: 1;
+        }
+        to {
+          opacity: 0;
+          transform: translateX(100%);
+        }
+      }
+    `;
+    document.head.appendChild(style);
+  }
+
+  document.body.appendChild(notification);
+
+  // Remove notification after 3 seconds
+  setTimeout(() => {
+    notification.style.animation = 'fadeOut 0.3s ease forwards';
+    setTimeout(() => {
+      if (document.body.contains(notification)) {
+        document.body.removeChild(notification);
+      }
+    }, 300);
+  }, 3000);
+}
 </script>
