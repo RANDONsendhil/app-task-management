@@ -26,7 +26,7 @@
     color: #333;
   }
 
-  .btn {
+  /* .btn {
     background-color: #dc3545;
     color: white;
     padding: 10px 20px;
@@ -34,7 +34,7 @@
     border: none;
     border-radius: 5px;
     cursor: pointer;
-  }
+  } */
 
   .btn:hover {
     background-color: #c82333;
@@ -60,7 +60,7 @@ unset($_SESSION['messageDeleteAppointmentAdmin']);
 <div class="content">
   <fieldset>
     <legend>
-      <h5>Profil ADMIN</h5>
+      <h5> LES RENDEZ-VOUS PATIENTS</h5>
     </legend>
 
 
@@ -108,7 +108,7 @@ unset($_SESSION['messageDeleteAppointmentAdmin']);
                       <td>
                         <form method="POST">
                           <input type="hidden" name="id_appointement_delete" value="<?= htmlspecialchars($row["id_res"]) ?>">
-                          <button class="btn btn-danger btn-sm" type="submit" name='delete-appointment-patient'
+                          <button class="btn  btn-sm btn-danger" type="submit" name='delete-appointment-patient'
                             value='delete-appointment-patient'>🗑
                             Supprimer</button>
                         </form>

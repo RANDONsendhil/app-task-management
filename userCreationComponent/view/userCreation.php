@@ -25,9 +25,6 @@
               <label class="form-check-label g-col-md-" for=" monsieur">Monsieur</label>
             </div>
           </div>
-          <div class="col-12">
-            <label for="inputAddress">Numéro de Sécurité Sociale</label>
-            <input type="text" class="form-control" id="numSS" name="numSS" placeholder="" required>
           </div>
           <div class="col-md-6">
             <label for="lname">Nom*</label>
@@ -58,15 +55,6 @@
           <div class="col-12">
             <label for="inputAddress">Address</label>
             <input type="text" class="form-control" id="inputAddress" name="inputAddress">
-          </div>
-          <div class="col-md-6">
-            <label for="inputCity">Commune</label>
-            <input type="text" class="form-control" id="inputCity" name="inputCity">
-          </div>
-
-          <div class="col-md-6">
-            <label for="inputZip">Code Postal</label>
-            <input type="text" class="form-control" id="inputZip" name="inputZip">
           </div>
 
           <div class="d-grid gap-2 mt-4 d-flex justify-content-end">

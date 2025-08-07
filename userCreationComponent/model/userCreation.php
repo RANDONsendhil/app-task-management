@@ -123,7 +123,7 @@ class UserCreationModel
     public function verifyLogin($email, $password)
     {
         $connect_db = $this->db->connect();
-        $sql = "SELECT * FROM users WHERE inputEmail = ? AND inputPassword = ?";
+        $sql = "SELECT * FROM users WHERE email = ? AND mot_de_passe = ?";
         $stmt = $connect_db->prepare($sql);
         $stmt->bind_param("ss", $email, $password);
         $stmt->execute();

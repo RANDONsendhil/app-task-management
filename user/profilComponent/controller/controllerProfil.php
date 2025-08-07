@@ -10,31 +10,22 @@ class Controllerprofil
 {
     private $profilModel;
     private $db;
-    private $userCreationModel;
 
     public function __construct()
     {
         $this->db = new DatabaseConnection();
         $this->profilModel = new Profil($this->db);
-        $this->userCreationModel = new UserCreationModel($this->db);
+   
     }
 
-    public function index($numSS)
+    public function getProfils()
     {
-        $this->displayProfilUser($numSS);
-    }
-
-    public function displayListUser()
-    {
-        $myUserData = $this->profilModel->displayUserList();
+        $dataUserGest = $this->profilModel->displayProfils();
+        // echo "<script>alert('Profils loaded successfully: " . json_encode($dataUserGest) . "');</script>";
         require(BASE_PATH . '/user/profilComponent/view/profil.php');
     }
 
-    public function displayProfilUser($numSS)
-    {
-        $dataByNumss = $this->profilModel->displayUserbyNumSS($numSS);
-        require(BASE_PATH . '/user/profilComponent/view/profil.php');
-    }
+ 
 
     public function displayProfilEditableFormPublic()
     {
@@ -42,10 +33,21 @@ class Controllerprofil
         require(BASE_PATH . '/user/profilComponent/view/updateProfil.php');
     }
 
-    public function saveProfilController($objUser)
+    public function controllerDeleteUser($id)
+    {
+        return $this->profilModel->delete_user($id);
+    }
+
+    public function controllerAddUser($objUser)
     {
 
-        $this->userCreationModel->update_user($objUser);
+        return $this->profilModel->insert_user($objUser);
+    }
+
+    public function controllerUpdateUser($id,$objUser)
+    {
+
+        $this->profilModel->update_user($id,$objUser);
     }
 
     public function findDoctor()

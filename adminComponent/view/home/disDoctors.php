@@ -1,7 +1,7 @@
  <style>
-   .modal-dialog {
-     color: rgb(7, 45, 112);
-   }
+.modal-dialog {
+  color: rgb(7, 45, 112);
+}
  </style>
  <?php
   include(BASE_PATH . '/adminComponent/view/home/ad_home.php');
@@ -15,7 +15,7 @@
  <div class="content">
    <fieldset>
      <legend>
-       <h5>Liste des Docteurs</h5>
+       <h5>LES MÉDECIN DU CABINET</h5>
      </legend>
 
      <div class="content-container">
@@ -23,21 +23,21 @@
          <div class="container-card">
            <div class="card">
              <?php foreach ($listDoctorsAdmin as $row): ?>
-               <div class="card-body">
-                 <?php ?>
+             <div class="card-body">
+               <?php ?>
 
-                 <h4>
-                   <div class="card-title"><?php echo ($row["full_name"]); ?></div>
-                 </h4>
+               <h4>
+                 <div class="card-title"><?php echo ($row["full_name"]); ?></div>
+               </h4>
 
-                 <div style="color: #af0a0a; font-variant-caps: small-caps;" class="card-title">
-                   <?php echo ($row["specialization"]); ?></div>
+               <div style="color: #af0a0a; font-variant-caps: small-caps;" class="card-title">
+                 <?php echo ($row["specialization"]); ?></div>
 
-                 <p class="card-text"><?php echo ($row["phone"]); ?></p>
-                 <p class="card-text"><?php echo ($row["email"]); ?></p>
+               <p class="card-text"><?php echo ($row["phone"]); ?></p>
+               <p class="card-text"><?php echo ($row["email"]); ?></p>
 
 
-               </div>
+             </div>
              <?php endforeach; ?>
            </div>
          </div>
