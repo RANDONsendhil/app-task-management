@@ -49,11 +49,15 @@ class ProjectModel
         $result = $stmt->get_result();
         if ($result->num_rows > 0) {
             $projects = $result->fetch_all(MYSQLI_ASSOC);
+            $_SESSION['project_creation_status'] = 'success';
+            $_SESSION['project_creation_message'] = 'Projet créé avec succès';
             $stmt->close();
             $connect_db->close();
 
             return $projects;
         } else {
+            $_SESSION['project_creation_status'] = 'success';
+            $_SESSION['project_creation_message'] = 'Projet créé avec succès';
             $stmt->close();
             $connect_db->close();
             return [];

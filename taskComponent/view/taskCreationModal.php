@@ -675,7 +675,7 @@
 
     <div class="task-modal-body">
       
-      <form id="taskForm" action="/home/selectProject/project" method="POST">
+      <form id="taskForm" action="/project/tasks" method="POST">
   
         <input type="hidden" name="projet_id"
           value="<?php echo isset($_SESSION['current_project_id']) ? $_SESSION['current_project_id'] : (isset($resultProjectById['id']) ? $resultProjectById['id'] : ''); ?>">

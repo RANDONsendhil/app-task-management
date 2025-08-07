@@ -131,7 +131,7 @@ class TaskModel
             ];
             $_SESSION['task_creation_status'] = 'success';
             $_SESSION['task_creation_message'] = 'Tâche créée avec succès';
-            
+
             $stmt->close();
             $connect_db->close();
             return true;
@@ -246,8 +246,7 @@ class TaskModel
      
 
     public function delete_task_by_id($id)
-    {  echo("<script>alert('DELETE: submit-task submit-task de la tâche: " . $id . "');</script>");
-        echo("<script>alert('DELETE: submit-task submit-task de la tâche: " . $id . "');</script>");
+    {   
         $connect_db = $this->db->connect();
         if ($connect_db->connect_error) {
             die("Connection failed: " . $connect_db->connect_error);
@@ -257,10 +256,15 @@ class TaskModel
         $stmt->bind_param("i", $id); // "i" means integer
 
         if ($stmt->execute()) {
+            $_SESSION['task_deletion_status'] = 'success';
+            $_SESSION['task_deletion_message'] = 'Tâche supprimée avec succès';
             $stmt->close();
             $connect_db->close();
             return true; // Task deleted successfully
         } else {
+            $error_msg = "suppression échouée: " . $stmt->error;
+            $_SESSION['task_deletion_status'] = 'error';
+            $_SESSION['task_deletion_message'] = $error_msg;
             $stmt->close();
             $connect_db->close();
             return false; // Failed to delete task

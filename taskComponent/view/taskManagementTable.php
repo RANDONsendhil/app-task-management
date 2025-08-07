@@ -48,32 +48,186 @@
   }
 
   .monday-btn {
-    padding: 8px 16px;
+    padding: 10px 20px;
     border: none;
-    border-radius: 4px;
-    font-weight: 500;
+    border-radius: 8px;
+    font-weight: 600;
     cursor: pointer;
-    transition: all 0.2s ease;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
     font-size: 14px;
+    position: relative;
+    overflow: hidden;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    min-height: 38px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  }
+
+  .monday-btn::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+    transition: left 0.6s ease;
+  }
+
+  .monday-btn:hover::before {
+    left: 100%;
   }
 
   .monday-btn-primary {
-    background: #0085ff;
+    background: linear-gradient(135deg, #0085ff, #0066cc);
     color: white;
+    box-shadow: 0 4px 15px rgba(0, 133, 255, 0.3);
   }
 
   .monday-btn-primary:hover {
-    background: #0073e6;
+    background: linear-gradient(135deg, #0073e6, #0052a3);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(0, 133, 255, 0.4);
+  }
+
+  .monday-btn-primary:active {
+    transform: translateY(0);
+    box-shadow: 0 2px 8px rgba(0, 133, 255, 0.3);
   }
 
   .monday-btn-secondary {
-    background: #f5f6fa;
-    color: #676879;
-    border: 1px solid #e6e9ef;
+    background: linear-gradient(135deg, #f8f9fd, #e6e9ef);
+    color: #323338;
+    border: 2px solid #e6e9ef;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
   }
 
   .monday-btn-secondary:hover {
-    background: #ecedf5;
+    background: linear-gradient(135deg, #e6e9ef, #d0d4da);
+    border-color: #d0d4da;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1);
+    color: #1a1a1a;
+  }
+
+  .monday-btn-secondary:active {
+    transform: translateY(0);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+  }
+
+  /* Action buttons improvements */
+  .action-btn {
+    width: 32px;
+    height: 32px;
+    border: none;
+    border-radius: 8px;
+    background: linear-gradient(135deg, #f8f9fd, #e6e9ef);
+    color: #676879;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    font-size: 14px;
+    position: relative;
+    overflow: hidden;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+  }
+
+  .action-btn::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+    transition: left 0.5s ease;
+  }
+
+  .action-btn:hover::before {
+    left: 100%;
+  }
+
+  .action-btn:hover {
+    background: linear-gradient(135deg, #e6e9ef, #d0d4da);
+    color: #323338;
+    transform: translateY(-2px) scale(1.05);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  }
+
+  .action-btn:active {
+    transform: translateY(0) scale(0.95);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  }
+
+  /* Specific action button styles */
+  .action-btn[title="Modifier"]:hover {
+    background: linear-gradient(135deg, #4CAF50, #45a049);
+    color: white;
+    box-shadow: 0 4px 12px rgba(76, 175, 80, 0.3);
+  }
+
+  .action-btn[title="Supprimer"]:hover {
+    background: linear-gradient(135deg, #f44336, #d32f2f);
+    color: white;
+    box-shadow: 0 4px 12px rgba(244, 67, 54, 0.3);
+  }
+
+  /* Export button improvements */
+  .export-btn:hover {
+    background: linear-gradient(135deg, #FF9800, #F57C00);
+    color: white;
+    box-shadow: 0 4px 12px rgba(255, 152, 0, 0.3);
+  }
+
+  /* Filter button improvements */
+  .filter-clear-btn {
+    padding: 8px 16px;
+    border: 2px solid #e6e9ef;
+    border-radius: 8px;
+    background: linear-gradient(135deg, #f8f9fd, #e6e9ef);
+    color: #323338;
+    font-size: 14px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    position: relative;
+    overflow: hidden;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+  }
+
+  .filter-clear-btn::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+    transition: left 0.5s ease;
+  }
+
+  .filter-clear-btn:hover::before {
+    left: 100%;
+  }
+
+  .filter-clear-btn:hover {
+    background: linear-gradient(135deg, #e6e9ef, #d0d4da);
+    border-color: #d0d4da;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    color: #1a1a1a;
+  }
+
+  .filter-clear-btn:active {
+    transform: translateY(0);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
   }
 
   .board-table {
@@ -288,26 +442,7 @@
 
   .actions-cell {
     display: flex;
-    gap: 4px;
-  }
-
-  .action-btn {
-    width: 28px;
-    height: 28px;
-    border: none;
-    border-radius: 4px;
-    background: #f5f6fa;
-    color: #676879;
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    transition: all 0.2s ease;
-  }
-
-  .action-btn:hover {
-    background: #e6e9ef;
-    color: #323338;
+    gap: 6px;
   }
 
   .description-preview {
@@ -422,22 +557,6 @@
     outline: none;
     border-color: #0085ff;
     box-shadow: 0 0 0 2px rgba(0, 133, 255, 0.1);
-  }
-
-  .filter-clear-btn {
-    padding: 6px 16px;
-    border: 1px solid #e6e9ef;
-    border-radius: 4px;
-    background: #f5f6fa;
-    color: #676879;
-    font-size: 14px;
-    cursor: pointer;
-    transition: all 0.2s ease;
-  }
-
-  .filter-clear-btn:hover {
-    background: #ecedf5;
-    border-color: #d0d4da;
   }
 
   .task-row.hidden {
@@ -823,6 +942,50 @@ function updateTaskFilterStats(visibleCount, totalCount) {
 
 // Initialize task filters
 document.addEventListener('DOMContentLoaded', function() {
+  // Check for task notifications from session
+  <?php if (isset($_SESSION['task_creation_status']) && $_SESSION['task_creation_status'] === 'success'): ?>
+    showNotification('<?php echo addslashes($_SESSION['task_creation_message']); ?>', 'success');
+    <?php unset($_SESSION['task_creation_status'], $_SESSION['task_creation_message']); ?>
+  <?php endif; ?>
+  
+  <?php if (isset($_SESSION['task_update_status']) && $_SESSION['task_update_status'] === 'success'): ?>
+    showNotification('<?php echo addslashes($_SESSION['task_update_message']); ?>', 'success');
+    <?php unset($_SESSION['task_update_status'], $_SESSION['task_update_message']); ?>
+  <?php endif; ?>
+  
+  <?php if (isset($_SESSION['task_creation_status']) && $_SESSION['task_creation_status'] === 'error'): ?>
+    showNotification('<?php echo addslashes($_SESSION['task_creation_message']); ?>', 'error');
+    <?php unset($_SESSION['task_creation_status'], $_SESSION['task_creation_message']); ?>
+  <?php endif; ?>
+  
+  <?php if (isset($_SESSION['task_update_status']) && $_SESSION['task_update_status'] === 'error'): ?>
+    showNotification('<?php echo addslashes($_SESSION['task_update_message']); ?>', 'error');
+    <?php unset($_SESSION['task_update_status'], $_SESSION['task_update_message']); ?>
+  <?php endif; ?>
+
+  <?php if (isset($_SESSION['task_deletion_status']) && $_SESSION['task_deletion_status'] === 'success'): ?>
+    showNotification('<?php echo addslashes($_SESSION['task_deletion_message']); ?>', 'success');
+    <?php unset($_SESSION['task_deletion_status'], $_SESSION['task_deletion_message']); ?>
+  <?php endif; ?>
+
+
+    <?php if (isset($_SESSION['project_creation_status']) && $_SESSION['project_creation_status'] === 'success'): ?>
+      showNotification('<?php echo addslashes($_SESSION['project_creation_message']); ?>', 'success');
+      <?php unset($_SESSION['project_creation_status'], $_SESSION['project_creation_message']); ?>
+    <?php endif; ?>
+
+    <?php if (isset($_SESSION['project_deletion_status']) && $_SESSION['project_deletion_status'] === 'success'): ?>
+      showNotification('<?php echo addslashes($_SESSION['project_deletion_message']); ?>', 'success');
+      <?php unset($_SESSION['project_deletion_status'], $_SESSION['project_deletion_message']); ?>
+    <?php endif; ?>
+
+    <?php if (isset($_SESSION['project_edit_status']) && $_SESSION['project_edit_status'] === 'success'): ?>
+      showNotification('<?php echo addslashes($_SESSION['project_edit_message']); ?>', 'success');
+      <?php unset($_SESSION['project_edit_status'], $_SESSION['project_edit_message']); ?>
+    <?php endif; ?>
+
+
+
   const statusFilter = document.getElementById('statusFilter');
   const priorityFilter = document.getElementById('priorityFilter');
   const assigneeFilter = document.getElementById('assigneeFilter');
@@ -866,10 +1029,10 @@ document.addEventListener('DOMContentLoaded', function() {
 // Export project to PDF function
 function exportProjectToPDF(projectId) {
   // Show notification
-  showExportNotification('Génération du PDF en cours...', 'info');
+  showNotification('Génération du PDF en cours...', 'info');
 }
 // Show export notification
-function showExportNotification(message, type = 'success') {
+function showNotification(message, type = 'success') {
   // Create notification element
   const notification = document.createElement('div');
   const bgColor = type === 'success' ? '#00c875' : type === 'info' ? '#0085ff' : '#e2445c';

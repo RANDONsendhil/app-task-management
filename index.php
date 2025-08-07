@@ -41,8 +41,6 @@ header('Content-Type: text/html; charset=utf-8');
   ?>
   </div>
 
-  <script src="/user/homeComponent/view/js/script.js"></script>
-  <script src="/js/common/script.js"></script>
   <script src="/js/common/script.js"></script>
 
 </body>

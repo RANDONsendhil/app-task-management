@@ -133,6 +133,108 @@ include(BASE_PATH . '/user/homeComponent/view/home.php');
     font-weight: 600;
   }
 
+  /* Enhanced Title with Logo Styles */
+  .title-container {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    padding: 5px 0;
+  }
+
+  .title-logo {
+    background: linear-gradient(135deg, #007bff, #0056b3);
+    color: white;
+    width: 45px;
+    height: 45px;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 20px;
+    box-shadow: 0 4px 15px rgba(0, 123, 255, 0.3);
+    position: relative;
+    overflow: hidden;
+    transition: all 0.3s ease;
+  }
+
+  .title-logo::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: linear-gradient(45deg, transparent, rgba(255,255,255,0.2), transparent);
+    transform: rotate(45deg);
+    transition: all 0.6s ease;
+    opacity: 0;
+  }
+
+  .title-logo:hover {
+    transform: translateY(-2px) scale(1.05);
+    box-shadow: 0 6px 20px rgba(0, 123, 255, 0.4);
+  }
+
+  .title-logo:hover::before {
+    opacity: 1;
+    left: 100%;
+    top: 100%;
+  }
+
+  .title-container h3 {
+    margin: 0;
+    color: #2c3e50;
+    font-weight: 700;
+    font-size: 1.8rem;
+    text-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    background: linear-gradient(135deg, #2c3e50, #3498db);
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-size: 200% 200%;
+    animation: gradientShift 4s ease-in-out infinite;
+    position: relative;
+  }
+
+  .title-container h3::after {
+    content: '';
+    position: absolute;
+    bottom: -5px;
+    left: 0;
+    width: 0;
+    height: 3px;
+    background: linear-gradient(90deg, #007bff, #28a745);
+    border-radius: 2px;
+    transition: width 0.8s ease;
+  }
+
+  .title-container:hover h3::after {
+    width: 100%;
+  }
+
+  @keyframes gradientShift {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+  }
+
+  /* Responsive design for title */
+  @media (max-width: 768px) {
+    .title-container {
+      gap: 10px;
+    }
+    
+    .title-logo {
+      width: 35px;
+      height: 35px;
+      font-size: 16px;
+    }
+    
+    .title-container h3 {
+      font-size: 1.4rem;
+    }
+  }
+
   .dashboard-actions {
     display: flex;
     gap: 10px;
@@ -654,17 +756,32 @@ include(BASE_PATH . '/user/homeComponent/view/home.php');
     if (window.initializeProjectFilters) {
       window.initializeProjectFilters();
     }
-  });
+  }); 
+    <?php if (isset($_SESSION['project_creation_status']) && $_SESSION['project_creation_status'] === 'success'): ?>
+      showNotification('<?php echo addslashes($_SESSION['project_creation_message']); ?>', 'success');
+      <?php unset($_SESSION['project_creation_status'], $_SESSION['project_creation_message']); ?>
+    <?php endif; ?>
 
+    <?php if (isset($_SESSION['project_deletion_status']) && $_SESSION['project_deletion_status'] === 'success'): ?>
+      showNotification('<?php echo addslashes($_SESSION['project_deletion_message']); ?>', 'success');
+      <?php unset($_SESSION['project_deletion_status'], $_SESSION['project_deletion_message']); ?>
+    <?php endif; ?>
+
+    <?php if (isset($_SESSION['project_edit_status']) && $_SESSION['project_edit_status'] === 'success'): ?>
+      showNotification('<?php echo addslashes($_SESSION['project_edit_message']); ?>', 'success');
+      <?php unset($_SESSION['project_edit_status'], $_SESSION['project_edit_message']); ?>
+    <?php endif; ?>
+
+ 
   // Export project function - PDF only
   function exportProject(projectId) {
     // Generate PDF directly from the application
  
-    showExportNotification('Génération du PDF en cours...', 'info, Project ID');
+    showNotification('Génération du PDF en cours...', 'info, Project ID');
   }
 
   // Show export notification
-  function showExportNotification(message, type = 'success') {
+  function showNotification(message, type = 'success') {
     // Create notification element
     const notification = document.createElement('div');
     const bgColor = type === 'success' ? '#28a745' : type === 'info' ? '#007bff' : '#dc3545';
@@ -815,13 +932,18 @@ include(BASE_PATH . '/user/homeComponent/view/home.php');
   </div>
   <fieldset>
     <legend>
-      <h5>Tableau de bord</h5>
+      <h3>Tableau de bord</h3>
     </legend>
     <div class="content-container">
       <div class="projects-table-container">
         <div class="dashboard-header">
           <div class="dashboard-title">
-            <h3>Gestion des projets</h3>
+            <div class="title-container">
+              <div class="title-logo">
+                📋
+              </div>
+              <h3>Gestion des projets</h3>
+            </div>
           </div>
           <div class="dashboard-actions">
             <button class="btn btn-success" onclick="openProjectCreationModal()">
@@ -956,7 +1078,7 @@ include(BASE_PATH . '/user/homeComponent/view/home.php');
                   </td>
 
                   <td class="project-actions-cell">
-                    <form action='/home/selectProject/project' method='POST' style="display:flex;justify-content:center;align-items:center;">
+                    <form action='/project/tasks' method='POST' style="display:flex;justify-content:center;align-items:center;">
                       <input type='hidden' name='select-project' value="<?php echo htmlspecialchars($row['id']); ?>">
                       <button type='submit' class='action-btn' title="Afficher" onclick="event.stopPropagation();" style="display:flex;justify-content:center;align-items:center;">
                         <img src="/images/eye.svg" alt="Afficher" style="width:20px;height:20px;display:block;margin:auto;">

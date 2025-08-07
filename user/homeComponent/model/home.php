@@ -42,8 +42,12 @@ class Home
     );
 
     if ($stmt->execute()) {
+      $_SESSION['project_creation_status'] = 'success';
+      $_SESSION['project_creation_message'] = 'Projet créé avec succès';
       return true;
     } else {
+      $_SESSION['project_creation_status'] = 'error';
+      $_SESSION['project_creation_message'] = 'Erreur lors de la création du projet';
       return false;
     }
   } 
@@ -55,8 +59,12 @@ class Home
     $stmt->bind_param("i", $id);
 
     if ($stmt->execute()) {
+        $_SESSION['project_deletion_status'] = 'success';
+        $_SESSION['project_deletion_message'] = 'Projet supprimé avec succès';
       return true;
     } else {
+        $_SESSION['project_deletion_status'] = 'error';
+        $_SESSION['project_deletion_message'] = 'Erreur lors de la suppression du projet';
       return false;
     }
   }
@@ -87,8 +95,12 @@ class Home
     $stmt->bind_param("ssssi", $nom, $description, $dateDebut, $dateFin, $id);
 
     if ($stmt->execute()) {
+        $_SESSION['project_edit_status'] = 'success';
+        $_SESSION['project_edit_message'] = 'Projet modifié avec succès';
       return true;
     } else {
+      $_SESSION['project_edit_status'] = 'error';
+        $_SESSION['project_edit_message'] = 'Erreur lors de la modification du projet';
       return false;
     }
   } 

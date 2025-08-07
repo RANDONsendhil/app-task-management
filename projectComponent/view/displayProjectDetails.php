@@ -948,6 +948,4 @@ include(BASE_PATH . '/user/homeComponent/view/home.php');
       document.getElementById('date_echeance').value = '';
     }
   }
-
-  
 </script>

@@ -70,7 +70,7 @@ hr {
       </div>
       <div class="nav-custom-sidebar">
         <ul class="nav flex-column submenu">
-          <li><a class="nav-link" href="/home" id="home"><span> <img style="height: 39px;" src="/images/graph.png"
+          <li><a class="nav-link" href="/project" id="home"><span> <img style="height: 39px;" src="/images/graph.png"
                   alt="" srcset=""></span>
               <span>Tableau de bord</span></a></li>
         </ul>

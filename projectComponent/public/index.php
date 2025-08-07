@@ -3,7 +3,7 @@ session_start();
 require_once(BASE_PATH . '/config/utils.php');
 require_once(BASE_PATH . '/projectComponent/controller/controllerProject.php');
 require_once(BASE_PATH . '/user/homeComponent/controller/controllerHome.php');
- 
+
 require_once(BASE_PATH . '/taskComponent/model/task.php');
 require_once(BASE_PATH . '/taskComponent/model/taskObj.php');
 $currentDir = dirname($_SERVER['PHP_SELF']);
@@ -24,45 +24,24 @@ class IndexProject
             $_SESSION["projectId"]  = isset($_POST['select-project']) ? intval($_POST['select-project']) : 0;
 
             $this->controllerProject->indexProject($_SESSION["projectId"]);
-          
         }
 
-        // if (($_SERVER['REQUEST_METHOD'] === 'POST') && isset($_POST['submit-task'])) {
-           
-        //     if (isset($_POST['idproject'])) {
-        //         // Check if we're in edit mode
-        //         if (isset($_POST['edit_mode']) && $_POST['edit_mode'] == '1' && isset($_POST['idtask'])) {
-                
-        //             if ($this->controllerProject->updateTask($this->getObjTaskForUpdate())) {
-        //                 header("Location: " . $_SERVER['REQUEST_URI']);
-        //                 exit();
-        //             }
-        //         } else {
-        //              echo("<script>alert('else: submit-task submit-task de la tâche: " .$_POST['idtask'] . "');</script>");
-        //             if ($this->controllerProject->createTask($this->getObjTask())) {
-        //                 header("Location: " . $_SERVER['REQUEST_URI']);
-        //                 exit();
-        //             }
-        //         }
-        //     }
-        //       $this->displayProjectTasksByProjectId($_SESSION["projectId"]);
-        // }
 
-if (($_SERVER['REQUEST_METHOD'] === 'POST') && isset($_POST['submit-task'])) {
-    
-                    if ($this->controllerProject->createTask($this->getObjTask())) {
-                        header("Location: " . $_SERVER['REQUEST_URI']);
-                        exit();
-                    }
-}
+        if (($_SERVER['REQUEST_METHOD'] === 'POST') && isset($_POST['submit-task'])) {
 
-if (($_SERVER['REQUEST_METHOD'] === 'POST') && isset($_POST['submit-edit-task'])) {
-    
-                    if ($this->controllerProject->updateTask($this->getObjTaskForUpdate())) {
-                        header("Location: " . $_SERVER['REQUEST_URI']);
-                        exit();
-                    }
-}
+            if ($this->controllerProject->createTask($this->getObjTask())) {
+                header("Location: " . $_SERVER['REQUEST_URI']);
+                exit();
+            }
+        }
+
+        if (($_SERVER['REQUEST_METHOD'] === 'POST') && isset($_POST['submit-edit-task'])) {
+
+            if ($this->controllerProject->updateTask($this->getObjTaskForUpdate())) {
+                header("Location: " . $_SERVER['REQUEST_URI']);
+                exit();
+            }
+        }
 
 
 
@@ -79,7 +58,7 @@ if (($_SERVER['REQUEST_METHOD'] === 'POST') && isset($_POST['submit-edit-task'])
         if ($_SERVER['REQUEST_METHOD'] === 'GET' && isset($_SESSION["projectId"])) {
             $this->controllerProject->indexProject($_SESSION["projectId"]);
         }
-           if (($_SERVER['REQUEST_METHOD'] === 'POST') && isset($_POST['export-pdf'])) {
+        if (($_SERVER['REQUEST_METHOD'] === 'POST') && isset($_POST['export-pdf'])) {
             $project_id = $this->sanitize_input($_POST["export_project_pdf"]);
 
             if ($this->controllerHome->controllerExportProjectToPDF($project_id)) {
@@ -87,7 +66,6 @@ if (($_SERVER['REQUEST_METHOD'] === 'POST') && isset($_POST['submit-edit-task'])
                 exit();
             }
         }
-
     }
 
 
