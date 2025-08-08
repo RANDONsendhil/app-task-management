@@ -11,7 +11,7 @@ $routes = [
   '/profil' =>   BASE_PATH . '/user/profilComponent/public/index.php',
   '/project' =>  BASE_PATH . '/user/homeComponent/public/index.php',
   '/project/tasks' =>  BASE_PATH . '/projectComponent/public/index.php',
-
+  '/login/submit-login'  =>   BASE_PATH . '/loginComponent/public/index.php',
 
 
   // '/userCreation' =>  BASE_PATH . '/userCreationComponent/public/index.php',

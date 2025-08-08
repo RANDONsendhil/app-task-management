@@ -1,321 +1,327 @@
 <style>
-  .user-board {
-    background: #f6f7fb;
-    border-radius: 12px;
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
-    margin: 20px 0;
-    overflow: hidden;
-    border: 1px solid #e6e9ef;
+.user-board {
+  background: #f6f7fb;
+  border-radius: 12px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+  margin: 20px 0;
+  overflow: hidden;
+  border: 1px solid #e6e9ef;
+}
+
+.board-header {
+  background: #ffffff;
+  padding: 20px 24px;
+  border-bottom: 1px solid #e6e9ef;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.board-title {
+  font-size: 24px;
+  font-weight: 600;
+  color: #323338;
+  margin: 0;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.board-icon {
+  width: 32px;
+  height: 32px;
+  background: linear-gradient(135deg, #6161ff, #0085ff);
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  font-weight: bold;
+  font-size: 16px;
+}
+
+.board-table {
+  width: 100%;
+  border-collapse: collapse;
+  background: white;
+}
+
+.board-table thead {
+  background: #f8f9fd;
+  position: relative;
+}
+
+.board-table thead::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: linear-gradient(90deg, #0085ff, #6161ff, #0085ff);
+  background-size: 200% 100%;
+  animation: shimmer 3s ease-in-out infinite;
+}
+
+@keyframes shimmer {
+  0% {
+    background-position: -200% 0;
   }
 
-  .board-header {
-    background: #ffffff;
-    padding: 20px 24px;
-    border-bottom: 1px solid #e6e9ef;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+  100% {
+    background-position: 200% 0;
   }
+}
 
-  .board-title {
-    font-size: 24px;
-    font-weight: 600;
-    color: #323338;
-    margin: 0;
-    display: flex;
-    align-items: center;
-    gap: 12px;
-  }
+.board-table th {
+  padding: 16px 20px;
+  text-align: left;
+  font-weight: 600;
+  font-size: 14px;
+  color: #676879;
+  border-bottom: 1px solid #e6e9ef;
+  border-right: 1px solid #e6e9ef;
+  background: linear-gradient(135deg, #f8f9fd, #e6e9ef);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
 
-  .board-icon {
-    width: 32px;
-    height: 32px;
-    background: linear-gradient(135deg, #6161ff, #0085ff);
-    border-radius: 8px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: white;
-    font-weight: bold;
-    font-size: 16px;
-  }
+.board-table th:last-child {
+  border-right: none;
+}
 
-  .board-table {
-    width: 100%;
-    border-collapse: collapse;
-    background: white;
-  }
+.board-table td {
+  border-bottom: 1px solid #e6e9ef;
+  border-right: 1px solid #e6e9ef;
+  vertical-align: middle;
+  font-size: 14px;
+}
 
-  .board-table thead {
-    background: #f8f9fd;
-    position: relative;
-  }
+.board-table td:last-child {
+  border-right: none;
+}
 
-  .board-table thead::after {
-    content: '';
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    height: 2px;
-    background: linear-gradient(90deg, #0085ff, #6161ff, #0085ff);
-    background-size: 200% 100%;
-    animation: shimmer 3s ease-in-out infinite;
-  }
+.board-table tbody tr {
+  transition: all 0.3s ease;
+}
 
-  @keyframes shimmer {
-    0% { background-position: -200% 0; }
-    100% { background-position: 200% 0; }
-  }
+.board-table tbody tr:hover {
+  background: linear-gradient(135deg, #f8f9fd, #ffffff);
+  transform: translateY(-1px);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+}
 
-  .board-table th {
-    padding: 16px 20px;
-    text-align: left;
-    font-weight: 600;
-    font-size: 14px;
-    color: #676879;
-    border-bottom: 1px solid #e6e9ef;
-    border-right: 1px solid #e6e9ef;
-    background: linear-gradient(135deg, #f8f9fd, #e6e9ef);
-    text-transform: uppercase;
-    letter-spacing: 0.5px;
-  }
+.user-name-cell {
+  font-weight: 600;
+  color: #323338;
+  font-size: 16px;
+}
 
-  .board-table th:last-child {
-    border-right: none;
-  }
+.user-id-cell {
+  font-weight: 600;
+  color: #0085ff;
+  font-size: 14px;
+}
 
-  .board-table td {
-    border-bottom: 1px solid #e6e9ef;
-    border-right: 1px solid #e6e9ef;
-    vertical-align: middle;
-    font-size: 14px;
-  }
+.user-email-cell {
+  color: #676879;
+  font-size: 14px;
+}
 
-  .board-table td:last-child {
-    border-right: none;
-  }
+.user-role-cell {
+  display: inline-block;
+  padding: 4px 12px;
+  border-radius: 20px;
+  font-size: 12px;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
 
-  .board-table tbody tr {
-    transition: all 0.3s ease;
-  }
+.role-admin {
+  background: #e2445c;
+  color: white;
+}
 
-  .board-table tbody tr:hover {
-    background: linear-gradient(135deg, #f8f9fd, #ffffff);
-    transform: translateY(-1px);
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
-  }
+.role-user {
+  background: #00c875;
+  color: white;
+}
 
-  .user-name-cell {
-    font-weight: 600;
-    color: #323338;
-    font-size: 16px;
-  }
+.role-manager {
+  background: #fdab3d;
+  color: white;
+}
 
-  .user-id-cell {
-    font-weight: 600;
-    color: #0085ff;
-    font-size: 14px;
-  }
+.user-avatar {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #6161ff, #0085ff);
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 16px;
+  font-weight: 600;
+  margin-right: 12px;
+}
 
-  .user-email-cell {
-    color: #676879;
-    font-size: 14px;
-  }
+.user-info-cell {
+  display: flex;
+  align-items: center;
+}
 
-  .user-role-cell {
-    display: inline-block;
-    padding: 4px 12px;
-    border-radius: 20px;
-    font-size: 12px;
-    font-weight: 500;
-    text-transform: uppercase;
-    letter-spacing: 0.5px;
-  }
+.date-cell {
+  color: #676879;
+  font-size: 14px;
+}
 
-  .role-admin {
-    background: #e2445c;
-    color: white;
-  }
+.action-btn {
+  background: none;
+  border: none;
+  border-radius: 6px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-size: 18px;
+  padding: 8px 12px;
+}
 
-  .role-user {
-    background: #00c875;
-    color: white;
-  }
+.action-btn-primary {
+  color: #0085ff;
+}
 
-  .role-manager {
-    background: #fdab3d;
-    color: white;
-  }
+.action-btn-primary:hover {
+  color: #0073e6;
+  transform: none;
+  box-shadow: none;
+}
 
-  .user-avatar {
-    width: 40px;
-    height: 40px;
-    border-radius: 50%;
-    background: linear-gradient(135deg, #6161ff, #0085ff);
-    color: white;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 16px;
-    font-weight: 600;
-    margin-right: 12px;
-  }
+.action-btn-danger {
+  color: #e2445c;
+}
 
-  .user-info-cell {
-    display: flex;
-    align-items: center;
-  }
+.action-btn-danger:hover {
+  color: #d63447;
+  transform: none;
+  box-shadow: none;
+}
 
-  .date-cell {
-    color: #676879;
-    font-size: 14px;
-  }
+.actions-cell {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+}
 
-  .action-btn {
-    background: none;
-    border: none;
-    border-radius: 6px;
-    font-weight: 600;
-    cursor: pointer;
-    transition: all 0.3s ease;
-    font-size: 18px;
-    padding: 8px 12px;
-  }
+.profile-section {
+  margin-bottom: 30px;
+}
 
-  .action-btn-primary {
-    color: #0085ff;
-  }
+.empty-state {
+  text-align: center;
+  padding: 60px 20px;
+  color: #676879;
+}
 
-  .action-btn-primary:hover {
-    color: #0073e6;
-    transform: none;
-    box-shadow: none;
-  }
+.empty-state-icon {
+  font-size: 48px;
+  margin-bottom: 16px;
+  opacity: 0.5;
+}
 
-  .action-btn-danger {
-    color: #e2445c;
-  }
+.empty-state-title {
+  font-size: 20px;
+  font-weight: 600;
+  margin-bottom: 8px;
+  color: #323338;
+}
 
-  .action-btn-danger:hover {
-    color: #d63447;
-    transform: none;
-    box-shadow: none;
-  }
+/* Modal Styles */
+.modal-content {
+  border-radius: 12px;
+  border: none;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.15);
+}
 
-  .actions-cell {
-    display: flex;
-    gap: 8px;
-    align-items: center;
-  }
+.modal-header {
+  background: linear-gradient(135deg, #6161ff, #0085ff);
+  color: white;
+  border-radius: 12px 12px 0 0;
+  border-bottom: none;
+}
 
-  .profile-section {
-    margin-bottom: 30px;
-  }
+.modal-title {
+  font-weight: 600;
+  color: white !important;
+}
 
-  .empty-state {
-    text-align: center;
-    padding: 60px 20px;
-    color: #676879;
-  }
+.btn-close {
+  filter: brightness(0) invert(1);
+}
 
-  .empty-state-icon {
-    font-size: 48px;
-    margin-bottom: 16px;
-    opacity: 0.5;
-  }
+.form-group {
+  margin-bottom: 20px;
+}
 
-  .empty-state-title {
-    font-size: 20px;
-    font-weight: 600;
-    margin-bottom: 8px;
-    color: #323338;
-  }
+.form-label {
+  font-weight: 600;
+  color: #323338;
+  margin-bottom: 8px;
+  display: block;
+}
 
-  /* Modal Styles */
-  .modal-content {
-    border-radius: 12px;
-    border: none;
-    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.15);
-  }
+.form-control {
+  border: 2px solid #e6e9ef;
+  border-radius: 8px;
+  padding: 12px 16px;
+  font-size: 14px;
+  transition: border-color 0.3s ease;
+}
 
-  .modal-header {
-    background: linear-gradient(135deg, #6161ff, #0085ff);
-    color: white;
-    border-radius: 12px 12px 0 0;
-    border-bottom: none;
-  }
+.form-control:focus {
+  border-color: #0085ff;
+  box-shadow: 0 0 0 3px rgba(0, 133, 255, 0.1);
+  outline: none;
+}
 
-  .modal-title {
-    font-weight: 600;
-    color: white !important;
-  }
+.btn-primary {
+  background: linear-gradient(135deg, #0085ff, #6161ff);
+  border: none;
+  border-radius: 8px;
+  padding: 12px 24px;
+  font-weight: 600;
+  transition: all 0.3s ease;
+}
 
-  .btn-close {
-    filter: brightness(0) invert(1);
-  }
+.btn-primary:hover {
+  background: linear-gradient(135deg, #0073e6, #5555e6);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 133, 255, 0.3);
+}
 
-  .form-group {
-    margin-bottom: 20px;
-  }
+.btn-success {
+  background: linear-gradient(135deg, #00c875, #00a86b);
+  border: none;
+  border-radius: 8px;
+  padding: 12px 24px;
+  font-weight: 600;
+  transition: all 0.3s ease;
+}
 
-  .form-label {
-    font-weight: 600;
-    color: #323338;
-    margin-bottom: 8px;
-    display: block;
-  }
+.btn-success:hover {
+  background: linear-gradient(135deg, #00b368, #009961);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 200, 117, 0.3);
+}
 
-  .form-control {
-    border: 2px solid #e6e9ef;
-    border-radius: 8px;
-    padding: 12px 16px;
-    font-size: 14px;
-    transition: border-color 0.3s ease;
-  }
+.create-user-btn {
+  margin-bottom: 20px;
+}
 
-  .form-control:focus {
-    border-color: #0085ff;
-    box-shadow: 0 0 0 3px rgba(0, 133, 255, 0.1);
-    outline: none;
-  }
-
-  .btn-primary {
-    background: linear-gradient(135deg, #0085ff, #6161ff);
-    border: none;
-    border-radius: 8px;
-    padding: 12px 24px;
-    font-weight: 600;
-    transition: all 0.3s ease;
-  }
-
-  .btn-primary:hover {
-    background: linear-gradient(135deg, #0073e6, #5555e6);
-    transform: translateY(-2px);
-    box-shadow: 0 4px 12px rgba(0, 133, 255, 0.3);
-  }
-
-  .btn-success {
-    background: linear-gradient(135deg, #00c875, #00a86b);
-    border: none;
-    border-radius: 8px;
-    padding: 12px 24px;
-    font-weight: 600;
-    transition: all 0.3s ease;
-  }
-
-  .btn-success:hover {
-    background: linear-gradient(135deg, #00b368, #009961);
-    transform: translateY(-2px);
-    box-shadow: 0 4px 12px rgba(0, 200, 117, 0.3);
-  }
-
-  .create-user-btn {
-    margin-bottom: 20px;
-  }
-  #createUserRole{
-    height: 56px;
-  }
+#createUserRole {
+  height: 56px;
+}
 </style>
 <?php
 include(BASE_PATH . '/user/homeComponent/view/home.php');
@@ -332,14 +338,15 @@ unset($_SESSION['message']);
       <legend>
         <h5>Liste des Utilisateurs</h5>
       </legend>
-      
+
       <div class="user-board">
         <div class="board-header">
           <h1 class="board-title">
             <div class="board-icon">👤</div>
             Informations du Profil
           </h1>
-          <button type="button" class="btn btn-success create-user-btn" data-bs-toggle="modal" data-bs-target="#createUserModal">
+          <button type="button" class="btn btn-success create-user-btn" data-bs-toggle="modal"
+            data-bs-target="#createUserModal">
             ➕ Créer Utilisateur
           </button>
         </div>
@@ -348,7 +355,7 @@ unset($_SESSION['message']);
         <table class="board-table">
           <thead>
             <tr>
- 
+
               <th style="width: 80px;">ID</th>
               <th style="width: 200px;">Nom d'utilisateur</th>
               <th style="width: 250px;">Email</th>
@@ -359,8 +366,8 @@ unset($_SESSION['message']);
           </thead>
           <tbody>
             <?php if (isset($dataUserGest) && !empty($dataUserGest)): ?>
-              <?php foreach ($dataUserGest as $row): ?>
-                <?php
+            <?php foreach ($dataUserGest as $row): ?>
+            <?php
                   $_SESSION['id']  =  $row['id'];
                   $_SESSION['name']  =  $row['nom'];
                   $_SESSION['email'] = $row['email']; 
@@ -370,71 +377,69 @@ unset($_SESSION['message']);
                   // Get user initials for avatar
                   $userInitials = strtoupper(substr($row['nom'], 0, 2));
                 ?>
-                
-                <tr class="user-row" 
-                    data-user-id="<?php echo $row['id'] ?? ''; ?>"
+
+            <tr class="user-row" data-user-id="<?php echo $row['id'] ?? ''; ?>"
+              data-user-name="<?php echo htmlspecialchars($row['nom']); ?>"
+              data-user-email="<?php echo htmlspecialchars($row['email']); ?>"
+              data-user-role="<?php echo htmlspecialchars($row['role']); ?>">
+
+              <td>
+                <div class="user-id-cell">
+                  #<?php echo $row['id'] ?? 'N/A'; ?>
+                </div>
+              </td>
+              <td>
+                <div class="user-name-cell">
+                  <?php echo htmlspecialchars($row['nom']); ?>
+                </div>
+              </td>
+              <td>
+                <div class="user-email-cell">
+                  <?php echo htmlspecialchars($row['email']); ?>
+                </div>
+              </td>
+
+              <td>
+                <span class="user-role-cell role-<?php echo strtolower($row['role']); ?>">
+                  <?php echo htmlspecialchars(ucfirst($row['role'])); ?>
+                </span>
+              </td>
+              <td>
+                <div class="date-cell">
+                  <?php echo htmlspecialchars(date('d/m/Y H:i', strtotime($row['date_creation']))); ?>
+                </div>
+              </td>
+              <td>
+                <div class="actions-cell">
+                  <button type="button" class="action-btn action-btn-primary" data-bs-toggle="modal"
+                    data-bs-target="#updateUserModal" data-user-id="<?php echo $row['id']; ?>"
                     data-user-name="<?php echo htmlspecialchars($row['nom']); ?>"
                     data-user-email="<?php echo htmlspecialchars($row['email']); ?>"
-                    data-user-role="<?php echo htmlspecialchars($row['role']); ?>">
-                  
-                  <td>
-                    <div class="user-id-cell">
-                      #<?php echo $row['id'] ?? 'N/A'; ?>
-                    </div>
-                  </td>
-                  <td>
-                    <div class="user-name-cell"> 
-                      <?php echo htmlspecialchars($row['nom']); ?>
-                    </div>
-                  </td>
-                  <td>
-                    <div class="user-email-cell">
-                      <?php echo htmlspecialchars($row['email']); ?>
-                    </div>
-                  </td>
-                  
-                  <td>
-                    <span class="user-role-cell role-<?php echo strtolower($row['role']); ?>">
-                      <?php echo htmlspecialchars(ucfirst($row['role'])); ?>
-                    </span>
-                  </td>
-                  <td>
-                    <div class="date-cell">
-                      <?php echo htmlspecialchars(date('d/m/Y H:i', strtotime($row['date_creation']))); ?>
-                    </div>
-                  </td>
-                  <td>
-                    <div class="actions-cell">
-                      <button type="button" class="action-btn action-btn-primary" 
-                              data-bs-toggle="modal" 
-                              data-bs-target="#updateUserModal"
-                              data-user-id="<?php echo $row['id']; ?>"
-                              data-user-name="<?php echo htmlspecialchars($row['nom']); ?>"
-                              data-user-email="<?php echo htmlspecialchars($row['email']); ?>"
-                              data-user-role="<?php echo htmlspecialchars($row['role']); ?>"
-                              title="Modifier l'utilisateur">
-                        ✏️
-                      </button>
-                      <form method="post"  style="display: inline;" onsubmit="return confirm('Êtes-vous sûr de vouloir supprimer cet utilisateur ?');">
-                        <input type="hidden" name="user_id" value="<?php echo $row['id']; ?>">
-                        <button class="action-btn action-btn-danger" type="submit" name="delete-user" title="Supprimer l'utilisateur">
-                          🗑️
-                        </button>
-                      </form>
-                    </div>
-                  </td>
-                </tr>
-              <?php endforeach; ?>
+                    data-user-role="<?php echo htmlspecialchars($row['role']); ?>" title="Modifier l'utilisateur">
+                    ✏️
+                  </button>
+                  <form method="post" style="display: inline;"
+                    onsubmit="return confirm('Êtes-vous sûr de vouloir supprimer cet utilisateur ?');">
+                    <input type="hidden" name="user_id" value="<?php echo $row['id']; ?>">
+                    <button class="action-btn action-btn-danger" type="submit" name="delete-user"
+                      title="Supprimer l'utilisateur">
+                      🗑️
+                    </button>
+                  </form>
+                </div>
+              </td>
+            </tr>
+            <?php endforeach; ?>
             <?php else: ?>
-              <tr>
-                <td colspan="8">
-                  <div class="empty-state">
-                    <div class="empty-state-icon">👤</div>
-                    <h3 class="empty-state-title">Aucun utilisateur trouvé</h3>
-                    <p>Les informations des utilisateurs ne sont pas disponibles.</p>
-                  </div>
-                </td>
-              </tr>
+            <tr>
+              <td colspan="8">
+                <div class="empty-state">
+                  <div class="empty-state-icon">👤</div>
+                  <h3 class="empty-state-title">Aucun utilisateur trouvé</h3>
+                  <p>Les informations des utilisateurs ne sont pas disponibles.</p>
+                </div>
+              </td>
+            </tr>
             <?php endif; ?>
           </tbody>
         </table>
@@ -507,7 +512,8 @@ unset($_SESSION['message']);
           </div>
           <div class="form-group">
             <label for="updateUserPassword" class="form-label">Nouveau mot de passe (optionnel)</label>
-            <input type="password" class="form-control" id="updateUserPassword" name="user_password" placeholder="Laisser vide pour conserver le mot de passe actuel">
+            <input type="password" class="form-control" id="updateUserPassword" name="user_password"
+              placeholder="Laisser vide pour conserver le mot de passe actuel">
           </div>
           <div class="form-group">
             <label for="updateUserRole" class="form-label">Rôle</label>
@@ -548,14 +554,14 @@ unset($_SESSION['message']);
 // Modal functionality for updating user
 document.addEventListener('DOMContentLoaded', function() {
   var updateModal = document.getElementById('updateUserModal');
-  
-  updateModal.addEventListener('show.bs.modal', function (event) {
+
+  updateModal.addEventListener('show.bs.modal', function(event) {
     var button = event.relatedTarget;
     var userId = button.getAttribute('data-user-id');
     var userName = button.getAttribute('data-user-name');
     var userEmail = button.getAttribute('data-user-email');
     var userRole = button.getAttribute('data-user-role');
-    
+
     // Update modal fields
     document.getElementById('updateUserId').value = userId;
     document.getElementById('updateUserName').value = userName;

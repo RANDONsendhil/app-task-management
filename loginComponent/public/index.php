@@ -18,7 +18,7 @@ class IndexLogin
             $email = htmlspecialchars($_POST["email"]);
             $password = htmlspecialchars($_POST["password"]);
             if ($this->login($email, $password)) {
-                header("Location: /home");
+                header("Location: /project");
             } else {
                 $_SESSION['statusLogin'] = "error";
                 $_SESSION['messageLogin'] = "Identifiant ou mot de passe non reconnu!";
