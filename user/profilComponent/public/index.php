@@ -14,18 +14,17 @@
             $this->controllerProfil = new ControllerProfil();
             $this->utils = new Utils("");
 
-
             if (($_SERVER['REQUEST_METHOD'] === 'POST') && isset($_POST['update-profil'])) {
                 $this->displayProfilEditableForm();
             }
             if (($_SERVER['REQUEST_METHOD'] === 'POST') && isset($_POST['create-user'])) {
-        
+
                 $this->addUser();
             }
             if (($_SERVER['REQUEST_METHOD'] === 'POST') && isset($_POST['update-user'])) {
                 $this->updateUser($_POST['user_id']);
             }
-              if (($_SERVER['REQUEST_METHOD'] === 'POST') && isset($_POST['delete-user'])) {
+            if (($_SERVER['REQUEST_METHOD'] === 'POST') && isset($_POST['delete-user'])) {
                 $this->deleteUser($_POST['user_id']);
             }
             if ($this->utils->getUri() == '/profil') {
@@ -39,7 +38,8 @@
             }
         }
 
-   public function deleteUser($userId){
+        public function deleteUser($userId)
+        {
             $this->controllerProfil->controllerDeleteUser($userId);
         }
 
@@ -49,24 +49,25 @@
 
             $this->controllerProfil->displayProfilEditableFormPublic();
         }
-         public function updateUser($id){
-            $this->controllerProfil->controllerUpdateUser($id,$this->getObjUser());
+        public function updateUser($id)
+        {
+            $this->controllerProfil->controllerUpdateUser($id, $this->getObjUser());
         }
 
 
 
         public function addUser()
         {
-           
-                $objUser = $this->getObjUser();
-              
-                if ($objUser) {
-                    $this->controllerProfil->controllerAddUser($objUser);
-                }
-        }   
+
+            $objUser = $this->getObjUser();
+
+            if ($objUser) {
+                $this->controllerProfil->controllerAddUser($objUser);
+            }
+        }
 
         public function getObjUser()
-        {   
+        {
             if (isset($_POST["user_name"]) && isset($_POST["user_email"]) && isset($_POST["user_password"]) && isset($_POST["user_role"])) {
 
                 $objUser = new User(
@@ -76,7 +77,7 @@
                     $this->sanitize_input($_POST["user_role"]),
                     date('Y-m-d H:i:s')
                 );
-           
+
                 return $objUser;
             } else {
                 echo "<script>alert('Veuillez remplir tous les champs');</script>";
@@ -90,5 +91,3 @@
     }
 
     new IndexProfil();
-
-    

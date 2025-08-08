@@ -313,6 +313,9 @@
   .create-user-btn {
     margin-bottom: 20px;
   }
+  #createUserRole{
+    height: 56px;
+  }
 </style>
 <?php
 include(BASE_PATH . '/user/homeComponent/view/home.php');

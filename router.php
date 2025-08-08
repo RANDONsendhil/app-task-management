@@ -8,8 +8,8 @@ $routes = [
   '/' =>  BASE_PATH . '/loginComponent/view/login.php',
   '/login' =>  BASE_PATH . '/loginComponent/view/login.php',
   '/userCreation' =>  BASE_PATH . '/userCreationComponent/public/index.php',
-  '/project' =>  BASE_PATH . '/user/homeComponent/public/index.php',
   '/profil' =>   BASE_PATH . '/user/profilComponent/public/index.php',
+  '/project' =>  BASE_PATH . '/user/homeComponent/public/index.php',
   '/project/tasks' =>  BASE_PATH . '/projectComponent/public/index.php',
 
 
@@ -62,16 +62,16 @@ function route_controller($requestUri, $routes)
         'svg' => 'image/svg+xml',
         'ico' => 'image/x-icon'
       ];
-      
+
       if (isset($contentTypes[$ext])) {
         header('Content-Type: ' . $contentTypes[$ext]);
       }
-      
+
       readfile($filePath);
       return;
     }
   }
-  
+
   // echo "<script> alert(" . $_SESSION['isloggedIn'] . ") </script>";
   array_key_exists($requestUri, $routes) ? require  $routes[$requestUri] : abort();
 }

@@ -1,25 +1,31 @@
-/app-cabinet-medicalp/
-    |--/adminComponent/
-       |--/controllers/controllerAdmin.php
-       |--/model/admin.php  
-       |--/public/index.php
-       |--/view/admin.php
-    |--/appointmentComponent/
-       |--/controllers/controllerAppointment.php
-       |--/model/appointment.php  
-       |--/public/index.php
-       |--/view/appointment.php
+/app-gestTask/
     |--/loginComponent/
        |--/controllers/controllerLogin.php
        |--/model/login.php  
        |--/public/index.php
        |--/view/login.php
+    |--/projectComponent/
+       |--/controllers/controllerProject.php
+       |--/model/project.php  
+       |--/public/index.php
+       |--/view/displayProjectDetails.php
+    |--/taskComponent/
+       |--/controllers/controllerTask.php
+       |--/model/
+                |--/task.php
+                |--/taskObj.php
+       |--/public/index.php
+       |--/view/
+                |--/taskCreationModal.php
+                |--/taskManagementTable.php
     |--/user/
-        |--/homeComponent
+       |--/homeComponent
             |--/controllers/controllerHome.php
             |--/model/home.php  
             |--/public/index.php
-            |--/view/home.php
+            |--/view/
+                |--/home.php
+                |--/displayHome.php
         |--/profilComponent
             |--/controllers/controllerProfil.php
             |--/model/profil.php  
@@ -37,5 +43,6 @@
     /images
     /css
     /js
+    /lib
     router.php
     index.php     

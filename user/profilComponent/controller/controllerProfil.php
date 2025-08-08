@@ -15,7 +15,6 @@ class Controllerprofil
     {
         $this->db = new DatabaseConnection();
         $this->profilModel = new Profil($this->db);
-   
     }
 
     public function getProfils()
@@ -25,7 +24,7 @@ class Controllerprofil
         require(BASE_PATH . '/user/profilComponent/view/profil.php');
     }
 
- 
+
 
     public function displayProfilEditableFormPublic()
     {
@@ -44,10 +43,10 @@ class Controllerprofil
         return $this->profilModel->insert_user($objUser);
     }
 
-    public function controllerUpdateUser($id,$objUser)
+    public function controllerUpdateUser($id, $objUser)
     {
 
-        $this->profilModel->update_user($id,$objUser);
+        $this->profilModel->update_user($id, $objUser);
     }
 
     public function findDoctor()

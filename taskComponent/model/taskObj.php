@@ -11,7 +11,7 @@ class Task
   public $priorite;
   public $date_echeance;
   public $date_creation;
- 
+
 
 
   public function __construct(
@@ -44,7 +44,7 @@ class Task
   function getProjetId()
   {
     return $this->projet_id;
-  } 
+  }
 
   function getTitre()
   {
@@ -75,10 +75,9 @@ class Task
   {
     return $this->date_echeance;
   }
- 
+
   function getDateCreation()
   {
     return $this->date_creation;
   }
- 
 }

@@ -23,7 +23,6 @@ class IndexHome
             if ($this->controllerHome->controllerCreateProject($this->getProjetData())) {
                 header("Location: " . $_SERVER['REQUEST_URI']);
                 exit();
-               
             }
         }
 
@@ -57,7 +56,7 @@ class IndexHome
         // Handle PDF export request
         // if (($_SERVER['REQUEST_METHOD'] === 'GET') && isset($_GET['export_pdf']) && isset($_GET['project_id'])) {
         //     $project_id = intval($_GET["export-project-name"]);
-             
+
         //     if ($project_id > 0) {
         //         if ($this->controllerHome->controllerExportProjectToPDF($project_id)) {
         //             exit(); // PDF output is sent directly

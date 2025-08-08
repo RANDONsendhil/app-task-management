@@ -12,160 +12,165 @@ unset($_SESSION['message']);
 ?>
 
 <style>
-  .user-board {
-    background: #f6f7fb;
-    border-radius: 8px;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-    margin: 20px 0;
-    overflow: hidden;
+.user-board {
+  background: #f6f7fb;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  margin: 20px 0;
+  overflow: hidden;
+}
+
+.board-header {
+  background: #ffffff;
+  padding: 20px 24px;
+  border-bottom: 1px solid #e6e9ef;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.board-title {
+  font-size: 24px;
+  font-weight: 600;
+  color: #323338;
+  margin: 0;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.board-icon {
+  width: 24px;
+  height: 24px;
+  background: #6161ff;
+  border-radius: 4px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  font-weight: bold;
+  font-size: 14px;
+}
+
+.board-table {
+  width: 100%;
+  border-collapse: collapse;
+  background: white;
+}
+
+.board-table thead {
+  background: #f8f9fd;
+  position: relative;
+}
+
+.board-table thead::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: linear-gradient(90deg, #0085ff, #6161ff, #0085ff);
+  background-size: 200% 100%;
+  animation: shimmer 3s ease-in-out infinite;
+}
+
+@keyframes shimmer {
+  0% {
+    background-position: -200% 0;
   }
 
-  .board-header {
-    background: #ffffff;
-    padding: 20px 24px;
-    border-bottom: 1px solid #e6e9ef;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+  100% {
+    background-position: 200% 0;
   }
+}
 
-  .board-title {
-    font-size: 24px;
-    font-weight: 600;
-    color: #323338;
-    margin: 0;
-    display: flex;
-    align-items: center;
-    gap: 12px;
-  }
+.board-table th {
+  padding: 12px 16px;
+  text-align: left;
+  font-weight: 500;
+  font-size: 14px;
+  color: #676879;
+  border-bottom: 1px solid #e6e9ef;
+  border-right: 1px solid #e6e9ef;
+  cursor: pointer;
+  position: relative;
+  transition: all 0.3s ease;
+  user-select: none;
+  background: linear-gradient(135deg, #f8f9fd, #e6e9ef);
+}
 
-  .board-icon {
-    width: 24px;
-    height: 24px;
-    background: #6161ff;
-    border-radius: 4px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: white;
-    font-weight: bold;
-    font-size: 14px;
-  }
+.board-table th:hover {
+  background: linear-gradient(135deg, #e6e9ef, #d0d4da);
+  transform: translateY(-1px);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
 
-  .board-table {
-    width: 100%;
-    border-collapse: collapse;
-    background: white;
-  }
+.board-table th:last-child {
+  border-right: none;
+}
 
-  .board-table thead {
-    background: #f8f9fd;
-    position: relative;
-  }
+.board-table td {
+  padding: 12px 16px;
+  border-bottom: 1px solid #e6e9ef;
+  border-right: 1px solid #e6e9ef;
+  vertical-align: middle;
+}
 
-  .board-table thead::after {
-    content: '';
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    height: 2px;
-    background: linear-gradient(90deg, #0085ff, #6161ff, #0085ff);
-    background-size: 200% 100%;
-    animation: shimmer 3s ease-in-out infinite;
-  }
+.board-table td:last-child {
+  border-right: none;
+}
 
-  @keyframes shimmer {
-    0% { background-position: -200% 0; }
-    100% { background-position: 200% 0; }
-  }
+.board-table tbody tr:hover {
+  background: linear-gradient(135deg, #f8f9fd, #ffffff);
+  transform: translateY(-1px);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+}
 
-  .board-table th {
-    padding: 12px 16px;
-    text-align: left;
-    font-weight: 500;
-    font-size: 14px;
-    color: #676879;
-    border-bottom: 1px solid #e6e9ef;
-    border-right: 1px solid #e6e9ef;
-    cursor: pointer;
-    position: relative;
-    transition: all 0.3s ease;
-    user-select: none;
-    background: linear-gradient(135deg, #f8f9fd, #e6e9ef);
-  }
+.user-name-cell {
+  font-weight: 500;
+  color: #323338;
+  font-size: 14px;
+}
 
-  .board-table th:hover {
-    background: linear-gradient(135deg, #e6e9ef, #d0d4da);
-    transform: translateY(-1px);
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  }
+.user-id-cell {
+  font-weight: 600;
+  color: #0085ff;
+  font-size: 14px;
+}
 
-  .board-table th:last-child {
-    border-right: none;
-  }
+.user-email-cell {
+  color: #676879;
+  font-size: 14px;
+}
 
-  .board-table td {
-    padding: 12px 16px;
-    border-bottom: 1px solid #e6e9ef;
-    border-right: 1px solid #e6e9ef;
-    vertical-align: middle;
-  }
+.user-phone-cell {
+  color: #323338;
+  font-size: 14px;
+}
 
-  .board-table td:last-child {
-    border-right: none;
-  }
+.user-avatar {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background: #6161ff;
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 14px;
+  font-weight: 500;
+  margin-right: 10px;
+}
 
-  .board-table tbody tr:hover {
-    background: linear-gradient(135deg, #f8f9fd, #ffffff);
-    transform: translateY(-1px);
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
-  }
+.user-info-cell {
+  display: flex;
+  align-items: center;
+}
 
-  .user-name-cell {
-    font-weight: 500;
-    color: #323338;
-    font-size: 14px;
-  }
-
-  .user-id-cell {
-    font-weight: 600;
-    color: #0085ff;
-    font-size: 14px;
-  }
-
-  .user-email-cell {
-    color: #676879;
-    font-size: 14px;
-  }
-
-  .user-phone-cell {
-    color: #323338;
-    font-size: 14px;
-  }
-
-  .user-avatar {
-    width: 32px;
-    height: 32px;
-    border-radius: 50%;
-    background: #6161ff;
-    color: white;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 14px;
-    font-weight: 500;
-    margin-right: 10px;
-  }
-
-  .user-info-cell {
-    display: flex;
-    align-items: center;
-  }
-
-  .profile-section {
-    margin-bottom: 30px;
-  }
+.profile-section {
+  margin-bottom: 30px;
+}
 </style>
 
 

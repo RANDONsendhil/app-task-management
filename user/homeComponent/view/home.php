@@ -1,37 +1,37 @@
 <style>
-.containerlog {
-  display: flex;
-  padding: 9px;
-  color: rgb(230 252 255);
-  align-items: center;
-  justify-content: flex-end;
-  flex-direction: column;
-  font-size: 14px;
-  font-weight: 500;
-}
+  .containerlog {
+    display: flex;
+    padding: 9px;
+    color: rgb(230 252 255);
+    align-items: center;
+    justify-content: flex-end;
+    flex-direction: column;
+    font-size: 14px;
+    font-weight: 500;
+  }
 
-#logo {
-  height: 25px;
-  width: 25px;
-  background: #0a485a;
-}
+  #logo {
+    height: 25px;
+    width: 25px;
+    background: #0a485a;
+  }
 
-hr {
-  border: none;
-  height: 2px;
-  /* background-color: #ccc; */
-  background-color: white;
-}
+  hr {
+    border: none;
+    height: 2px;
+    /* background-color: #ccc; */
+    background-color: white;
+  }
 
-#for_logout {
-  cursor: pointer;
-  font-size: 11px;
-}
+  #for_logout {
+    cursor: pointer;
+    font-size: 11px;
+  }
 
-#profil_name {
-  color: #15caff;
-  font-size: large;
-}
+  #profil_name {
+    color: #15caff;
+    font-size: large;
+  }
 </style>
 
 <?php session_start()
@@ -42,7 +42,7 @@ hr {
     <li class="nav-item">
       <div id="username-sidebar" class="nav-link" href="#submenu1" aria-expanded="false" aria-controls="submenu1">
 
-      <hr>
+        <hr>
         <div class="containerlog">
           <div class="containerlog" id="profil_name">
             <div><?php echo strtoupper($_SESSION["lname"]) ?></div>
@@ -52,8 +52,8 @@ hr {
           </div>
         </div>
         <hr>
-        
-   
+
+
         <div class="containerlog" id="for_logout" onclick="logout()">
           <div>
             <img style="border-radius: 50%;" id="logo" src="/images/se_deconnecter.png" alt="" srcset="">
@@ -99,8 +99,9 @@ hr {
       </div>
       <div class="nav-custom-sidebar" style="pointer-events: none; opacity: 0.5;">
         <ul class="nav flex-column submenu">
-          <li><span class="nav-link disabled" style="color: #6c757d; cursor: not-allowed;"><span> <img style="height: 30px; opacity: 0.5;" src="/images/location.png"
-                  alt="" srcset=""></span><span>Information</span></span></li>
+          <li><span class="nav-link disabled" style="color: #6c757d; cursor: not-allowed;"><span> <img
+                  style="height: 30px; opacity: 0.5;" src="/images/location.png" alt=""
+                  srcset=""></span><span>Information</span></span></li>
         </ul>
       </div>
     </li>
@@ -112,8 +113,9 @@ hr {
       </div>
       <div class="nav-custom-sidebar" id="nav-contact" style="pointer-events: none; opacity: 0.5;">
         <ul class="nav flex-column submenu">
-          <li><span class="nav-link disabled" style="color: #6c757d; cursor: not-allowed;"><span> <img style="height: 30px; opacity: 0.5;" src="/images/mail.png"
-                  alt="" srcset=""></span><span>Contact Assistant</span></span></li>
+          <li><span class="nav-link disabled" style="color: #6c757d; cursor: not-allowed;"><span> <img
+                  style="height: 30px; opacity: 0.5;" src="/images/mail.png" alt="" srcset=""></span><span>Contact
+                Assistant</span></span></li>
         </ul>
       </div>
     </li>
@@ -124,12 +126,12 @@ hr {
 <div class="main-container">
   <div class="container-fluid" id="navbarHome">
     <div class="d-flex justify-content-center align-items-center navbar-container">
-     <h3>GESTION DE PROJECT V1</h3>
+      <h3>GESTION DE PROJECT V1</h3>
     </div>
   </div>
 
   <script>
-  function logout() {
-    window.location.href = "/login"; // Redirects to "/profil"
-  }
+    function logout() {
+      window.location.href = "/login"; // Redirects to "/profil"
+    }
   </script>

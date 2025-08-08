@@ -12,32 +12,32 @@ class Profil
   }
 
   public function insert_user($objUser)
-  { 
+  {
     //establish database connection
     $connect_db = $this->db->connect();
-    
+
     // Check if connection is successful
     if ($connect_db->connect_error) {
-        echo "<script>alert('Erreur de connexion: " . $connect_db->connect_error . "');</script>";
-        return false;
+      echo "<script>alert('Erreur de connexion: " . $connect_db->connect_error . "');</script>";
+      return false;
     }
-    
+
     $sql = "INSERT INTO users (nom, email, mot_de_passe, role, date_creation) VALUES (?, ?, ?, ?, ?)";
-    
+
     $stmt = $connect_db->prepare($sql);
-    
+
     $name = $objUser->getName();
     $email = $objUser->getInputEmail();
     $password = $objUser->getInputPassword();
     $role = $objUser->getRole();
     $dateCreation = $objUser->getDateCreation();
- 
+
     $stmt->bind_param("sssss", $name, $email, $password, $role, $dateCreation);
 
     if ($stmt->execute()) {
-       echo "<script>alert('Utilisateur ajouté avec succès');</script>";
-       $stmt->close();
-       return true;
+      echo "<script>alert('Utilisateur ajouté avec succès');</script>";
+      $stmt->close();
+      return true;
     } else {
       echo "<script>alert('Erreur SQL: " . $stmt->error . "');</script>";
       $stmt->close();
@@ -48,30 +48,30 @@ class Profil
   public function update_user($id, $objUser)
   {
     $connect_db = $this->db->connect();
-    
+
     // Check if connection is successful
     if ($connect_db->connect_error) {
-        echo "<script>alert('Erreur de connexion: " . $connect_db->connect_error . "');</script>";
-        return false;
+      echo "<script>alert('Erreur de connexion: " . $connect_db->connect_error . "');</script>";
+      return false;
     }
-    
+
     $sql = "UPDATE users SET 
           nom = ?,
           email = ?,
           role = ?
           WHERE id = ?";
-    
+
     $stmt = $connect_db->prepare($sql);
-    
+
     if (!$stmt) {
-        echo "<script>alert('Erreur de préparation SQL: " . $connect_db->error . "');</script>";
-        return false;
+      echo "<script>alert('Erreur de préparation SQL: " . $connect_db->error . "');</script>";
+      return false;
     }
-    
+
     $name = $objUser->getName();
     $email = $objUser->getInputEmail();
     $role = $objUser->getRole();
-    
+
     $stmt->bind_param("sssi", $name, $email, $role, $id);
 
     if ($stmt->execute()) {

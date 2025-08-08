@@ -7,10 +7,10 @@ class Project
   public $date_debut;
   public $date_fin;
   public $cree_par_user_id;
- 
+
 
   public function __construct(
-$nom,
+    $nom,
     $description,
     $date_debut,
     $date_fin,
@@ -23,41 +23,51 @@ $nom,
     $this->cree_par_user_id = $cree_par_user_id;
   }
 
-  function getNom() : string {
+  function getNom(): string
+  {
 
     return $this->nom;
   }
-  function getDescription() : string {
+  function getDescription(): string
+  {
 
     return $this->description;
-  } 
+  }
 
-  function getDateDebut() : string {
+  function getDateDebut(): string
+  {
 
     return $this->date_debut;
-  } 
+  }
 
-  function getDateFin() : string {
+  function getDateFin(): string
+  {
 
     return $this->date_fin;
   }
-  function getCreeParUserId() : int {
+  function getCreeParUserId(): int
+  {
 
     return $this->cree_par_user_id;
   }
-  function setNom($nom) {
+  function setNom($nom)
+  {
     $this->nom = $nom;
   }
-  function setDescription($description) {
+  function setDescription($description)
+  {
     $this->description = $description;
-  }    
-  function setDateDebut($date_debut) {
+  }
+  function setDateDebut($date_debut)
+  {
     $this->date_debut = $date_debut;
   }
-  function setDateFin($date_fin) {
+  function setDateFin($date_fin)
+  {
     $this->date_fin = $date_fin;
-  }   
-  function setCreeParUserId($cree_par_user_id) {
+  }
+  function setCreeParUserId($cree_par_user_id)
+  {
     $this->cree_par_user_id = $cree_par_user_id;
-  }   
+  }
 }

@@ -7,7 +7,7 @@ $currentDir = dirname($_SERVER['PHP_SELF']);
 ini_set('memory_limit', '256M'); // Increase to 256MB
 
 class ControllerProject
-{   
+{
     private $taskModel;
     private $projectModel;
     private $db;
@@ -23,7 +23,7 @@ class ControllerProject
     {
         $projectTasks = $this->taskModel->get_tasks_by_project_id($id);
         $resultProjectById = $this->projectModel->get_project_by_id($id);
-        $allUsers = $this->projectModel->get_all_users();  
+        $allUsers = $this->projectModel->get_all_users();
 
         if (!$resultProjectById) {
             return;
@@ -46,7 +46,7 @@ class ControllerProject
             return false;
         }
     }
-    
+
     public function deleteTask($idTask)
     {
         if ($this->taskModel->delete_task_by_id($idTask)) {
