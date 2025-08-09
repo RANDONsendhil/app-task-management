@@ -22,10 +22,13 @@ class IndexProject
 
         if (($_SERVER['REQUEST_METHOD'] === 'POST') && isset($_POST['select-project'])) {
             $_SESSION["projectId"]  = isset($_POST['select-project']) ? intval($_POST['select-project']) : 0;
-
-            $this->controllerProject->indexProject($_SESSION["projectId"]);
+            if ($_SESSION["role"] === "admin") {
+                $this->controllerProject->indexProject($_SESSION["projectId"]);
+            }
+            if ($_SESSION["role"] === "collaborateur") {
+                $this->controllerProject->indexProjectCollaborateur($_SESSION["collaborateur_id"], $_SESSION["projectId"]);
+            }
         }
-
 
         if (($_SERVER['REQUEST_METHOD'] === 'POST') && isset($_POST['submit-task'])) {
 
@@ -34,7 +37,13 @@ class IndexProject
                 exit();
             }
         }
+        if (($_SERVER['REQUEST_METHOD'] === 'POST') && isset($_POST['modify-status-task-collaborateur'])) {
 
+            if ($this->controllerProject->updateTaskStatus($_POST['task_id'], $_POST['modify-status-task-collaborateur'])) {
+                header("Location: " . $_SERVER['REQUEST_URI']);
+                exit();
+            }
+        }
         if (($_SERVER['REQUEST_METHOD'] === 'POST') && isset($_POST['submit-edit-task'])) {
 
             if ($this->controllerProject->updateTask($this->getObjTaskForUpdate())) {
@@ -42,8 +51,6 @@ class IndexProject
                 exit();
             }
         }
-
-
 
         if (($_SERVER['REQUEST_METHOD'] === 'POST') && isset($_POST['delete-task'])) {
 
@@ -56,7 +63,12 @@ class IndexProject
             }
         }
         if ($_SERVER['REQUEST_METHOD'] === 'GET' && isset($_SESSION["projectId"])) {
-            $this->controllerProject->indexProject($_SESSION["projectId"]);
+            if ($_SESSION["role"] === "admin") {
+                $this->controllerProject->indexProject($_SESSION["projectId"]);
+            }
+            if ($_SESSION["role"] === "collaborateur") {
+                $this->controllerProject->indexProjectCollaborateur($_SESSION["collaborateur_id"], $_SESSION["projectId"]);
+            }
         }
         if (($_SERVER['REQUEST_METHOD'] === 'POST') && isset($_POST['export-pdf'])) {
             $project_id = $this->sanitize_input($_POST["export_project_pdf"]);
@@ -114,6 +126,11 @@ class IndexProject
     public function displayProjectTasksByProjectId($projectId)
     {
         $this->controllerProject->getTasksByProjectId($projectId);
+    }
+
+    public function displayProjectTasksByCollaborateurId($collaborateurId, $projectId)
+    {
+        $this->controllerProject->getTasksByCollaborateurId($collaborateurId, $projectId);
     }
 }
 

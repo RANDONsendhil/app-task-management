@@ -17,7 +17,7 @@ class IndexHome
         $this->utils = new Utils("");
         $this->controllerHome = new ControllerHome();
 
-
+        echo ("<script> console.log('" . json_encode($_SESSION["role"]) . "'); </script>");
         if (($_SERVER['REQUEST_METHOD'] === 'POST') && isset($_POST['submit-project'])) {
 
             if ($this->controllerHome->controllerCreateProject($this->getProjetData())) {
@@ -52,23 +52,12 @@ class IndexHome
                 exit();
             }
         }
-
-        // Handle PDF export request
-        // if (($_SERVER['REQUEST_METHOD'] === 'GET') && isset($_GET['export_pdf']) && isset($_GET['project_id'])) {
-        //     $project_id = intval($_GET["export-project-name"]);
-
-        //     if ($project_id > 0) {
-        //         if ($this->controllerHome->controllerExportProjectToPDF($project_id)) {
-        //             exit(); // PDF output is sent directly
-        //         } else {
-        //             // Redirect back with error
-        //             header("Location: " . $_SERVER['REQUEST_URI'] . "?error=pdf_export_failed");
-        //             exit();
-        //         }
-        //     }
-        // }
-
-        $this->displayProjects();
+        if ($_SESSION["role"] == "admin") {
+            $this->displayProjects();
+        }
+        if ($_SESSION["role"] == "collaborateur") {
+            $this->displayHomeCollaborateur();
+        }
     }
 
     function getProjetData()
@@ -102,12 +91,15 @@ class IndexHome
         return $this->controllerHome->controllerDeleteProject($id);
     }
 
-
-
     public function displayHome()
     {
-        $this->controllerHome = new ControllerHome();
+        // echo ("<script> console.log('Displaying home for user: " . $_SESSION["user_id"] . "'); </script>");
         return $this->controllerHome->index();
+    }
+    public function displayHomeCollaborateur()
+    {
+        //echo ("<script> console.log('Displaying displayHomeCollaborateur : " . $_SESSION["user_id"] . "'); </script>");
+        $this->controllerHome->controlledisplayProjectsCollaborateur($_SESSION["fname_lname"], $_SESSION["email"]);
     }
 }
 

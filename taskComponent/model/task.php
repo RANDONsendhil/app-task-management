@@ -46,8 +46,6 @@ class TaskModel
         }
     }
 
-
-
     function create_task($objTask)
     {
         $connect_db = $this->db->connect();
@@ -270,6 +268,65 @@ class TaskModel
             $stmt->close();
             $connect_db->close();
             return false; // Failed to delete task
+        }
+    }
+
+    public function get_tasks_by_collaborateurId_project_id($collaborateurId, $projectId)
+    {
+        $connect_db = $this->db->connect();
+        if ($connect_db->connect_error) {
+            die("Connection failed: " . $connect_db->connect_error);
+        }
+
+        $stmt = $connect_db->prepare("SELECT * FROM tasks WHERE assignee_id = ? AND projet_id = ?");
+        $stmt->bind_param("ii", $collaborateurId, $projectId);
+
+        if ($stmt->execute()) {
+            $result = $stmt->get_result();
+            $tasks = $result->fetch_all(MYSQLI_ASSOC);
+            $stmt->close();
+            $connect_db->close();
+            return $tasks;
+        } else {
+            $error_msg = "Failed to retrieve tasks: " . $stmt->error;
+            $stmt->close();
+            $connect_db->close();
+            error_log($error_msg);
+            return [];
+        }
+    }
+
+    public function update_task_status($taskId, $newStatus)
+    {
+        $connect_db = $this->db->connect();
+        if ($connect_db->connect_error) {
+            die("Connection failed: " . $connect_db->connect_error);
+        }
+
+        $stmt = $connect_db->prepare("UPDATE tasks SET statut = ? WHERE id = ?");
+        $stmt->bind_param("si", $newStatus, $taskId);
+
+        if ($stmt->execute()) {
+            $_SESSION['last_task_updated'] = [
+                'id' => $taskId,
+                'statut' => $newStatus,
+                'updated_at' => date('Y-m-d H:i:s')
+            ];
+            $_SESSION['task_update_status'] = 'success';
+            $_SESSION['task_update_message'] = 'Statut de la tâche mis à jour avec succès';
+
+            $stmt->close();
+            $connect_db->close();
+            return true;
+        } else {
+            $error_msg = "Update failed: " . $stmt->error;
+            $_SESSION['task_update_status'] = 'error';
+            $_SESSION['task_update_message'] = $error_msg;
+
+            $stmt->close();
+            $connect_db->close();
+            error_log($error_msg);
+            return false;
         }
     }
 }

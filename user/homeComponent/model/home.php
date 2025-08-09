@@ -104,4 +104,57 @@ class Home
       return false;
     }
   }
+  public function get_projects_collaborateur()
+  {
+    $connect_db = $this->db->connect();
+    $stmt = $connect_db->prepare("SELECT * FROM projects WHERE id IN (SELECT project_id FROM project_collaborateurs WHERE user_id = ?)");
+    $stmt->bind_param("i", $_SESSION["user_id"]);
+    $stmt->execute();
+    $result = $stmt->get_result();
+
+    if ($result->num_rows > 0) {
+      return $result->fetch_all(MYSQLI_ASSOC);
+    } else {
+      return [];
+    }
+  }
+  public function get_id_userCollaborateur($user_name, $email)
+  {
+    echo ("<script> console.log('User ID found: " .  $user_name . ", " . $email . "'); </script>");
+    $connect_db = $this->db->connect();
+    $stmt = $connect_db->prepare("SELECT id FROM users WHERE nom = ? AND email = ?");
+    $stmt->bind_param("ss", $user_name, $email);
+    $stmt->execute();
+    $result = $stmt->get_result();
+    if ($result->num_rows > 0) {
+      return $result->fetch_assoc()['id'];
+    } else {
+      return false;
+    }
+  }
+
+  public function get_project_by_assigned_id($id)
+  {
+    $connect_db = $this->db->connect();
+    $sql = "
+        SELECT DISTINCT p.*
+        FROM projects p
+        INNER JOIN tasks t ON p.id = t.projet_id
+        WHERE t.assignee_id = ?
+    ";
+
+    $stmt = $connect_db->prepare($sql);
+    $stmt->bind_param("i", $id);
+    $stmt->execute();
+    $result = $stmt->get_result();
+
+    if ($result->num_rows > 0) {
+      $projects = $result->fetch_all(MYSQLI_ASSOC);
+      $stmt->close();
+      return $projects;
+    } else {
+      $stmt->close();
+      return [];
+    }
+  }
 }

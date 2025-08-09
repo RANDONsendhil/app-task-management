@@ -28,7 +28,16 @@
                 $this->deleteUser($_POST['user_id']);
             }
             if ($this->utils->getUri() == '/profil') {
-                $this->controllerProfil->getProfils();
+                switch ($_SESSION["role"]) {
+                    case "admin":
+                        $this->controllerProfil->getProfils();
+                        break;
+                    case "collaborateur":
+                        $this->controllerProfil->getProfilsCollaborateur($_SESSION["collaborateur_id"]);
+                        break;
+                    default:
+                        break;
+                }
             }
 
             if ($this->utils->getUri() == '/updateProfil') {

@@ -129,4 +129,24 @@ class Profil
       return false;
     }
   }
+
+  public function display_profils_collaborateur($id)
+  {
+    $connect_db = $this->db->connect();
+    if ($connect_db->connect_error) {
+      die("Connection failed: " . $connect_db->connect_error);
+    }
+
+    $sql = "SELECT * FROM users WHERE id = ?";
+    $stmt = $connect_db->prepare($sql);
+    $stmt->bind_param("i", $id);
+    $stmt->execute();
+    $result = $stmt->get_result();
+
+    if ($result->num_rows > 0) {
+      return $result->fetch_all(MYSQLI_ASSOC);
+    } else {
+      return [];
+    }
+  }
 }

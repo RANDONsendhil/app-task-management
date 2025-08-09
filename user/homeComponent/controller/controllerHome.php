@@ -27,6 +27,18 @@ class ControllerHome
         require(BASE_PATH . '/user/homeComponent/view/displayHome.php');
     }
 
+    public function controlledisplayProjectsCollaborateur($user_name, $email)
+    {
+        $id_user = $this->homeModel->get_id_userCollaborateur($user_name, $email);
+        $listProjects = $this->homeModel->get_project_by_assigned_id(intval($id_user));
+        require(BASE_PATH . '/user/homeComponent/view/displayHomeUser.php');
+    }
+
+    public function getProjectByAssigneeId($id)
+    {
+        $projects = $this->homeModel->get_project_by_assigned_id($id);
+        return $projects;
+    }
 
     public function controllerDeleteProject($id_project)
     {
@@ -34,6 +46,11 @@ class ControllerHome
         $this->homeModel->delete_project($id_project);
     }
 
+    public function controllerGetProjectById($id_project)
+    {
+        $project = $this->homeModel->get_project_by_id($id_project);
+        return $project;
+    }
     public function controllerCreateProject($objProject)
     {
         if ($this->homeModel->create_project($objProject)) {

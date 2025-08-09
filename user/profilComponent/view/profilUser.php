@@ -345,10 +345,6 @@ unset($_SESSION['message']);
             <div class="board-icon">👤</div>
             Informations du Profil
           </h1>
-          <button type="button" class="btn btn-success create-user-btn" data-bs-toggle="modal"
-            data-bs-target="#createUserModal">
-            ➕ Créer Utilisateur
-          </button>
         </div>
 
         <!-- User Profile Table -->
@@ -361,7 +357,7 @@ unset($_SESSION['message']);
               <th style="width: 250px;">Email</th>
               <th style="width: 100px;">Rôle</th>
               <th style="width: 150px;">Date de Création</th>
-              <th style="width: 120px;">Actions</th>
+
             </tr>
           </thead>
           <tbody>
@@ -409,25 +405,7 @@ unset($_SESSION['message']);
                       <?php echo htmlspecialchars(date('d/m/Y H:i', strtotime($row['date_creation']))); ?>
                     </div>
                   </td>
-                  <td>
-                    <div class="actions-cell">
-                      <button type="button" class="action-btn action-btn-primary" data-bs-toggle="modal"
-                        data-bs-target="#updateUserModal" data-user-id="<?php echo $row['id']; ?>"
-                        data-user-name="<?php echo htmlspecialchars($row['nom']); ?>"
-                        data-user-email="<?php echo htmlspecialchars($row['email']); ?>"
-                        data-user-role="<?php echo htmlspecialchars($row['role']); ?>" title="Modifier l'utilisateur">
-                        ✏️
-                      </button>
-                      <form method="post" style="display: inline;"
-                        onsubmit="return confirm('Êtes-vous sûr de vouloir supprimer cet utilisateur ?');">
-                        <input type="hidden" name="user_id" value="<?php echo $row['id']; ?>">
-                        <button class="action-btn action-btn-danger" type="submit" name="delete-user"
-                          title="Supprimer l'utilisateur">
-                          🗑️
-                        </button>
-                      </form>
-                    </div>
-                  </td>
+
                 </tr>
               <?php endforeach; ?>
             <?php else: ?>
@@ -472,15 +450,7 @@ unset($_SESSION['message']);
             <label for="createUserPassword" class="form-label">Mot de passe</label>
             <input type="password" class="form-control" id="createUserPassword" name="user_password" required>
           </div>
-          <div class="form-group">
-            <label for="createUserRole" class="form-label">Rôle</label>
-            <select class="form-control" id="createUserRole" name="user_role" required>
-              <option value="">Sélectionner un rôle</option>
-              <option value="user">Utilisateur</option>
-              <option value="admin">Administrateur</option>
-              <option value="manager">Manager</option>
-            </select>
-          </div>
+
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Annuler</button>

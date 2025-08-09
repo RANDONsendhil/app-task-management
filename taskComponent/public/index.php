@@ -17,7 +17,6 @@ class IndexTask
     public function __construct()
     {
         $this->controllerTask = new ControllerTask();
-
         $this->utils = new Utils("");
     }
 }

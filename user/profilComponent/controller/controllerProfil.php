@@ -24,6 +24,12 @@ class Controllerprofil
         require(BASE_PATH . '/user/profilComponent/view/profil.php');
     }
 
+    public function getProfilsCollaborateur($id)
+    {
+        $dataUserGest = $this->profilModel->display_profils_collaborateur($id);
+        require(BASE_PATH . '/user/profilComponent/view/profilUser.php');
+    }
+
 
 
     public function displayProfilEditableFormPublic()

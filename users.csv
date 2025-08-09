@@ -1,0 +1,14 @@
+id;nom;email;mot_de_passe;role;date_creation
+1;Alice Martin;alice@example.com;12345;admin;02/08/2025 16:20
+2;Bob Dupuis;bob@example.com;12345;collaborateur;02/08/2025 16:20
+3;Clara Leclerc;clara@example.com;12345;collaborateur;02/08/2025 16:20
+4;Alice Dupont;alice.dupont@example.com;password123;admin;08/08/2025 04:09
+5;Jean Martin;jean.martin@example.com;password123;collaborateur;08/08/2025 04:09
+6;Sophie Leroy;sophie.leroy@example.com;password123;admin;08/08/2025 04:09
+7;Lucas Bernard;lucas.bernard@example.com;password123;collaborateur;08/08/2025 04:09
+8;Emma Robert;emma.robert@example.com;password123;collaborateur;08/08/2025 04:09
+9;Thomas Petit;thomas.petit@example.com;password123;admin;08/08/2025 04:09
+10;Léa Richard;lea.richard@example.com;password123;collaborateur;08/08/2025 04:09
+11;Maxime Garcia;maxime.garcia@example.com;password123;collaborateur;08/08/2025 04:09
+12;Camille Moreau;camille.moreau@example.com;password123;admin;08/08/2025 04:09
+13;Julien Roux;julien.roux@example.com;password123;collaborateur;08/08/2025 04:09

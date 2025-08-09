@@ -18,6 +18,7 @@
        |--/view/
                 |--/taskCreationModal.php
                 |--/taskManagementTable.php
+                |--/taskManagementTableCollaborateur.php
     |--/user/
        |--/homeComponent
             |--/controllers/controllerHome.php
@@ -26,11 +27,14 @@
             |--/view/
                 |--/home.php
                 |--/displayHome.php
+                |--/displayHomeUser.php
         |--/profilComponent
             |--/controllers/controllerProfil.php
             |--/model/profil.php  
             |--/public/index.php
-            |--/view/profil.php
+            |--/view
+                |--/profil.php
+                |--/profilUser.php
     |--/userCreationComponent
         |--/controllers/controllerUserCreation.php
         |--/model/userCreation.php  
